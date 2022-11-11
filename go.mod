@@ -13,7 +13,7 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
 
-require k8s.io/client-go v0.25.3
+require k8s.io/client-go v0.25.4
 
 require (
 	github.com/kelseyhightower/envconfig v1.4.0
@@ -25,8 +25,8 @@ require (
 	github.com/operator-framework/operator-lifecycle-manager v0.20.0
 	github.com/pkg/errors v0.9.1 // indirect
 	helm.sh/helm/v3 v3.10.1
-	k8s.io/api v0.25.3
-	k8s.io/apimachinery v0.25.3
+	k8s.io/api v0.25.4
+	k8s.io/apimachinery v0.25.4
 	k8s.io/klog/v2 v2.80.1 // indirect
 )
 
@@ -159,7 +159,7 @@ require (
 	github.com/go-yaml/yaml v2.1.0+incompatible
 	github.com/openshift/machine-config-operator v0.0.0-00010101000000-000000000000
 	github.com/test-network-function/cnfextensions v0.0.0-20220908220149-566dd6fe6b0e
-	github.com/test-network-function/privileged-daemonset v0.0.4
+	github.com/test-network-function/privileged-daemonset v0.0.5
 	gopkg.in/yaml.v3 v3.0.1
 	k8s.io/kubectl v0.25.3
 )
