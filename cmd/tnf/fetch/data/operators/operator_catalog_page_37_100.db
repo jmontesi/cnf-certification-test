@@ -1,1130 +1,6 @@
 {
   "data": [
     {
-      "_id": "6350ea274b6c281902ea532c",
-      "alm_examples": [
-        {
-          "api_version": "eginnovations.com/v1beta1",
-          "kind": "EgUniversalAgent",
-          "metadata": {
-            "name": "eguniversalagent",
-            "namespace": "egagent"
-          },
-          "spec": {
-            "agent": {
-              "env": [
-                {
-                  "name": "EG_MANAGER",
-                  "value": "Replace with eG Manager IP"
-                },
-                {
-                  "name": "EG_MANAGER_PORT",
-                  "value": "Replace with eG Manager Port"
-                }
-              ]
-            }
-          }
-        }
-      ],
-      "annotations": {
-        "infrastructure_features": [],
-        "valid_subscription": []
-      },
-      "architectures": [],
-      "bundle_path": "registry.connect.redhat.com/eginnovations/universal-agent-operator@sha256:8bb137844077061a31c70209617527e837ca87222aa9f04a3d59015ce01241fc",
-      "bundle_path_digest": "sha256:8bb137844077061a31c70209617527e837ca87222aa9f04a3d59015ce01241fc",
-      "capabilities": [
-        "Seamless Upgrades"
-      ],
-      "channel_name": "beta",
-      "creation_date": "2022-10-20T06:26:47.848000+00:00",
-      "csv_description": "eG Innovations\u2019 converged application and infrastructure performance monitoring capabilities provide end-to-end visibility and correlated analytics for every layer, every tier of your IT landscape.\n\nThe eG Enterprise Universal Agent Operator automatically configures a host agent on every Kubernetes worker node. The host agent auto-discovers the worker nodes and application containers running as Pods on each node and tracks their performance and utilization levels. In-depth monitoring of applications running on containers is also provided using the same host agent. No additional agents are required for the containers.\n\n### Capabilities\n  * Rolls out the eg Agent pod per node to monitor its pods and the node itself\n  * Automatic BTM profiler injection using webhook based injection for deep application monitoring and transection tracing.\n\n### Installation\n  1. Create the namespace \"egagent\" for installing eG Agent on kubernetes Cluster.\n\n     <br />``` $ kubectl create ns egagent ```\n  2. Install eG Innovations Universal Agent operator from [OperatorHub.io](https://operatorhub.io/) or [OpenShift Container Platform](https://www.openshift.com/).\n  3. Create the eG Universal Agent CRD (Custom Resource Definition)\n     a. Click \"View YAML Example\" and copy the yaml contents and save it to (filename).yaml on your host.\n     b. To apply the CRD run the following command\n\n     <br />``` $ kubectl apply -f (filename).yaml ```\n\n### Required Parameters\n  * EG\\_MANAGER, EG\\_MANAGER\\_PORT - provide the ip and port of your eG Manager Installation.\n\n### Advanced Options\n  * Disable Certificate Checking - disable any certificate validation that may interact poorly with proxies within your cluster\n  * Image Override - use a copy of the eG Iniversal Agent container image from a registry other that Docker's or Red Hat's\n  * Environment variables - define environment variables for the eG Universal Agent container of for APM profiler.\n  * Namespace Selectors- select a subset of namesapces to enable instrumentation for applications.\n\nFor complete list of supported parameters and the detailed documentation available in [eG Innovations Docs](https://docs.eginnovations.com)\n",
-      "csv_display_name": "eG Innovations Universal Agent Operator",
-      "csv_metadata_description": "",
-      "csv_name": "eginnovations-operator.v0.0.2",
-      "in_index_img": true,
-      "install_modes": [
-        {
-          "supported": false,
-          "type": "OwnNamespace"
-        },
-        {
-          "supported": false,
-          "type": "SingleNamespace"
-        },
-        {
-          "supported": false,
-          "type": "MultiNamespace"
-        },
-        {
-          "supported": true,
-          "type": "AllNamespaces"
-        }
-      ],
-      "is_default_channel": true,
-      "last_update_date": "2022-10-24T12:04:18.416000+00:00",
-      "latest_in_channel": true,
-      "ocp_version": "4.8",
-      "organization": "certified-operators",
-      "package": "eginnovations-operator",
-      "provided_apis": [
-        {
-          "group": "eginnovations.com",
-          "kind": "EgUniversalAgent",
-          "plural": "eguniversalagents",
-          "version": "v1beta1"
-        }
-      ],
-      "provider": "eG Innovations",
-      "related_images": [
-        {
-          "digest": "sha256:324a2f2bbb3b220a02ab85046d5e5e49fbe1cc14578882ef0bb22c07bc65be14",
-          "image": "docker.io/eginnovations/universal-agent-operator@sha256:324a2f2bbb3b220a02ab85046d5e5e49fbe1cc14578882ef0bb22c07bc65be14",
-          "name": "eginnovations-operator"
-        },
-        {
-          "digest": "sha256:324a2f2bbb3b220a02ab85046d5e5e49fbe1cc14578882ef0bb22c07bc65be14",
-          "image": "docker.io/eginnovations/universal-agent-operator@sha256:324a2f2bbb3b220a02ab85046d5e5e49fbe1cc14578882ef0bb22c07bc65be14",
-          "name": "universal-agent-operator-324a2f2bbb3b220a02ab85046d5e5e49fbe1cc14578882ef0bb22c07bc65be14-annotation"
-        },
-        {
-          "digest": "sha256:db06cc4c084dd0253134f156dddaaf53ef1c3fb3cc809e5d81711baa4029ea4c",
-          "image": "gcr.io/kubebuilder/kube-rbac-proxy@sha256:db06cc4c084dd0253134f156dddaaf53ef1c3fb3cc809e5d81711baa4029ea4c",
-          "name": "kube-rbac-proxy"
-        },
-        {
-          "digest": "sha256:324a2f2bbb3b220a02ab85046d5e5e49fbe1cc14578882ef0bb22c07bc65be14",
-          "image": "docker.io/eginnovations/universal-agent-operator@sha256:324a2f2bbb3b220a02ab85046d5e5e49fbe1cc14578882ef0bb22c07bc65be14",
-          "name": "manager"
-        }
-      ],
-      "replaces": null,
-      "skip_range": null,
-      "skips": [],
-      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.8",
-      "version": "0.0.2",
-      "version_original": "0.0.2"
-    },
-    {
-      "_id": "63511dd8bf62483057d4523c",
-      "alm_examples": [
-        {
-          "api_version": "operator.aquasec.com/v1alpha1",
-          "kind": "AquaCsp",
-          "metadata": {
-            "name": "aqua",
-            "namespace": "aqua"
-          },
-          "spec": {
-            "common": {
-              "databaseSecret": {
-                "key": "db-password",
-                "name": "aqua-database-password"
-              },
-              "dbDiskSize": 10
-            },
-            "database": {
-              "replicas": 1,
-              "service": "ClusterIP"
-            },
-            "gateway": {
-              "replicas": 1,
-              "service": "ClusterIP"
-            },
-            "infra": {
-              "namespace": "aqua",
-              "requirements": true,
-              "serviceAccount": "aqua-sa",
-              "version": "6.5"
-            },
-            "route": true,
-            "runAsNonRoot": false,
-            "server": {
-              "replicas": 1,
-              "service": "LoadBalancer"
-            }
-          }
-        },
-        {
-          "api_version": "operator.aquasec.com/v1alpha1",
-          "kind": "AquaDatabase",
-          "metadata": {
-            "name": "aqua",
-            "namespace": "aqua"
-          },
-          "spec": {
-            "common": {
-              "splitDB": false
-            },
-            "deploy": {
-              "replicas": 1,
-              "service": "ClusterIP"
-            },
-            "diskSize": 10,
-            "infra": {
-              "serviceAccount": "aqua-sa",
-              "version": "6.5"
-            },
-            "runAsNonRoot": false
-          }
-        },
-        {
-          "api_version": "operator.aquasec.com/v1alpha1",
-          "kind": "AquaEnforcer",
-          "metadata": {
-            "name": "aqua"
-          },
-          "spec": {
-            "gateway": {
-              "host": "aqua-gateway",
-              "port": 8443
-            },
-            "infra": {
-              "serviceAccount": "aqua-sa",
-              "version": "6.5"
-            },
-            "runAsNonRoot": false,
-            "token": "<<your-token>>"
-          }
-        },
-        {
-          "api_version": "operator.aquasec.com/v1alpha1",
-          "kind": "AquaKubeEnforcer",
-          "metadata": {
-            "name": "aqua"
-          },
-          "spec": {
-            "config": {
-              "cluster_name": "aqua-secure",
-              "gateway_address": "aqua-gateway:8443",
-              "imagePullSecret": "aqua-registry"
-            },
-            "deploy": {
-              "service": "ClusterIP"
-            },
-            "infra": {
-              "serviceAccount": "aqua-kube-enforcer-sa",
-              "version": "6.5"
-            },
-            "token": "<<KUBE_ENFORCER_GROUP_TOKEN>>"
-          }
-        },
-        {
-          "api_version": "operator.aquasec.com/v1alpha1",
-          "kind": "AquaGateway",
-          "metadata": {
-            "name": "aqua",
-            "namespace": "aqua"
-          },
-          "spec": {
-            "common": {
-              "databaseSecret": {
-                "key": "<<EXTERNAL DB PASSWORD SECRET KEY>>",
-                "name": "<<EXTERNAL DB PASSWORD SECRET NAME>>"
-              },
-              "splitDB": false
-            },
-            "deploy": {
-              "replicas": 1,
-              "service": "ClusterIP"
-            },
-            "externalDb": {
-              "host": "<<EXTERNAL DB IP OR DNS>>",
-              "password": "<<EXTERNAL DB PASSWORD (if secret does not exist)>>",
-              "port": "<<EXTERNAL DB PORT>>",
-              "username": "<<EXTERNAL DB USERNAME>>"
-            },
-            "infra": {
-              "serviceAccount": "aqua-sa",
-              "version": "6.5"
-            }
-          }
-        },
-        {
-          "api_version": "operator.aquasec.com/v1alpha1",
-          "kind": "AquaScanner",
-          "metadata": {
-            "name": "aqua",
-            "namespace": "aqua"
-          },
-          "spec": {
-            "deploy": {
-              "replicas": 1
-            },
-            "infra": {
-              "serviceAccount": "aqua-sa",
-              "version": "6.5"
-            },
-            "login": {
-              "host": "http://aqua-server:8080",
-              "password": "<<YOUR AQUA USER PASSWORD>>",
-              "username": "<<YOUR AQUA USER NAME>>"
-            },
-            "runAsNonRoot": false
-          }
-        },
-        {
-          "api_version": "operator.aquasec.com/v1alpha1",
-          "kind": "AquaServer",
-          "metadata": {
-            "name": "aqua",
-            "namespace": "aqua"
-          },
-          "spec": {
-            "common": {
-              "databaseSecret": {
-                "key": "<<EXTERNAL DB PASSWORD SECRET KEY>>",
-                "name": "<<EXTERNAL DB PASSWORD SECRET NAME>>"
-              },
-              "splitDB": false
-            },
-            "deploy": {
-              "replicas": 1,
-              "service": "LoadBalancer"
-            },
-            "externalDb": {
-              "host": "<<EXTERNAL DB IP OR DNS>>",
-              "password": "<<EXTERNAL DB PASSWORD (if secret does not exist)>>",
-              "port": "<<EXTERNAL DB PORT>>",
-              "username": "<<EXTERNAL DB USERNAME>>"
-            },
-            "infra": {
-              "serviceAccount": "aqua-sa",
-              "version": "6.5"
-            }
-          }
-        }
-      ],
-      "annotations": {
-        "infrastructure_features": [],
-        "valid_subscription": []
-      },
-      "architectures": [],
-      "bundle_path": "registry.connect.redhat.com/aquasec/aquasec-operator-bundle@sha256:24c16eecad82db3556bd7ea72a09aa4a9a699bfc4441e0d71ca6224f6c57bd22",
-      "bundle_path_digest": "sha256:24c16eecad82db3556bd7ea72a09aa4a9a699bfc4441e0d71ca6224f6c57bd22",
-      "capabilities": [
-        "Seamless Upgrades"
-      ],
-      "channel_name": "6.5",
-      "creation_date": "2022-10-20T10:07:20.153000+00:00",
-      "csv_description": "The Aqua Security Operator runs within an OpenShift cluster and provides a means to deploy and manage the Aqua Security cluster and components :\n* Server (aka \u201cconsole\u201d)\n* Database (for production environments we recommend to use an external database and not the Aqua default database)\n* Gateway\n* Enforcer (aka \u201cagent\u201d)\n* KubeEnforcer\n* Scanner\n* CSP (package that contains the Server, Database, and Gateway)\n\nUse the Aqua-Operator to\n* Deploy Aqua Security components on OpenShift\n* Scale up Aqua Security components with extra replicas\n* Assign metadata tags to Aqua Security components\n\nThe Aqua Operator provides a few [Custom Resources](https://github.com/aquasecurity/aqua-operator/tree/master/deploy/crds) for managing the Aqua CSP platform.\n\n## Prerequisites\n\nThere are only 3 prerequisites:\n1. Make sure you have a license and to obtain one, please contact Aqua Security at [Contact Us](mailto:cloudsales@aquasec.com).\n2. Create a new project for aqua\n\n    ```oc new-project aqua```\n\n3. Create the secret for Aqua Database password. If you are using an External Database, make sure you use those credentials.\nNOTE: This step is optional and you can specify the Database password when creating the CRs.\n\n    ```oc create secret generic aqua-database-password --from-literal=db-password=<password> -n aqua```\n\nPlease note that for the certified operator, the Docker registry secret is NOT needed. For the Red Hat certified operator, the Aqua application images are stored in the Red Hat Connect registry and will be automatically pulled by the Aqua operator.\n\n## Choosing the right channel\n\nChannels are a flexible publishing mechanism that offers you three different Aqua versions to deploy, at any point. These channels map to their respective Aqua versions, describing the maturity based on where they are in their lifecycle:\n* 4.6: This maps to the older version of Aqua 4.6.0\n* 5.0: This maps to the Aqua version 5.0.0\n* 5.3: This maps to the Aqua version 5.3.0\n* 6.0: This maps to the Aqua version 6.0.0\n* 6.2: This maps to the Aqua version 6.2.0\n* 6.5: This is the latest and greatest version of Aqua (default)\n\n## Deploying the Aqua Operator\n\nAqua Operator follows an easy push button deployment that installs the operator in its own aqua namespace.\nPlease refer to the instructions [here](https://github.com/aquasecurity/aqua-operator/blob/6.5.0/docs/DeployOpenShiftOperator.md).\n\n## Configuring the Aqua Operator\n\nOperators leverage CRDs as a configuration mechanism for the application. Aqua offers a number of CRDs that can be tweaked and configured as per your needs. Please refer to this [link](https://github.com/aquasecurity/aqua-operator/blob/6.2.0/docs/DeployOpenShiftOperator.md#aquacsp-crds) for Custom Resource examples for popular scenarios.\n\n## Support\n\nFor support please contact support@aquasec.com.",
-      "csv_display_name": "Aqua Security Operator",
-      "csv_metadata_description": "The Aqua Security Operator runs within a Openshift cluster and provides a means to deploy and manage Aqua Security cluster and components.",
-      "csv_name": "aqua-operator.v6.5.22288",
-      "in_index_img": true,
-      "install_modes": [
-        {
-          "supported": true,
-          "type": "OwnNamespace"
-        },
-        {
-          "supported": true,
-          "type": "SingleNamespace"
-        },
-        {
-          "supported": false,
-          "type": "MultiNamespace"
-        },
-        {
-          "supported": false,
-          "type": "AllNamespaces"
-        }
-      ],
-      "is_default_channel": false,
-      "last_update_date": "2022-10-24T10:55:06.264000+00:00",
-      "latest_in_channel": true,
-      "ocp_version": "4.9",
-      "organization": "certified-operators",
-      "package": "aqua-operator-certified",
-      "provided_apis": [
-        {
-          "group": "operator.aquasec.com",
-          "kind": "AquaScanner",
-          "plural": "aquascanners",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "operator.aquasec.com",
-          "kind": "AquaKubeEnforcer",
-          "plural": "aquakubeenforcers",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "aquasecurity.github.io",
-          "kind": "ConfigAuditReport",
-          "plural": "configauditreports",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "aquasecurity.github.io",
-          "kind": "ClusterConfigAuditReport",
-          "plural": "clusterconfigauditreports",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "operator.aquasec.com",
-          "kind": "AquaEnforcer",
-          "plural": "aquaenforcers",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "operator.aquasec.com",
-          "kind": "AquaGateway",
-          "plural": "aquagateways",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "operator.aquasec.com",
-          "kind": "AquaServer",
-          "plural": "aquaservers",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "aquasecurity.github.io",
-          "kind": "AquaStarboard",
-          "plural": "aquastarboards",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "operator.aquasec.com",
-          "kind": "AquaCsp",
-          "plural": "aquacsps",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "operator.aquasec.com",
-          "kind": "AquaDatabase",
-          "plural": "aquadatabases",
-          "version": "v1alpha1"
-        }
-      ],
-      "provider": "Aqua Security, Inc.",
-      "related_images": [
-        {
-          "digest": "sha256:7b98d0b04835e5995a88b223d7b7477ba4dca625d08d2c23df167552e396a20f",
-          "image": "registry.connect.redhat.com/aquasec/aquasec@sha256:7b98d0b04835e5995a88b223d7b7477ba4dca625d08d2c23df167552e396a20f",
-          "name": "aquasec-7b98d0b04835e5995a88b223d7b7477ba4dca625d08d2c23df167552e396a20f-annotation"
-        },
-        {
-          "digest": "sha256:7b98d0b04835e5995a88b223d7b7477ba4dca625d08d2c23df167552e396a20f",
-          "image": "registry.connect.redhat.com/aquasec/aquasec@sha256:7b98d0b04835e5995a88b223d7b7477ba4dca625d08d2c23df167552e396a20f",
-          "name": "aqua-operator"
-        },
-        {
-          "digest": "sha256:2cb83939d45d32560b3499299c46f98d542a1f67f5378774e60c95d255a03768",
-          "image": "registry.connect.redhat.com/aquasec/database@sha256:2cb83939d45d32560b3499299c46f98d542a1f67f5378774e60c95d255a03768",
-          "name": "database"
-        },
-        {
-          "digest": "sha256:ffb9b72c6972aa01b668f5972ece9469d33b1b2b0c59c18be2fe5b7d8e5cd5b0",
-          "image": "registry.connect.redhat.com/aquasec/gateway@sha256:ffb9b72c6972aa01b668f5972ece9469d33b1b2b0c59c18be2fe5b7d8e5cd5b0",
-          "name": "gateway"
-        },
-        {
-          "digest": "sha256:8d4a595c3b2c72b3fdaba49ca7197b5c54eb2ee459fdf18d7dd379fe1f68c4c7",
-          "image": "registry.connect.redhat.com/aquasec/console@sha256:8d4a595c3b2c72b3fdaba49ca7197b5c54eb2ee459fdf18d7dd379fe1f68c4c7",
-          "name": "server"
-        },
-        {
-          "digest": "sha256:a152748ab79c863553da6833740103516ca50067f2e3344ad1a5bd496e6651fb",
-          "image": "registry.connect.redhat.com/aquasec/scanner@sha256:a152748ab79c863553da6833740103516ca50067f2e3344ad1a5bd496e6651fb",
-          "name": "scanner"
-        },
-        {
-          "digest": "sha256:a66f8f5f85bf8e376aa0d5244c359b4a6e4e6a8c12ef740e610a3db18b768eb6",
-          "image": "registry.connect.redhat.com/aquasec/enforcer@sha256:a66f8f5f85bf8e376aa0d5244c359b4a6e4e6a8c12ef740e610a3db18b768eb6",
-          "name": "enforcer"
-        },
-        {
-          "digest": "sha256:6f70b09d443638133ed75369aaa074cc2f0a95518c5549abfe5c77efab58e025",
-          "image": "registry.connect.redhat.com/aquasec/kube-enforcer@sha256:6f70b09d443638133ed75369aaa074cc2f0a95518c5549abfe5c77efab58e025",
-          "name": "kube_enforcer"
-        }
-      ],
-      "replaces": null,
-      "skip_range": ">=1.0.2 <6.5.22288",
-      "skips": [],
-      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.9",
-      "version": "6.5.22288",
-      "version_original": "6.5.22288"
-    },
-    {
-      "_id": "63511de8a13cf60c13da7dd7",
-      "alm_examples": [
-        {
-          "api_version": "operator.aquasec.com/v1alpha1",
-          "kind": "AquaCsp",
-          "metadata": {
-            "name": "aqua",
-            "namespace": "aqua"
-          },
-          "spec": {
-            "common": {
-              "databaseSecret": {
-                "key": "db-password",
-                "name": "aqua-database-password"
-              },
-              "dbDiskSize": 10
-            },
-            "database": {
-              "replicas": 1,
-              "service": "ClusterIP"
-            },
-            "gateway": {
-              "replicas": 1,
-              "service": "ClusterIP"
-            },
-            "infra": {
-              "namespace": "aqua",
-              "requirements": true,
-              "serviceAccount": "aqua-sa",
-              "version": "6.5"
-            },
-            "route": true,
-            "runAsNonRoot": false,
-            "server": {
-              "replicas": 1,
-              "service": "LoadBalancer"
-            }
-          }
-        },
-        {
-          "api_version": "operator.aquasec.com/v1alpha1",
-          "kind": "AquaDatabase",
-          "metadata": {
-            "name": "aqua",
-            "namespace": "aqua"
-          },
-          "spec": {
-            "common": {
-              "splitDB": false
-            },
-            "deploy": {
-              "replicas": 1,
-              "service": "ClusterIP"
-            },
-            "diskSize": 10,
-            "infra": {
-              "serviceAccount": "aqua-sa",
-              "version": "6.5"
-            },
-            "runAsNonRoot": false
-          }
-        },
-        {
-          "api_version": "operator.aquasec.com/v1alpha1",
-          "kind": "AquaEnforcer",
-          "metadata": {
-            "name": "aqua"
-          },
-          "spec": {
-            "gateway": {
-              "host": "aqua-gateway",
-              "port": 8443
-            },
-            "infra": {
-              "serviceAccount": "aqua-sa",
-              "version": "6.5"
-            },
-            "runAsNonRoot": false,
-            "token": "<<your-token>>"
-          }
-        },
-        {
-          "api_version": "operator.aquasec.com/v1alpha1",
-          "kind": "AquaKubeEnforcer",
-          "metadata": {
-            "name": "aqua"
-          },
-          "spec": {
-            "config": {
-              "cluster_name": "aqua-secure",
-              "gateway_address": "aqua-gateway:8443",
-              "imagePullSecret": "aqua-registry"
-            },
-            "deploy": {
-              "service": "ClusterIP"
-            },
-            "infra": {
-              "serviceAccount": "aqua-kube-enforcer-sa",
-              "version": "6.5"
-            },
-            "token": "<<KUBE_ENFORCER_GROUP_TOKEN>>"
-          }
-        },
-        {
-          "api_version": "operator.aquasec.com/v1alpha1",
-          "kind": "AquaGateway",
-          "metadata": {
-            "name": "aqua",
-            "namespace": "aqua"
-          },
-          "spec": {
-            "common": {
-              "databaseSecret": {
-                "key": "<<EXTERNAL DB PASSWORD SECRET KEY>>",
-                "name": "<<EXTERNAL DB PASSWORD SECRET NAME>>"
-              },
-              "splitDB": false
-            },
-            "deploy": {
-              "replicas": 1,
-              "service": "ClusterIP"
-            },
-            "externalDb": {
-              "host": "<<EXTERNAL DB IP OR DNS>>",
-              "password": "<<EXTERNAL DB PASSWORD (if secret does not exist)>>",
-              "port": "<<EXTERNAL DB PORT>>",
-              "username": "<<EXTERNAL DB USERNAME>>"
-            },
-            "infra": {
-              "serviceAccount": "aqua-sa",
-              "version": "6.5"
-            }
-          }
-        },
-        {
-          "api_version": "operator.aquasec.com/v1alpha1",
-          "kind": "AquaScanner",
-          "metadata": {
-            "name": "aqua",
-            "namespace": "aqua"
-          },
-          "spec": {
-            "deploy": {
-              "replicas": 1
-            },
-            "infra": {
-              "serviceAccount": "aqua-sa",
-              "version": "6.5"
-            },
-            "login": {
-              "host": "http://aqua-server:8080",
-              "password": "<<YOUR AQUA USER PASSWORD>>",
-              "username": "<<YOUR AQUA USER NAME>>"
-            },
-            "runAsNonRoot": false
-          }
-        },
-        {
-          "api_version": "operator.aquasec.com/v1alpha1",
-          "kind": "AquaServer",
-          "metadata": {
-            "name": "aqua",
-            "namespace": "aqua"
-          },
-          "spec": {
-            "common": {
-              "databaseSecret": {
-                "key": "<<EXTERNAL DB PASSWORD SECRET KEY>>",
-                "name": "<<EXTERNAL DB PASSWORD SECRET NAME>>"
-              },
-              "splitDB": false
-            },
-            "deploy": {
-              "replicas": 1,
-              "service": "LoadBalancer"
-            },
-            "externalDb": {
-              "host": "<<EXTERNAL DB IP OR DNS>>",
-              "password": "<<EXTERNAL DB PASSWORD (if secret does not exist)>>",
-              "port": "<<EXTERNAL DB PORT>>",
-              "username": "<<EXTERNAL DB USERNAME>>"
-            },
-            "infra": {
-              "serviceAccount": "aqua-sa",
-              "version": "6.5"
-            }
-          }
-        }
-      ],
-      "annotations": {
-        "infrastructure_features": [],
-        "valid_subscription": []
-      },
-      "architectures": [],
-      "bundle_path": "registry.connect.redhat.com/aquasec/aquasec-operator-bundle@sha256:24c16eecad82db3556bd7ea72a09aa4a9a699bfc4441e0d71ca6224f6c57bd22",
-      "bundle_path_digest": "sha256:24c16eecad82db3556bd7ea72a09aa4a9a699bfc4441e0d71ca6224f6c57bd22",
-      "capabilities": [
-        "Seamless Upgrades"
-      ],
-      "channel_name": "6.5",
-      "creation_date": "2022-10-20T10:07:36.862000+00:00",
-      "csv_description": "The Aqua Security Operator runs within an OpenShift cluster and provides a means to deploy and manage the Aqua Security cluster and components :\n* Server (aka \u201cconsole\u201d)\n* Database (for production environments we recommend to use an external database and not the Aqua default database)\n* Gateway\n* Enforcer (aka \u201cagent\u201d)\n* KubeEnforcer\n* Scanner\n* CSP (package that contains the Server, Database, and Gateway)\n\nUse the Aqua-Operator to\n* Deploy Aqua Security components on OpenShift\n* Scale up Aqua Security components with extra replicas\n* Assign metadata tags to Aqua Security components\n\nThe Aqua Operator provides a few [Custom Resources](https://github.com/aquasecurity/aqua-operator/tree/master/deploy/crds) for managing the Aqua CSP platform.\n\n## Prerequisites\n\nThere are only 3 prerequisites:\n1. Make sure you have a license and to obtain one, please contact Aqua Security at [Contact Us](mailto:cloudsales@aquasec.com).\n2. Create a new project for aqua\n\n    ```oc new-project aqua```\n\n3. Create the secret for Aqua Database password. If you are using an External Database, make sure you use those credentials.\nNOTE: This step is optional and you can specify the Database password when creating the CRs.\n\n    ```oc create secret generic aqua-database-password --from-literal=db-password=<password> -n aqua```\n\nPlease note that for the certified operator, the Docker registry secret is NOT needed. For the Red Hat certified operator, the Aqua application images are stored in the Red Hat Connect registry and will be automatically pulled by the Aqua operator.\n\n## Choosing the right channel\n\nChannels are a flexible publishing mechanism that offers you three different Aqua versions to deploy, at any point. These channels map to their respective Aqua versions, describing the maturity based on where they are in their lifecycle:\n* 4.6: This maps to the older version of Aqua 4.6.0\n* 5.0: This maps to the Aqua version 5.0.0\n* 5.3: This maps to the Aqua version 5.3.0\n* 6.0: This maps to the Aqua version 6.0.0\n* 6.2: This maps to the Aqua version 6.2.0\n* 6.5: This is the latest and greatest version of Aqua (default)\n\n## Deploying the Aqua Operator\n\nAqua Operator follows an easy push button deployment that installs the operator in its own aqua namespace.\nPlease refer to the instructions [here](https://github.com/aquasecurity/aqua-operator/blob/6.5.0/docs/DeployOpenShiftOperator.md).\n\n## Configuring the Aqua Operator\n\nOperators leverage CRDs as a configuration mechanism for the application. Aqua offers a number of CRDs that can be tweaked and configured as per your needs. Please refer to this [link](https://github.com/aquasecurity/aqua-operator/blob/6.2.0/docs/DeployOpenShiftOperator.md#aquacsp-crds) for Custom Resource examples for popular scenarios.\n\n## Support\n\nFor support please contact support@aquasec.com.",
-      "csv_display_name": "Aqua Security Operator",
-      "csv_metadata_description": "The Aqua Security Operator runs within a Openshift cluster and provides a means to deploy and manage Aqua Security cluster and components.",
-      "csv_name": "aqua-operator.v6.5.22288",
-      "in_index_img": true,
-      "install_modes": [
-        {
-          "supported": true,
-          "type": "OwnNamespace"
-        },
-        {
-          "supported": true,
-          "type": "SingleNamespace"
-        },
-        {
-          "supported": false,
-          "type": "MultiNamespace"
-        },
-        {
-          "supported": false,
-          "type": "AllNamespaces"
-        }
-      ],
-      "is_default_channel": false,
-      "last_update_date": "2022-10-24T11:23:49.638000+00:00",
-      "latest_in_channel": true,
-      "ocp_version": "4.11",
-      "organization": "certified-operators",
-      "package": "aqua-operator-certified",
-      "provided_apis": [
-        {
-          "group": "aquasecurity.github.io",
-          "kind": "AquaStarboard",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "aquasecurity.github.io",
-          "kind": "ClusterConfigAuditReport",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "aquasecurity.github.io",
-          "kind": "ConfigAuditReport",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "operator.aquasec.com",
-          "kind": "AquaCsp",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "operator.aquasec.com",
-          "kind": "AquaDatabase",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "operator.aquasec.com",
-          "kind": "AquaEnforcer",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "operator.aquasec.com",
-          "kind": "AquaGateway",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "operator.aquasec.com",
-          "kind": "AquaKubeEnforcer",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "operator.aquasec.com",
-          "kind": "AquaScanner",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "operator.aquasec.com",
-          "kind": "AquaServer",
-          "version": "v1alpha1"
-        }
-      ],
-      "provider": "Aqua Security, Inc.",
-      "related_images": [
-        {
-          "digest": "sha256:7b98d0b04835e5995a88b223d7b7477ba4dca625d08d2c23df167552e396a20f",
-          "image": "registry.connect.redhat.com/aquasec/aquasec@sha256:7b98d0b04835e5995a88b223d7b7477ba4dca625d08d2c23df167552e396a20f",
-          "name": "aquasec-7b98d0b04835e5995a88b223d7b7477ba4dca625d08d2c23df167552e396a20f-annotation"
-        },
-        {
-          "digest": "sha256:7b98d0b04835e5995a88b223d7b7477ba4dca625d08d2c23df167552e396a20f",
-          "image": "registry.connect.redhat.com/aquasec/aquasec@sha256:7b98d0b04835e5995a88b223d7b7477ba4dca625d08d2c23df167552e396a20f",
-          "name": "aqua-operator"
-        },
-        {
-          "digest": "sha256:2cb83939d45d32560b3499299c46f98d542a1f67f5378774e60c95d255a03768",
-          "image": "registry.connect.redhat.com/aquasec/database@sha256:2cb83939d45d32560b3499299c46f98d542a1f67f5378774e60c95d255a03768",
-          "name": "database"
-        },
-        {
-          "digest": "sha256:ffb9b72c6972aa01b668f5972ece9469d33b1b2b0c59c18be2fe5b7d8e5cd5b0",
-          "image": "registry.connect.redhat.com/aquasec/gateway@sha256:ffb9b72c6972aa01b668f5972ece9469d33b1b2b0c59c18be2fe5b7d8e5cd5b0",
-          "name": "gateway"
-        },
-        {
-          "digest": "sha256:8d4a595c3b2c72b3fdaba49ca7197b5c54eb2ee459fdf18d7dd379fe1f68c4c7",
-          "image": "registry.connect.redhat.com/aquasec/console@sha256:8d4a595c3b2c72b3fdaba49ca7197b5c54eb2ee459fdf18d7dd379fe1f68c4c7",
-          "name": "server"
-        },
-        {
-          "digest": "sha256:a152748ab79c863553da6833740103516ca50067f2e3344ad1a5bd496e6651fb",
-          "image": "registry.connect.redhat.com/aquasec/scanner@sha256:a152748ab79c863553da6833740103516ca50067f2e3344ad1a5bd496e6651fb",
-          "name": "scanner"
-        },
-        {
-          "digest": "sha256:a66f8f5f85bf8e376aa0d5244c359b4a6e4e6a8c12ef740e610a3db18b768eb6",
-          "image": "registry.connect.redhat.com/aquasec/enforcer@sha256:a66f8f5f85bf8e376aa0d5244c359b4a6e4e6a8c12ef740e610a3db18b768eb6",
-          "name": "enforcer"
-        },
-        {
-          "digest": "sha256:6f70b09d443638133ed75369aaa074cc2f0a95518c5549abfe5c77efab58e025",
-          "image": "registry.connect.redhat.com/aquasec/kube-enforcer@sha256:6f70b09d443638133ed75369aaa074cc2f0a95518c5549abfe5c77efab58e025",
-          "name": "kube_enforcer"
-        }
-      ],
-      "replaces": null,
-      "skip_range": ">=1.0.2 <6.5.22288",
-      "skips": [],
-      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.11",
-      "version": "6.5.22288",
-      "version_original": "6.5.22288"
-    },
-    {
-      "_id": "63511ff26804229d44dfdd27",
-      "alm_examples": [
-        {
-          "api_version": "operator.aquasec.com/v1alpha1",
-          "kind": "AquaCsp",
-          "metadata": {
-            "name": "aqua",
-            "namespace": "aqua"
-          },
-          "spec": {
-            "common": {
-              "databaseSecret": {
-                "key": "db-password",
-                "name": "aqua-database-password"
-              },
-              "dbDiskSize": 10
-            },
-            "database": {
-              "replicas": 1,
-              "service": "ClusterIP"
-            },
-            "gateway": {
-              "replicas": 1,
-              "service": "ClusterIP"
-            },
-            "infra": {
-              "namespace": "aqua",
-              "requirements": true,
-              "serviceAccount": "aqua-sa",
-              "version": "6.5"
-            },
-            "route": true,
-            "runAsNonRoot": false,
-            "server": {
-              "replicas": 1,
-              "service": "LoadBalancer"
-            }
-          }
-        },
-        {
-          "api_version": "operator.aquasec.com/v1alpha1",
-          "kind": "AquaDatabase",
-          "metadata": {
-            "name": "aqua",
-            "namespace": "aqua"
-          },
-          "spec": {
-            "common": {
-              "splitDB": false
-            },
-            "deploy": {
-              "replicas": 1,
-              "service": "ClusterIP"
-            },
-            "diskSize": 10,
-            "infra": {
-              "serviceAccount": "aqua-sa",
-              "version": "6.5"
-            },
-            "runAsNonRoot": false
-          }
-        },
-        {
-          "api_version": "operator.aquasec.com/v1alpha1",
-          "kind": "AquaEnforcer",
-          "metadata": {
-            "name": "aqua"
-          },
-          "spec": {
-            "gateway": {
-              "host": "aqua-gateway",
-              "port": 8443
-            },
-            "infra": {
-              "serviceAccount": "aqua-sa",
-              "version": "6.5"
-            },
-            "runAsNonRoot": false,
-            "token": "<<your-token>>"
-          }
-        },
-        {
-          "api_version": "operator.aquasec.com/v1alpha1",
-          "kind": "AquaKubeEnforcer",
-          "metadata": {
-            "name": "aqua"
-          },
-          "spec": {
-            "config": {
-              "cluster_name": "aqua-secure",
-              "gateway_address": "aqua-gateway:8443",
-              "imagePullSecret": "aqua-registry"
-            },
-            "deploy": {
-              "service": "ClusterIP"
-            },
-            "infra": {
-              "serviceAccount": "aqua-kube-enforcer-sa",
-              "version": "6.5"
-            },
-            "token": "<<KUBE_ENFORCER_GROUP_TOKEN>>"
-          }
-        },
-        {
-          "api_version": "operator.aquasec.com/v1alpha1",
-          "kind": "AquaGateway",
-          "metadata": {
-            "name": "aqua",
-            "namespace": "aqua"
-          },
-          "spec": {
-            "common": {
-              "databaseSecret": {
-                "key": "<<EXTERNAL DB PASSWORD SECRET KEY>>",
-                "name": "<<EXTERNAL DB PASSWORD SECRET NAME>>"
-              },
-              "splitDB": false
-            },
-            "deploy": {
-              "replicas": 1,
-              "service": "ClusterIP"
-            },
-            "externalDb": {
-              "host": "<<EXTERNAL DB IP OR DNS>>",
-              "password": "<<EXTERNAL DB PASSWORD (if secret does not exist)>>",
-              "port": "<<EXTERNAL DB PORT>>",
-              "username": "<<EXTERNAL DB USERNAME>>"
-            },
-            "infra": {
-              "serviceAccount": "aqua-sa",
-              "version": "6.5"
-            }
-          }
-        },
-        {
-          "api_version": "operator.aquasec.com/v1alpha1",
-          "kind": "AquaScanner",
-          "metadata": {
-            "name": "aqua",
-            "namespace": "aqua"
-          },
-          "spec": {
-            "deploy": {
-              "replicas": 1
-            },
-            "infra": {
-              "serviceAccount": "aqua-sa",
-              "version": "6.5"
-            },
-            "login": {
-              "host": "http://aqua-server:8080",
-              "password": "<<YOUR AQUA USER PASSWORD>>",
-              "username": "<<YOUR AQUA USER NAME>>"
-            },
-            "runAsNonRoot": false
-          }
-        },
-        {
-          "api_version": "operator.aquasec.com/v1alpha1",
-          "kind": "AquaServer",
-          "metadata": {
-            "name": "aqua",
-            "namespace": "aqua"
-          },
-          "spec": {
-            "common": {
-              "databaseSecret": {
-                "key": "<<EXTERNAL DB PASSWORD SECRET KEY>>",
-                "name": "<<EXTERNAL DB PASSWORD SECRET NAME>>"
-              },
-              "splitDB": false
-            },
-            "deploy": {
-              "replicas": 1,
-              "service": "LoadBalancer"
-            },
-            "externalDb": {
-              "host": "<<EXTERNAL DB IP OR DNS>>",
-              "password": "<<EXTERNAL DB PASSWORD (if secret does not exist)>>",
-              "port": "<<EXTERNAL DB PORT>>",
-              "username": "<<EXTERNAL DB USERNAME>>"
-            },
-            "infra": {
-              "serviceAccount": "aqua-sa",
-              "version": "6.5"
-            }
-          }
-        }
-      ],
-      "annotations": {
-        "infrastructure_features": [],
-        "valid_subscription": []
-      },
-      "architectures": [],
-      "bundle_path": "registry.connect.redhat.com/aquasec/aquasec-operator-bundle@sha256:24c16eecad82db3556bd7ea72a09aa4a9a699bfc4441e0d71ca6224f6c57bd22",
-      "bundle_path_digest": "sha256:24c16eecad82db3556bd7ea72a09aa4a9a699bfc4441e0d71ca6224f6c57bd22",
-      "capabilities": [
-        "Seamless Upgrades"
-      ],
-      "channel_name": "6.5",
-      "creation_date": "2022-10-20T10:16:18.202000+00:00",
-      "csv_description": "The Aqua Security Operator runs within an OpenShift cluster and provides a means to deploy and manage the Aqua Security cluster and components :\n* Server (aka \u201cconsole\u201d)\n* Database (for production environments we recommend to use an external database and not the Aqua default database)\n* Gateway\n* Enforcer (aka \u201cagent\u201d)\n* KubeEnforcer\n* Scanner\n* CSP (package that contains the Server, Database, and Gateway)\n\nUse the Aqua-Operator to\n* Deploy Aqua Security components on OpenShift\n* Scale up Aqua Security components with extra replicas\n* Assign metadata tags to Aqua Security components\n\nThe Aqua Operator provides a few [Custom Resources](https://github.com/aquasecurity/aqua-operator/tree/master/deploy/crds) for managing the Aqua CSP platform.\n\n## Prerequisites\n\nThere are only 3 prerequisites:\n1. Make sure you have a license and to obtain one, please contact Aqua Security at [Contact Us](mailto:cloudsales@aquasec.com).\n2. Create a new project for aqua\n\n    ```oc new-project aqua```\n\n3. Create the secret for Aqua Database password. If you are using an External Database, make sure you use those credentials.\nNOTE: This step is optional and you can specify the Database password when creating the CRs.\n\n    ```oc create secret generic aqua-database-password --from-literal=db-password=<password> -n aqua```\n\nPlease note that for the certified operator, the Docker registry secret is NOT needed. For the Red Hat certified operator, the Aqua application images are stored in the Red Hat Connect registry and will be automatically pulled by the Aqua operator.\n\n## Choosing the right channel\n\nChannels are a flexible publishing mechanism that offers you three different Aqua versions to deploy, at any point. These channels map to their respective Aqua versions, describing the maturity based on where they are in their lifecycle:\n* 4.6: This maps to the older version of Aqua 4.6.0\n* 5.0: This maps to the Aqua version 5.0.0\n* 5.3: This maps to the Aqua version 5.3.0\n* 6.0: This maps to the Aqua version 6.0.0\n* 6.2: This maps to the Aqua version 6.2.0\n* 6.5: This is the latest and greatest version of Aqua (default)\n\n## Deploying the Aqua Operator\n\nAqua Operator follows an easy push button deployment that installs the operator in its own aqua namespace.\nPlease refer to the instructions [here](https://github.com/aquasecurity/aqua-operator/blob/6.5.0/docs/DeployOpenShiftOperator.md).\n\n## Configuring the Aqua Operator\n\nOperators leverage CRDs as a configuration mechanism for the application. Aqua offers a number of CRDs that can be tweaked and configured as per your needs. Please refer to this [link](https://github.com/aquasecurity/aqua-operator/blob/6.2.0/docs/DeployOpenShiftOperator.md#aquacsp-crds) for Custom Resource examples for popular scenarios.\n\n## Support\n\nFor support please contact support@aquasec.com.",
-      "csv_display_name": "Aqua Security Operator",
-      "csv_metadata_description": "The Aqua Security Operator runs within a Openshift cluster and provides a means to deploy and manage Aqua Security cluster and components.",
-      "csv_name": "aqua-operator.v6.5.22288",
-      "in_index_img": true,
-      "install_modes": [
-        {
-          "supported": true,
-          "type": "OwnNamespace"
-        },
-        {
-          "supported": true,
-          "type": "SingleNamespace"
-        },
-        {
-          "supported": false,
-          "type": "MultiNamespace"
-        },
-        {
-          "supported": false,
-          "type": "AllNamespaces"
-        }
-      ],
-      "is_default_channel": false,
-      "last_update_date": "2022-10-24T11:51:52.835000+00:00",
-      "latest_in_channel": true,
-      "ocp_version": "4.6",
-      "organization": "certified-operators",
-      "package": "aqua-operator-certified",
-      "provided_apis": [
-        {
-          "group": "operator.aquasec.com",
-          "kind": "AquaEnforcer",
-          "plural": "aquaenforcers",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "operator.aquasec.com",
-          "kind": "AquaServer",
-          "plural": "aquaservers",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "aquasecurity.github.io",
-          "kind": "ConfigAuditReport",
-          "plural": "configauditreports",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "operator.aquasec.com",
-          "kind": "AquaDatabase",
-          "plural": "aquadatabases",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "operator.aquasec.com",
-          "kind": "AquaKubeEnforcer",
-          "plural": "aquakubeenforcers",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "operator.aquasec.com",
-          "kind": "AquaGateway",
-          "plural": "aquagateways",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "operator.aquasec.com",
-          "kind": "AquaScanner",
-          "plural": "aquascanners",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "aquasecurity.github.io",
-          "kind": "AquaStarboard",
-          "plural": "aquastarboards",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "aquasecurity.github.io",
-          "kind": "ClusterConfigAuditReport",
-          "plural": "clusterconfigauditreports",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "operator.aquasec.com",
-          "kind": "AquaCsp",
-          "plural": "aquacsps",
-          "version": "v1alpha1"
-        }
-      ],
-      "provider": "Aqua Security, Inc.",
-      "related_images": [
-        {
-          "digest": "sha256:7b98d0b04835e5995a88b223d7b7477ba4dca625d08d2c23df167552e396a20f",
-          "image": "registry.connect.redhat.com/aquasec/aquasec@sha256:7b98d0b04835e5995a88b223d7b7477ba4dca625d08d2c23df167552e396a20f",
-          "name": "aquasec-7b98d0b04835e5995a88b223d7b7477ba4dca625d08d2c23df167552e396a20f-annotation"
-        },
-        {
-          "digest": "sha256:7b98d0b04835e5995a88b223d7b7477ba4dca625d08d2c23df167552e396a20f",
-          "image": "registry.connect.redhat.com/aquasec/aquasec@sha256:7b98d0b04835e5995a88b223d7b7477ba4dca625d08d2c23df167552e396a20f",
-          "name": "aqua-operator"
-        },
-        {
-          "digest": "sha256:2cb83939d45d32560b3499299c46f98d542a1f67f5378774e60c95d255a03768",
-          "image": "registry.connect.redhat.com/aquasec/database@sha256:2cb83939d45d32560b3499299c46f98d542a1f67f5378774e60c95d255a03768",
-          "name": "database"
-        },
-        {
-          "digest": "sha256:ffb9b72c6972aa01b668f5972ece9469d33b1b2b0c59c18be2fe5b7d8e5cd5b0",
-          "image": "registry.connect.redhat.com/aquasec/gateway@sha256:ffb9b72c6972aa01b668f5972ece9469d33b1b2b0c59c18be2fe5b7d8e5cd5b0",
-          "name": "gateway"
-        },
-        {
-          "digest": "sha256:8d4a595c3b2c72b3fdaba49ca7197b5c54eb2ee459fdf18d7dd379fe1f68c4c7",
-          "image": "registry.connect.redhat.com/aquasec/console@sha256:8d4a595c3b2c72b3fdaba49ca7197b5c54eb2ee459fdf18d7dd379fe1f68c4c7",
-          "name": "server"
-        },
-        {
-          "digest": "sha256:a152748ab79c863553da6833740103516ca50067f2e3344ad1a5bd496e6651fb",
-          "image": "registry.connect.redhat.com/aquasec/scanner@sha256:a152748ab79c863553da6833740103516ca50067f2e3344ad1a5bd496e6651fb",
-          "name": "scanner"
-        },
-        {
-          "digest": "sha256:a66f8f5f85bf8e376aa0d5244c359b4a6e4e6a8c12ef740e610a3db18b768eb6",
-          "image": "registry.connect.redhat.com/aquasec/enforcer@sha256:a66f8f5f85bf8e376aa0d5244c359b4a6e4e6a8c12ef740e610a3db18b768eb6",
-          "name": "enforcer"
-        },
-        {
-          "digest": "sha256:6f70b09d443638133ed75369aaa074cc2f0a95518c5549abfe5c77efab58e025",
-          "image": "registry.connect.redhat.com/aquasec/kube-enforcer@sha256:6f70b09d443638133ed75369aaa074cc2f0a95518c5549abfe5c77efab58e025",
-          "name": "kube_enforcer"
-        }
-      ],
-      "replaces": null,
-      "skip_range": ">=1.0.2 <6.5.22288",
-      "skips": [],
-      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.6",
-      "version": "6.5.22288",
-      "version_original": "6.5.22288"
-    },
-    {
       "_id": "63512026d67be106add8b60f",
       "alm_examples": [
         {
@@ -18778,6 +17654,573 @@
       "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.10",
       "version": "0.0.33",
       "version_original": "0.0.33"
+    },
+    {
+      "_id": "636481e21e0a3aed345bbe09",
+      "alm_examples": [
+        {
+          "api_version": "app.joget.com/v1alpha1",
+          "kind": "JogetDX",
+          "metadata": {
+            "name": "example-joget"
+          },
+          "spec": {
+            "size": 1
+          }
+        }
+      ],
+      "annotations": {
+        "infrastructure_features": [],
+        "valid_subscription": []
+      },
+      "architectures": [],
+      "bundle_path": "registry.connect.redhat.com/joget/joget-dx-operator-bundle@sha256:79c02d6d2ab87a38bcd4731f7ef9fa7de12df43e64f091e5799157eedf759035",
+      "bundle_path_digest": "sha256:79c02d6d2ab87a38bcd4731f7ef9fa7de12df43e64f091e5799157eedf759035",
+      "capabilities": [
+        "Seamless Upgrades"
+      ],
+      "channel_name": "alpha",
+      "creation_date": "2022-11-04T03:07:14.890000+00:00",
+      "csv_description": "Joget DX is the next generation open source no-code / low-code application platform that combines the best of Rapid Application Development, Business Process Automation and Workflow Management. \nJoget DX empowers business users, non-coders or coders with a single platform to easily build, deliver, monitor and maintain enterprise applications.\n\nThis operator installs a Joget DX cluster running on JBoss EAP 7.\n\n### Features\n* Build full-fledged apps e.g. CRM, HR, Healthcare, etc\n* Drag and drop forms, lists, UI\n* Add workflow to automate processes\n* Extend via plugins\n* Apps are mobile optimized and cloud ready\n* Download ready-made apps from the Joget Marketplace\n\n### Before You Start\nDeploy a [MySQL](https://docs.openshift.com/online/pro/using_images/db_images/mysql.html) or [MariaDB](https://docs.openshift.com/online/pro/using_images/db_images/mariadb.html) database.\n\n### Post Deployment\nAccess the service URL and complete the one-time [Database Setup](https://dev.joget.org/community/display/DX7/Setting+Up+Database)\n\n### More Information\nMore information about Joget DX on JBoss EAP 7 is available in the [Joget Knowledge Base](https://dev.joget.org/community/display/DX7/Automated+Deployment+on+Red+Hat+OpenShift+with+the+Joget+Operator)\n",
+      "csv_display_name": "Joget DX Operator",
+      "csv_metadata_description": "No-code/low-code application platform to visually build, run and maintain apps",
+      "csv_name": "joget-dx-openshift-operator.v0.0.33",
+      "in_index_img": true,
+      "install_modes": [
+        {
+          "supported": true,
+          "type": "OwnNamespace"
+        },
+        {
+          "supported": true,
+          "type": "SingleNamespace"
+        },
+        {
+          "supported": false,
+          "type": "MultiNamespace"
+        },
+        {
+          "supported": true,
+          "type": "AllNamespaces"
+        }
+      ],
+      "is_default_channel": true,
+      "last_update_date": "2022-11-04T03:07:14.890000+00:00",
+      "latest_in_channel": true,
+      "ocp_version": "4.9",
+      "organization": "certified-operators",
+      "package": "joget-dx-operator",
+      "provided_apis": [
+        {
+          "group": "app.joget.com",
+          "kind": "JogetDX",
+          "plural": "jogetdx",
+          "version": "v1alpha1"
+        }
+      ],
+      "provider": "Joget, Inc",
+      "related_images": [
+        {
+          "digest": "sha256:79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749",
+          "image": "registry.connect.redhat.com/joget/joget-dx-operator@sha256:79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749",
+          "name": "joget-dx-operator-79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749-annotation"
+        },
+        {
+          "digest": "sha256:79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749",
+          "image": "registry.connect.redhat.com/joget/joget-dx-operator@sha256:79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749",
+          "name": "operator"
+        },
+        {
+          "digest": "sha256:7c26ef72bd25b98e56cc57d4a89342274d2e62d808ed46c6f8278a3ebd17c868",
+          "image": "registry.connect.redhat.com/joget/joget-dx7-eap7@sha256:7c26ef72bd25b98e56cc57d4a89342274d2e62d808ed46c6f8278a3ebd17c868",
+          "name": "joget"
+        }
+      ],
+      "replaces": null,
+      "skip_range": null,
+      "skips": [],
+      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.9",
+      "version": "0.0.33",
+      "version_original": "0.0.33"
+    },
+    {
+      "_id": "636482bb2771f5a96d4f6e39",
+      "alm_examples": [
+        {
+          "api_version": "app.joget.com/v1alpha1",
+          "kind": "JogetDX",
+          "metadata": {
+            "name": "example-joget"
+          },
+          "spec": {
+            "size": 1
+          }
+        }
+      ],
+      "annotations": {
+        "infrastructure_features": [],
+        "valid_subscription": []
+      },
+      "architectures": [],
+      "bundle_path": "registry.connect.redhat.com/joget/joget-dx-operator-bundle@sha256:79c02d6d2ab87a38bcd4731f7ef9fa7de12df43e64f091e5799157eedf759035",
+      "bundle_path_digest": "sha256:79c02d6d2ab87a38bcd4731f7ef9fa7de12df43e64f091e5799157eedf759035",
+      "capabilities": [
+        "Seamless Upgrades"
+      ],
+      "channel_name": "alpha",
+      "creation_date": "2022-11-04T03:10:51.412000+00:00",
+      "csv_description": "Joget DX is the next generation open source no-code / low-code application platform that combines the best of Rapid Application Development, Business Process Automation and Workflow Management. \nJoget DX empowers business users, non-coders or coders with a single platform to easily build, deliver, monitor and maintain enterprise applications.\n\nThis operator installs a Joget DX cluster running on JBoss EAP 7.\n\n### Features\n* Build full-fledged apps e.g. CRM, HR, Healthcare, etc\n* Drag and drop forms, lists, UI\n* Add workflow to automate processes\n* Extend via plugins\n* Apps are mobile optimized and cloud ready\n* Download ready-made apps from the Joget Marketplace\n\n### Before You Start\nDeploy a [MySQL](https://docs.openshift.com/online/pro/using_images/db_images/mysql.html) or [MariaDB](https://docs.openshift.com/online/pro/using_images/db_images/mariadb.html) database.\n\n### Post Deployment\nAccess the service URL and complete the one-time [Database Setup](https://dev.joget.org/community/display/DX7/Setting+Up+Database)\n\n### More Information\nMore information about Joget DX on JBoss EAP 7 is available in the [Joget Knowledge Base](https://dev.joget.org/community/display/DX7/Automated+Deployment+on+Red+Hat+OpenShift+with+the+Joget+Operator)\n",
+      "csv_display_name": "Joget DX Operator",
+      "csv_metadata_description": "No-code/low-code application platform to visually build, run and maintain apps",
+      "csv_name": "joget-dx-openshift-operator.v0.0.33",
+      "in_index_img": true,
+      "install_modes": [
+        {
+          "supported": true,
+          "type": "OwnNamespace"
+        },
+        {
+          "supported": true,
+          "type": "SingleNamespace"
+        },
+        {
+          "supported": false,
+          "type": "MultiNamespace"
+        },
+        {
+          "supported": true,
+          "type": "AllNamespaces"
+        }
+      ],
+      "is_default_channel": true,
+      "last_update_date": "2022-11-04T03:10:51.412000+00:00",
+      "latest_in_channel": true,
+      "ocp_version": "4.8",
+      "organization": "certified-operators",
+      "package": "joget-dx-operator",
+      "provided_apis": [
+        {
+          "group": "app.joget.com",
+          "kind": "JogetDX",
+          "plural": "jogetdx",
+          "version": "v1alpha1"
+        }
+      ],
+      "provider": "Joget, Inc",
+      "related_images": [
+        {
+          "digest": "sha256:79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749",
+          "image": "registry.connect.redhat.com/joget/joget-dx-operator@sha256:79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749",
+          "name": "joget-dx-operator-79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749-annotation"
+        },
+        {
+          "digest": "sha256:79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749",
+          "image": "registry.connect.redhat.com/joget/joget-dx-operator@sha256:79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749",
+          "name": "operator"
+        },
+        {
+          "digest": "sha256:7c26ef72bd25b98e56cc57d4a89342274d2e62d808ed46c6f8278a3ebd17c868",
+          "image": "registry.connect.redhat.com/joget/joget-dx7-eap7@sha256:7c26ef72bd25b98e56cc57d4a89342274d2e62d808ed46c6f8278a3ebd17c868",
+          "name": "joget"
+        }
+      ],
+      "replaces": null,
+      "skip_range": null,
+      "skips": [],
+      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.8",
+      "version": "0.0.33",
+      "version_original": "0.0.33"
+    },
+    {
+      "_id": "63667e58855eb8e9cbcc2baa",
+      "alm_examples": [
+        {
+          "api_version": "atlas.mongodb.com/v1",
+          "kind": "AtlasBackupPolicy",
+          "metadata": {
+            "name": "atlasbackuppolicy-sample"
+          },
+          "spec": {
+            "id": "1",
+            "items": [
+              {
+                "frequencyInterval": 6,
+                "frequencyType": "WEEKLY",
+                "id": "2",
+                "retentionUnit": "DAYS",
+                "retentionValue": 6
+              }
+            ]
+          }
+        },
+        {
+          "api_version": "atlas.mongodb.com/v1",
+          "kind": "AtlasBackupSchedule",
+          "metadata": {
+            "name": "atlasbackupschedule-sample"
+          },
+          "spec": {
+            "autoExportEnabled": true,
+            "policies": [
+              {
+                "name": "atlas-default-backuppolicy",
+                "namespace": "mongodb-atlas-system"
+              },
+              {
+                "name": "atlas-default-backuppolicy2",
+                "namespace": "mongodb-atlas-system"
+              }
+            ],
+            "referenceHourOfDay": 10,
+            "referenceMinuteOfHour": 10,
+            "restoreWindowDays": 2
+          }
+        },
+        {
+          "api_version": "atlas.mongodb.com/v1",
+          "kind": "AtlasDatabaseUser",
+          "metadata": {
+            "name": "my-database-user"
+          },
+          "spec": {
+            "databaseName": "admin",
+            "passwordSecretRef": {
+              "name": "my-database-user-password"
+            },
+            "projectRef": {
+              "name": "my-project"
+            },
+            "roles": [
+              {
+                "databaseName": "admin",
+                "roleName": "readWriteAnyDatabase"
+              }
+            ],
+            "username": "david"
+          }
+        },
+        {
+          "api_version": "atlas.mongodb.com/v1",
+          "kind": "AtlasDeployment",
+          "metadata": {
+            "name": "my-atlas-deployment"
+          },
+          "spec": {
+            "deploymentSpec": {
+              "name": "test-deployment",
+              "providerSettings": {
+                "instanceSizeName": "M10",
+                "providerName": "AWS",
+                "regionName": "US_EAST_1"
+              }
+            },
+            "projectRef": {
+              "name": "my-project"
+            }
+          }
+        },
+        {
+          "api_version": "atlas.mongodb.com/v1",
+          "kind": "AtlasProject",
+          "metadata": {
+            "name": "my-project"
+          },
+          "spec": {
+            "name": "Test Atlas Operator Project",
+            "projectIpAccessList": [
+              {
+                "comment": "IP address for Application Server A",
+                "ipAddress": "192.0.2.15"
+              }
+            ]
+          }
+        }
+      ],
+      "annotations": {
+        "infrastructure_features": [],
+        "valid_subscription": []
+      },
+      "architectures": [],
+      "bundle_path": "registry.connect.redhat.com/mongodb/mongodb-atlas-kubernetes-operator-bundle@sha256:f15d63bb62a06e97d23d326b1c7853065b71ae06edc7a7a20c3672c7e505f9b6",
+      "bundle_path_digest": "sha256:f15d63bb62a06e97d23d326b1c7853065b71ae06edc7a7a20c3672c7e505f9b6",
+      "capabilities": [
+        "Full Lifecycle"
+      ],
+      "channel_name": "stable",
+      "creation_date": "2022-11-05T15:16:40.653000+00:00",
+      "csv_description": "The MongoDB Atlas Operator provides a native integration between the Kubernetes orchestration platform and MongoDB Atlas \u2014\nthe only multi-cloud document database service that gives you the versatility you need to build sophisticated and resilient applications that can adapt to changing customer demands and market trends.\n\n> Current Status: *Beta*. The Operator gives users the ability to provision\n> Atlas projects, clusters and database users using Kubernetes Specifications and bind connection information\n> into applications deployed to Kubernetes.\n\n## Quick Start guide\n### Step 1. Deploy Kubernetes operator by clicking Install button.\n\n### Step 2. Create Atlas Cluster\n\n**1.** Create an Atlas API Key Secret\nIn order to work with the Atlas Operator you need to provide [authentication information](https://docs.atlas.mongodb.com/configure-api-access)\n to allow the Atlas Operator to communicate with Atlas API. Once you have generated a Public and Private key in Atlas, you can create a Kuberentes Secret with:\n```\nkubectl create secret generic mongodb-atlas-operator-api-key \\\n         --from-literal=\"orgId=<the_atlas_organization_id>\" \\\n         --from-literal=\"publicApiKey=<the_atlas_api_public_key>\" \\\n         --from-literal=\"privateApiKey=<the_atlas_api_private_key>\" \\\n         -n openshift-operators\n```\n(Note, that you should use the namespace where the Operator was installed - it's `openshift-operators` by default)\n\n**2.** Create an `AtlasProject` Custom Resource\n\nThe `AtlasProject` CustomResource represents Atlas Projects in our Kubernetes cluster. You need to specify\n`projectIpAccessList` with the IP addresses or CIDR blocks of any hosts that will connect to the Atlas Cluster.\n```\napiVersion: atlas.mongodb.com/v1\nkind: AtlasProject\nmetadata:\n  name: my-project\nspec:\n  name: Test Atlas Operator Project\n  projectIpAccessList:\n    - ipAddress: \"192.0.2.15\"\n      comment: \"IP address for Application Server A\"\n    - ipAddress: \"203.0.113.0/24\"\n      comment: \"CIDR block for Application Server B - D\"\n```\n**3.** Create an `AtlasDeployment` Custom Resource.\nThe example below is a minimal configuration to create an M10 Atlas cluster in the AWS US East region. For a full list of properties, check\n`atlasclusters.atlas.mongodb.com` [CRD specification](config/crd/bases/atlas.mongodb.com_atlasclusters.yaml)):\n```\napiVersion: atlas.mongodb.com/v1\nkind: AtlasDeployment\nmetadata:\n  name: my-atlas-cluster\nspec:\n  name: \"Test-cluster\"\n  projectRef:\n    name: my-project\n  providerSettings:\n    instanceSizeName: M10\n    providerName: AWS\n    regionName: US_EAST_1\n```\n\n**4.** Create a database user password Kubernetes Secret\nThe Secret must be created in the same namespace as the `AtlasDeployment` and `AtlasProject` were created.\n```\nkubectl create secret generic the-user-password --from-literal=\"password=P@@sword%\"\n```\n\n**5.** Create an `AtlasDatabaseUser` Custom Resource\n\nIn order to connect to an Atlas Cluster the database user needs to be created. `AtlasDatabaseUser` resource should reference\nthe password Kubernetes Secret created in the previous step.\n```\napiVersion: atlas.mongodb.com/v1\nkind: AtlasDatabaseUser\nmetadata:\n  name: my-database-user\nspec:\n  roles:\n    - roleName: \"readWriteAnyDatabase\"\n      databaseName: \"admin\"\n  projectRef:\n    name: my-project\n  username: theuser\n  passwordSecretRef:\n    name: the-user-password\n```\n**6.** Wait for the `AtlasDatabaseUser` Custom Resource to be ready\n\nWait until the AtlasDatabaseUser resource gets to \"ready\" status (it will wait until the cluster is created that may take around 10 minutes):\n```\nkubectl get atlasdatabaseusers my-database-user -o=jsonpath='{.status.conditions[?(@.type==\"Ready\")].status}'\nTrue\n```\n### Step 3. Connect your application to the Atlas Cluster\n\nThe Atlas Operator will create a Kubernetes Secret with the information necessary to connect to the Atlas Cluster created\nin the previous step. An application in the same Kubernetes Cluster can mount and use the Secret:\n\n```\n...\ncontainers:\n      - name: test-app\n        env:\n         - name: \"CONNECTION_STRING\"\n           valueFrom:\n             secretKeyRef:\n               name: test-atlas-operator-project-test-cluster-theuser\n               key: connectionStringStandardSrv\n\n```\n",
+      "csv_display_name": "MongoDB Atlas Operator",
+      "csv_metadata_description": "The MongoDB Atlas Kubernetes Operator enables easy management of Clusters in MongoDB Atlas",
+      "csv_name": "mongodb-atlas-kubernetes.v1.4.1",
+      "in_index_img": true,
+      "install_modes": [
+        {
+          "supported": true,
+          "type": "OwnNamespace"
+        },
+        {
+          "supported": true,
+          "type": "SingleNamespace"
+        },
+        {
+          "supported": true,
+          "type": "MultiNamespace"
+        },
+        {
+          "supported": true,
+          "type": "AllNamespaces"
+        }
+      ],
+      "is_default_channel": true,
+      "last_update_date": "2022-11-05T15:16:40.653000+00:00",
+      "latest_in_channel": true,
+      "ocp_version": "4.8",
+      "organization": "certified-operators",
+      "package": "mongodb-atlas-kubernetes",
+      "provided_apis": [
+        {
+          "group": "atlas.mongodb.com",
+          "kind": "AtlasBackupPolicy",
+          "plural": "atlasbackuppolicies",
+          "version": "v1"
+        },
+        {
+          "group": "atlas.mongodb.com",
+          "kind": "AtlasBackupSchedule",
+          "plural": "atlasbackupschedules",
+          "version": "v1"
+        },
+        {
+          "group": "atlas.mongodb.com",
+          "kind": "AtlasDatabaseUser",
+          "plural": "atlasdatabaseusers",
+          "version": "v1"
+        },
+        {
+          "group": "atlas.mongodb.com",
+          "kind": "AtlasDeployment",
+          "plural": "atlasdeployments",
+          "version": "v1"
+        },
+        {
+          "group": "atlas.mongodb.com",
+          "kind": "AtlasProject",
+          "plural": "atlasprojects",
+          "version": "v1"
+        }
+      ],
+      "provider": "MongoDB, Inc",
+      "related_images": [
+        {
+          "digest": "sha256:a98e799a58ec797bdb0a825bf90a4720bcd83c3a5f4b2403ce8953a1e5efe77f",
+          "image": "quay.io/mongodb/mongodb-atlas-kubernetes-operator@sha256:a98e799a58ec797bdb0a825bf90a4720bcd83c3a5f4b2403ce8953a1e5efe77f",
+          "name": "mongodb-atlas-kubernetes-operator-a98e799a58ec797bdb0a825bf90a4720bcd83c3a5f4b2403ce8953a1e5efe77f-annotation"
+        },
+        {
+          "digest": "sha256:a98e799a58ec797bdb0a825bf90a4720bcd83c3a5f4b2403ce8953a1e5efe77f",
+          "image": "quay.io/mongodb/mongodb-atlas-kubernetes-operator@sha256:a98e799a58ec797bdb0a825bf90a4720bcd83c3a5f4b2403ce8953a1e5efe77f",
+          "name": "manager"
+        }
+      ],
+      "replaces": null,
+      "skip_range": null,
+      "skips": [],
+      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.8",
+      "version": "1.4.1",
+      "version_original": "1.4.1"
+    },
+    {
+      "_id": "63667fbb8c3861507fa26ab4",
+      "alm_examples": [
+        {
+          "api_version": "atlas.mongodb.com/v1",
+          "kind": "AtlasBackupPolicy",
+          "metadata": {
+            "name": "atlasbackuppolicy-sample"
+          },
+          "spec": {
+            "id": "1",
+            "items": [
+              {
+                "frequencyInterval": 6,
+                "frequencyType": "WEEKLY",
+                "id": "2",
+                "retentionUnit": "DAYS",
+                "retentionValue": 6
+              }
+            ]
+          }
+        },
+        {
+          "api_version": "atlas.mongodb.com/v1",
+          "kind": "AtlasBackupSchedule",
+          "metadata": {
+            "name": "atlasbackupschedule-sample"
+          },
+          "spec": {
+            "autoExportEnabled": true,
+            "policies": [
+              {
+                "name": "atlas-default-backuppolicy",
+                "namespace": "mongodb-atlas-system"
+              },
+              {
+                "name": "atlas-default-backuppolicy2",
+                "namespace": "mongodb-atlas-system"
+              }
+            ],
+            "referenceHourOfDay": 10,
+            "referenceMinuteOfHour": 10,
+            "restoreWindowDays": 2
+          }
+        },
+        {
+          "api_version": "atlas.mongodb.com/v1",
+          "kind": "AtlasDatabaseUser",
+          "metadata": {
+            "name": "my-database-user"
+          },
+          "spec": {
+            "databaseName": "admin",
+            "passwordSecretRef": {
+              "name": "my-database-user-password"
+            },
+            "projectRef": {
+              "name": "my-project"
+            },
+            "roles": [
+              {
+                "databaseName": "admin",
+                "roleName": "readWriteAnyDatabase"
+              }
+            ],
+            "username": "david"
+          }
+        },
+        {
+          "api_version": "atlas.mongodb.com/v1",
+          "kind": "AtlasDeployment",
+          "metadata": {
+            "name": "my-atlas-deployment"
+          },
+          "spec": {
+            "deploymentSpec": {
+              "name": "test-deployment",
+              "providerSettings": {
+                "instanceSizeName": "M10",
+                "providerName": "AWS",
+                "regionName": "US_EAST_1"
+              }
+            },
+            "projectRef": {
+              "name": "my-project"
+            }
+          }
+        },
+        {
+          "api_version": "atlas.mongodb.com/v1",
+          "kind": "AtlasProject",
+          "metadata": {
+            "name": "my-project"
+          },
+          "spec": {
+            "name": "Test Atlas Operator Project",
+            "projectIpAccessList": [
+              {
+                "comment": "IP address for Application Server A",
+                "ipAddress": "192.0.2.15"
+              }
+            ]
+          }
+        }
+      ],
+      "annotations": {
+        "infrastructure_features": [],
+        "valid_subscription": []
+      },
+      "architectures": [],
+      "bundle_path": "registry.connect.redhat.com/mongodb/mongodb-atlas-kubernetes-operator-bundle@sha256:f15d63bb62a06e97d23d326b1c7853065b71ae06edc7a7a20c3672c7e505f9b6",
+      "bundle_path_digest": "sha256:f15d63bb62a06e97d23d326b1c7853065b71ae06edc7a7a20c3672c7e505f9b6",
+      "capabilities": [
+        "Full Lifecycle"
+      ],
+      "channel_name": "stable",
+      "creation_date": "2022-11-05T15:22:35.079000+00:00",
+      "csv_description": "The MongoDB Atlas Operator provides a native integration between the Kubernetes orchestration platform and MongoDB Atlas \u2014\nthe only multi-cloud document database service that gives you the versatility you need to build sophisticated and resilient applications that can adapt to changing customer demands and market trends.\n\n> Current Status: *Beta*. The Operator gives users the ability to provision\n> Atlas projects, clusters and database users using Kubernetes Specifications and bind connection information\n> into applications deployed to Kubernetes.\n\n## Quick Start guide\n### Step 1. Deploy Kubernetes operator by clicking Install button.\n\n### Step 2. Create Atlas Cluster\n\n**1.** Create an Atlas API Key Secret\nIn order to work with the Atlas Operator you need to provide [authentication information](https://docs.atlas.mongodb.com/configure-api-access)\n to allow the Atlas Operator to communicate with Atlas API. Once you have generated a Public and Private key in Atlas, you can create a Kuberentes Secret with:\n```\nkubectl create secret generic mongodb-atlas-operator-api-key \\\n         --from-literal=\"orgId=<the_atlas_organization_id>\" \\\n         --from-literal=\"publicApiKey=<the_atlas_api_public_key>\" \\\n         --from-literal=\"privateApiKey=<the_atlas_api_private_key>\" \\\n         -n openshift-operators\n```\n(Note, that you should use the namespace where the Operator was installed - it's `openshift-operators` by default)\n\n**2.** Create an `AtlasProject` Custom Resource\n\nThe `AtlasProject` CustomResource represents Atlas Projects in our Kubernetes cluster. You need to specify\n`projectIpAccessList` with the IP addresses or CIDR blocks of any hosts that will connect to the Atlas Cluster.\n```\napiVersion: atlas.mongodb.com/v1\nkind: AtlasProject\nmetadata:\n  name: my-project\nspec:\n  name: Test Atlas Operator Project\n  projectIpAccessList:\n    - ipAddress: \"192.0.2.15\"\n      comment: \"IP address for Application Server A\"\n    - ipAddress: \"203.0.113.0/24\"\n      comment: \"CIDR block for Application Server B - D\"\n```\n**3.** Create an `AtlasDeployment` Custom Resource.\nThe example below is a minimal configuration to create an M10 Atlas cluster in the AWS US East region. For a full list of properties, check\n`atlasclusters.atlas.mongodb.com` [CRD specification](config/crd/bases/atlas.mongodb.com_atlasclusters.yaml)):\n```\napiVersion: atlas.mongodb.com/v1\nkind: AtlasDeployment\nmetadata:\n  name: my-atlas-cluster\nspec:\n  name: \"Test-cluster\"\n  projectRef:\n    name: my-project\n  providerSettings:\n    instanceSizeName: M10\n    providerName: AWS\n    regionName: US_EAST_1\n```\n\n**4.** Create a database user password Kubernetes Secret\nThe Secret must be created in the same namespace as the `AtlasDeployment` and `AtlasProject` were created.\n```\nkubectl create secret generic the-user-password --from-literal=\"password=P@@sword%\"\n```\n\n**5.** Create an `AtlasDatabaseUser` Custom Resource\n\nIn order to connect to an Atlas Cluster the database user needs to be created. `AtlasDatabaseUser` resource should reference\nthe password Kubernetes Secret created in the previous step.\n```\napiVersion: atlas.mongodb.com/v1\nkind: AtlasDatabaseUser\nmetadata:\n  name: my-database-user\nspec:\n  roles:\n    - roleName: \"readWriteAnyDatabase\"\n      databaseName: \"admin\"\n  projectRef:\n    name: my-project\n  username: theuser\n  passwordSecretRef:\n    name: the-user-password\n```\n**6.** Wait for the `AtlasDatabaseUser` Custom Resource to be ready\n\nWait until the AtlasDatabaseUser resource gets to \"ready\" status (it will wait until the cluster is created that may take around 10 minutes):\n```\nkubectl get atlasdatabaseusers my-database-user -o=jsonpath='{.status.conditions[?(@.type==\"Ready\")].status}'\nTrue\n```\n### Step 3. Connect your application to the Atlas Cluster\n\nThe Atlas Operator will create a Kubernetes Secret with the information necessary to connect to the Atlas Cluster created\nin the previous step. An application in the same Kubernetes Cluster can mount and use the Secret:\n\n```\n...\ncontainers:\n      - name: test-app\n        env:\n         - name: \"CONNECTION_STRING\"\n           valueFrom:\n             secretKeyRef:\n               name: test-atlas-operator-project-test-cluster-theuser\n               key: connectionStringStandardSrv\n\n```\n",
+      "csv_display_name": "MongoDB Atlas Operator",
+      "csv_metadata_description": "The MongoDB Atlas Kubernetes Operator enables easy management of Clusters in MongoDB Atlas",
+      "csv_name": "mongodb-atlas-kubernetes.v1.4.1",
+      "in_index_img": true,
+      "install_modes": [
+        {
+          "supported": true,
+          "type": "OwnNamespace"
+        },
+        {
+          "supported": true,
+          "type": "SingleNamespace"
+        },
+        {
+          "supported": true,
+          "type": "MultiNamespace"
+        },
+        {
+          "supported": true,
+          "type": "AllNamespaces"
+        }
+      ],
+      "is_default_channel": true,
+      "last_update_date": "2022-11-05T15:22:35.079000+00:00",
+      "latest_in_channel": true,
+      "ocp_version": "4.11",
+      "organization": "certified-operators",
+      "package": "mongodb-atlas-kubernetes",
+      "provided_apis": [
+        {
+          "group": "atlas.mongodb.com",
+          "kind": "AtlasBackupPolicy",
+          "version": "v1"
+        },
+        {
+          "group": "atlas.mongodb.com",
+          "kind": "AtlasBackupSchedule",
+          "version": "v1"
+        },
+        {
+          "group": "atlas.mongodb.com",
+          "kind": "AtlasDatabaseUser",
+          "version": "v1"
+        },
+        {
+          "group": "atlas.mongodb.com",
+          "kind": "AtlasDeployment",
+          "version": "v1"
+        },
+        {
+          "group": "atlas.mongodb.com",
+          "kind": "AtlasProject",
+          "version": "v1"
+        }
+      ],
+      "provider": "MongoDB, Inc",
+      "related_images": [
+        {
+          "digest": "sha256:a98e799a58ec797bdb0a825bf90a4720bcd83c3a5f4b2403ce8953a1e5efe77f",
+          "image": "quay.io/mongodb/mongodb-atlas-kubernetes-operator@sha256:a98e799a58ec797bdb0a825bf90a4720bcd83c3a5f4b2403ce8953a1e5efe77f",
+          "name": "mongodb-atlas-kubernetes-operator-a98e799a58ec797bdb0a825bf90a4720bcd83c3a5f4b2403ce8953a1e5efe77f-annotation"
+        },
+        {
+          "digest": "sha256:a98e799a58ec797bdb0a825bf90a4720bcd83c3a5f4b2403ce8953a1e5efe77f",
+          "image": "quay.io/mongodb/mongodb-atlas-kubernetes-operator@sha256:a98e799a58ec797bdb0a825bf90a4720bcd83c3a5f4b2403ce8953a1e5efe77f",
+          "name": "manager"
+        }
+      ],
+      "replaces": null,
+      "skip_range": null,
+      "skips": [],
+      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.11",
+      "version": "1.4.1",
+      "version_original": "1.4.1"
     }
   ]
 }

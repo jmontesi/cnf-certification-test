@@ -21230,7 +21230,7 @@
       "version_original": "5.1.2"
     },
     {
-      "_id": "62cd95054f09db93321ceada",
+      "_id": "62cd999de4ad541e1fa7ba44",
       "alm_examples": [
         {
           "api_version": "crd.nutanix.com/v1alpha1",
@@ -21255,7 +21255,7 @@
         "Seamless Upgrades"
       ],
       "channel_name": "stable",
-      "creation_date": "2022-07-12T15:36:37.427000+00:00",
+      "creation_date": "2022-07-12T15:56:13.372000+00:00",
       "csv_description": "# Overview \n\nThe Nutanix CSI Operator for Kubernetes packages, deploys, manages, upgrades the Nutanix CSI Driver on Kubernetes and OpenShift for dynamic provisioning of persistent volumes on Nutanix Enterprise Cloud platform.\n\nThe Nutanix Container Storage Interface (CSI) Driver for Kubernetes leverages Nutanix Volumes and Nutanix Files to provide scalable and persistent storage for stateful applications.\n\nWith the Nutanix CSI Provider you can:\n\n*  **Provide persistent storage to your containers**\n    * Leverage PVC resources to consume dynamically Nutanix storage\n    * With Files storage classes, applications on multiple pods can access the same storage, and also have the benefit of multi-pod read and write access. \n\n## Warning\n\nIf you upgrade from a previous version take care to validate your existing StorageClass parameters against the corresponding [documentation](https://portal.nutanix.com/page/documents/details?targetId=CSI-Volume-Driver-v2_5:CSI-Volume-Driver-v2_5).\n\n## Supported Access mode\n\n| Storage Class mode | ReadWriteOnce | ReadOnlyMany | ReadWriteMany |\n|--------------------|---------------|--------------|---------------|\n| Nutanix Volumes    | yes           | yes          | no            |\n| Nutanix Files      | yes           | yes          | yes           |\n\n\n## Supported orchestration platforms\nThe following table details orchestration platforms suitable for deployment of the Nutanix CSI driver.\n\n| Orchestration platform | Version | Architecture |\n|------------------------|---------|--------------|\n| Red Hat OpenShift      | 4.6     | x86          |\n| Red Hat OpenShift      | 4.7     | x86          |\n| Red Hat OpenShift      | 4.8     | x86          |\n| Red Hat OpenShift      | 4.9     | x86          |\n| Red Hat OpenShift      | 4.10    | x86          |\n| Red Hat OpenShift      | 4.11    | x86          |\n\n## Configuring k8s secret and storage class\nIn order to use this driver, deploy your NutanixCsiStorage instance and create the relevant storage classes and secrets, by following the [documentation](https://portal.nutanix.com/page/documents/details?targetId=CSI-Volume-Driver-v2_5:CSI-Volume-Driver-v2_5) or the example in below section:\n\n1. Create a NutanixCsiStorage resource to deploy your driver\n\nYou can do it directly inside the Operator UI with the `Create instance` button or with the following ressource\n```yaml\napiVersion: crd.nutanix.com/v1alpha1\nkind: NutanixCsiStorage\nmetadata:\n  name: nutanixcsistorage\n  namespace: ntnx-system\nspec: {}\n```\n\n2. Create a Nutanix secret\n```yaml\napiVersion: v1\nkind: Secret\nmetadata:\n  name: ntnx-secret\n  namespace: openshift-cluster-csi-drivers\nstringData:\n  # prism-ip:prism-port:username:password.\n  key: 10.0.0.14:9440:admin:password\n```\n\n3. Create storage classes\n\n- volume mode example\n```yaml\nkind: StorageClass\napiVersion: storage.k8s.io/v1\nmetadata:\n  name: nutanix-volume\nprovisioner: csi.nutanix.com\nparameters:\n  csi.storage.k8s.io/provisioner-secret-name: ntnx-secret\n  csi.storage.k8s.io/provisioner-secret-namespace: openshift-cluster-csi-drivers\n  csi.storage.k8s.io/node-publish-secret-name: ntnx-secret\n  csi.storage.k8s.io/node-publish-secret-namespace: openshift-cluster-csi-drivers\n  csi.storage.k8s.io/controller-expand-secret-name: ntnx-secret\n  csi.storage.k8s.io/controller-expand-secret-namespace: openshift-cluster-csi-drivers\n  csi.storage.k8s.io/fstype: ext4\n  storageContainer: default-container\n  storageType: NutanixVolumes\n  #description: \"description added to each storage object created by the driver\"\n  #isSegmentedIscsiNetwork: \"false\"\n  #whitelistIPMode: ENABLED\n  #chapAuth: ENABLED\n  #isLVMVolume: \"false\"\n  #numLVMDisks: 4\nallowVolumeExpansion: true\nreclaimPolicy: Delete\n```\n\n- dynamic files mode example\n\n```yaml\nkind: StorageClass\napiVersion: storage.k8s.io/v1\nmetadata:\n    name: nutanix-dynfiles\nprovisioner: csi.nutanix.com\nparameters:\n  dynamicProv: ENABLED\n  nfsServerName: fs\n  csi.storage.k8s.io/provisioner-secret-name: ntnx-secret\n  csi.storage.k8s.io/provisioner-secret-namespace: openshift-cluster-csi-drivers\n  csi.storage.k8s.io/node-publish-secret-name: ntnx-secret\n  csi.storage.k8s.io/node-publish-secret-namespace: openshift-cluster-csi-drivers\n  csi.storage.k8s.io/controller-expand-secret-name: ntnx-secret\n  csi.storage.k8s.io/controller-expand-secret-namespace: openshift-cluster-csi-drivers\n  storageType: NutanixFiles\n  #description: \"description added to each storage object created by the driver\"\nallowVolumeExpansion: true\n```",
       "csv_display_name": "Nutanix CSI Operator",
       "csv_metadata_description": "An Operator for deploying and managing the Nutanix CSI Driver",
@@ -21280,15 +21280,16 @@
         }
       ],
       "is_default_channel": true,
-      "last_update_date": "2022-10-24T11:39:15.642000+00:00",
+      "last_update_date": "2022-10-24T10:44:33.813000+00:00",
       "latest_in_channel": true,
-      "ocp_version": "4.11",
+      "ocp_version": "4.6",
       "organization": "certified-operators",
       "package": "nutanixcsioperator",
       "provided_apis": [
         {
           "group": "crd.nutanix.com",
           "kind": "NutanixCsiStorage",
+          "plural": "nutanixcsistorages",
           "version": "v1alpha1"
         }
       ],
@@ -21313,7 +21314,7 @@
       "replaces": null,
       "skip_range": "<2.5.4",
       "skips": [],
-      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.11",
+      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.6",
       "version": "2.5.4",
       "version_original": "2.5.4"
     }

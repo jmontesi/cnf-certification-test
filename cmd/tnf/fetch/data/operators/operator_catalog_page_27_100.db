@@ -1,576 +1,6 @@
 {
   "data": [
     {
-      "_id": "62def109c4cecb3d71348101",
-      "alm_examples": [
-        {
-          "api_version": "cilium.io/v1alpha1",
-          "kind": "CiliumConfig",
-          "metadata": {
-            "name": "cilium-openshift-default",
-            "namespace": "placeholder"
-          },
-          "spec": {
-            "cni": {
-              "binPath": "/var/lib/cni/bin",
-              "confPath": "/var/run/multus/cni/net.d"
-            },
-            "endpointRoutes": {
-              "enabled": true
-            },
-            "hubble": {
-              "tls": {
-                "enabled": false
-              }
-            },
-            "ipam": {
-              "mode": "cluster-pool",
-              "operator": {
-                "clusterPoolIPv4MaskSize": "23",
-                "clusterPoolIPv4PodCIDR": "10.128.0.0/14"
-              }
-            },
-            "kubeProxyReplacement": "probe",
-            "nativeRoutingCIDR": "10.128.0.0/14",
-            "prometheus": {
-              "serviceMonitor": {
-                "enabled": false
-              }
-            }
-          }
-        }
-      ],
-      "annotations": {
-        "infrastructure_features": [
-          "disconnected"
-        ],
-        "valid_subscription": []
-      },
-      "architectures": [],
-      "bundle_path": "registry.connect.redhat.com/isovalent/cilium-olm-metadata@sha256:a063d964cd00c421e7681bd79894a235ea888dd11a83f54a0de1fc0954c1ba05",
-      "bundle_path_digest": "sha256:a063d964cd00c421e7681bd79894a235ea888dd11a83f54a0de1fc0954c1ba05",
-      "capabilities": [
-        "Seamless Upgrades"
-      ],
-      "channel_name": "1.11",
-      "creation_date": "2022-07-25T19:37:45.193000+00:00",
-      "csv_description": "Cilium - eBPF-based Networking, Security, and Observability",
-      "csv_display_name": "Cilium",
-      "csv_metadata_description": "",
-      "csv_name": "cilium.v1.11.6-xdd3b9cb",
-      "in_index_img": true,
-      "install_modes": [
-        {
-          "supported": true,
-          "type": "OwnNamespace"
-        },
-        {
-          "supported": true,
-          "type": "SingleNamespace"
-        },
-        {
-          "supported": false,
-          "type": "MultiNamespace"
-        },
-        {
-          "supported": false,
-          "type": "AllNamespaces"
-        }
-      ],
-      "is_default_channel": false,
-      "last_update_date": "2022-10-24T11:00:50.418000+00:00",
-      "latest_in_channel": false,
-      "ocp_version": "4.10",
-      "organization": "certified-operators",
-      "package": "cilium",
-      "provided_apis": [
-        {
-          "group": "cilium.io",
-          "kind": "CiliumConfig",
-          "plural": "ciliumconfigs",
-          "version": "v1alpha1"
-        }
-      ],
-      "provider": "Isovalent",
-      "related_images": [
-        {
-          "digest": "sha256:f7f93c26739b6641a3fa3d76b1e1605b15989f25d06625260099e01c8243f54c",
-          "image": "quay.io/cilium/cilium@sha256:f7f93c26739b6641a3fa3d76b1e1605b15989f25d06625260099e01c8243f54c",
-          "name": "cilium"
-        },
-        {
-          "digest": "sha256:fd9034a2d04d5b973f1e8ed44f230ea195b89c37955ff32e34e5aa68f3ed675a",
-          "image": "quay.io/cilium/hubble-relay@sha256:fd9034a2d04d5b973f1e8ed44f230ea195b89c37955ff32e34e5aa68f3ed675a",
-          "name": "hubble-relay"
-        },
-        {
-          "digest": "sha256:9f6063c7bcaede801a39315ec7c166309f6a6783e98665f6693939cf1701bc17",
-          "image": "quay.io/cilium/operator-generic@sha256:9f6063c7bcaede801a39315ec7c166309f6a6783e98665f6693939cf1701bc17",
-          "name": "cilium-operator"
-        },
-        {
-          "digest": "sha256:f7f93c26739b6641a3fa3d76b1e1605b15989f25d06625260099e01c8243f54c",
-          "image": "quay.io/cilium/cilium@sha256:f7f93c26739b6641a3fa3d76b1e1605b15989f25d06625260099e01c8243f54c",
-          "name": "preflight"
-        },
-        {
-          "digest": "sha256:d368f1415087fea8fe3effa2f5dd36702b8f7daaa3201f61f5b8435890c5d81c",
-          "image": "quay.io/cilium/clustermesh-apiserver@sha256:d368f1415087fea8fe3effa2f5dd36702b8f7daaa3201f61f5b8435890c5d81c",
-          "name": "clustermesh"
-        },
-        {
-          "digest": "sha256:0c2b71bb3469990e7990e7e26243617aa344b5a69a4ce465740b8577f9d48ab9",
-          "image": "quay.io/cilium/certgen@sha256:0c2b71bb3469990e7990e7e26243617aa344b5a69a4ce465740b8577f9d48ab9",
-          "name": "certgen"
-        },
-        {
-          "digest": "sha256:fac239d7b0498f4e3389a06824916963ff7904cac6bdb51eec7f4bbd2a27f8ec",
-          "image": "quay.io/cilium/hubble-ui-backend@sha256:fac239d7b0498f4e3389a06824916963ff7904cac6bdb51eec7f4bbd2a27f8ec",
-          "name": "hubble-ui-backend"
-        },
-        {
-          "digest": "sha256:e032b146d2f27b53167246dbb15ddc91bf5ba2b0562d4d9a4c86dd7e72862670",
-          "image": "quay.io/cilium/hubble-ui@sha256:e032b146d2f27b53167246dbb15ddc91bf5ba2b0562d4d9a4c86dd7e72862670",
-          "name": "hubble-ui-frontend"
-        },
-        {
-          "digest": "sha256:04b8327f7f992693c2cb483b999041ed8f92efc8e14f2a5f3ab95574a65ea2dc",
-          "image": "quay.io/cilium/cilium-etcd-operator@sha256:04b8327f7f992693c2cb483b999041ed8f92efc8e14f2a5f3ab95574a65ea2dc",
-          "name": "etcd-operator"
-        },
-        {
-          "digest": "sha256:1daf817f34000399fcb5da9a94cb299e2810d2c7a52e51de22ba0d4783b6ce84",
-          "image": "quay.io/cilium/startup-script@sha256:1daf817f34000399fcb5da9a94cb299e2810d2c7a52e51de22ba0d4783b6ce84",
-          "name": "nodeinit"
-        },
-        {
-          "digest": "sha256:04833b601fa130512450afa45c4fe484fee1293634f34c7ddc231bd193c74017",
-          "image": "quay.io/coreos/etcd@sha256:04833b601fa130512450afa45c4fe484fee1293634f34c7ddc231bd193c74017",
-          "name": "clustermesh-etcd"
-        },
-        {
-          "digest": "sha256:862121c7d081787ccba43363438fb7cd067f461a790745ffc3ea052917857ce9",
-          "image": "registry.connect.redhat.com/isovalent/cilium-olm@sha256:862121c7d081787ccba43363438fb7cd067f461a790745ffc3ea052917857ce9",
-          "name": "operator"
-        },
-        {
-          "digest": "sha256:fd9034a2d04d5b973f1e8ed44f230ea195b89c37955ff32e34e5aa68f3ed675a",
-          "image": "quay.io/cilium/hubble-relay@sha256:fd9034a2d04d5b973f1e8ed44f230ea195b89c37955ff32e34e5aa68f3ed675a",
-          "name": "hubble_relay"
-        },
-        {
-          "digest": "sha256:9f6063c7bcaede801a39315ec7c166309f6a6783e98665f6693939cf1701bc17",
-          "image": "quay.io/cilium/operator-generic@sha256:9f6063c7bcaede801a39315ec7c166309f6a6783e98665f6693939cf1701bc17",
-          "name": "cilium_operator"
-        },
-        {
-          "digest": "sha256:fac239d7b0498f4e3389a06824916963ff7904cac6bdb51eec7f4bbd2a27f8ec",
-          "image": "quay.io/cilium/hubble-ui-backend@sha256:fac239d7b0498f4e3389a06824916963ff7904cac6bdb51eec7f4bbd2a27f8ec",
-          "name": "hubble_ui_be"
-        },
-        {
-          "digest": "sha256:e032b146d2f27b53167246dbb15ddc91bf5ba2b0562d4d9a4c86dd7e72862670",
-          "image": "quay.io/cilium/hubble-ui@sha256:e032b146d2f27b53167246dbb15ddc91bf5ba2b0562d4d9a4c86dd7e72862670",
-          "name": "hubble_ui_fe"
-        },
-        {
-          "digest": "sha256:04b8327f7f992693c2cb483b999041ed8f92efc8e14f2a5f3ab95574a65ea2dc",
-          "image": "quay.io/cilium/cilium-etcd-operator@sha256:04b8327f7f992693c2cb483b999041ed8f92efc8e14f2a5f3ab95574a65ea2dc",
-          "name": "etcd_operator"
-        },
-        {
-          "digest": "sha256:04833b601fa130512450afa45c4fe484fee1293634f34c7ddc231bd193c74017",
-          "image": "quay.io/coreos/etcd@sha256:04833b601fa130512450afa45c4fe484fee1293634f34c7ddc231bd193c74017",
-          "name": "clustermesh_etcd"
-        }
-      ],
-      "replaces": null,
-      "skip_range": null,
-      "skips": [],
-      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.10",
-      "version": "1.11.6+xdd3b9cb",
-      "version_original": "1.11.6+xdd3b9cb"
-    },
-    {
-      "_id": "62defaf6fcc8d6f8eabc0506",
-      "alm_examples": [
-        {
-          "api_version": "charts.helm.k8s.io/v1",
-          "kind": "Kubeturbo",
-          "metadata": {
-            "name": "kubeturbo-release"
-          },
-          "spec": {
-            "serverMeta": {
-              "turboServer": "https://Turbo_server_URL"
-            },
-            "targetConfig": {
-              "targetName": "Cluster_Name"
-            }
-          }
-        }
-      ],
-      "annotations": {
-        "infrastructure_features": [],
-        "valid_subscription": []
-      },
-      "architectures": [],
-      "bundle_path": "registry.connect.redhat.com/turbonomic/kubeturbo-operator-bundle@sha256:bea7192e07456b6f23901e623137f7bde8c3a2313d80c3c6a8007f04e1fb3687",
-      "bundle_path_digest": "sha256:bea7192e07456b6f23901e623137f7bde8c3a2313d80c3c6a8007f04e1fb3687",
-      "capabilities": [
-        "Basic Install"
-      ],
-      "channel_name": "stable",
-      "creation_date": "2022-07-25T20:20:06.280000+00:00",
-      "csv_description": "### Application Resource Management for Kubernetes\nTurbonomic AI-powered Application Resource Management simultaneously optimizes performance, compliance, and cost in real time.\nSoftware manages the complete application stack, automatically. Applications are continually resourced to perform while satisfying business constraints.\n\nTurbonomic makes workloads smart \u2014 enabling them to self-manage and determines the specific actions that will drive continuous health:\n\n* Continuous placement for Pods (rescheduling)\n* Continuous scaling for applications and  the underlying cluster.\n\nIt assures application performance by giving workloads the resources they need when they need them.\n\n### How does it work?\nTurbonomic uses a container \u2014 KubeTurbo \u2014 that runs in your Kubernetes or Red Hat OpenShift cluster to discover and monitor your environment.\nKubeTurbo runs together with the default scheduler and sends this data back to the Turbonomic analytics engine.\nTurbonomic determines the right actions that drive continuous health, including continuous placement for Pods and continuous scaling for applications and the underlying cluster.",
-      "csv_display_name": "Kubeturbo Operator",
-      "csv_metadata_description": "Turbonomic Workload Automation for Multicloud simultaneously optimizes performance, compliance, and cost in real-time. Workloads are precisely resourced, automatically, to perform while satisfying business constraints.",
-      "csv_name": "kubeturbo-operator.v8.6.0",
-      "in_index_img": true,
-      "install_modes": [
-        {
-          "supported": true,
-          "type": "OwnNamespace"
-        },
-        {
-          "supported": true,
-          "type": "SingleNamespace"
-        },
-        {
-          "supported": false,
-          "type": "MultiNamespace"
-        },
-        {
-          "supported": false,
-          "type": "AllNamespaces"
-        }
-      ],
-      "is_default_channel": true,
-      "last_update_date": "2022-10-24T11:33:58.814000+00:00",
-      "latest_in_channel": false,
-      "ocp_version": "4.11",
-      "organization": "certified-operators",
-      "package": "kubeturbo-certified",
-      "provided_apis": [
-        {
-          "group": "charts.helm.k8s.io",
-          "kind": "Kubeturbo",
-          "version": "v1"
-        },
-        {
-          "group": "charts.helm.k8s.io",
-          "kind": "Kubeturbo",
-          "version": "v1alpha1"
-        }
-      ],
-      "provider": "Turbonomic, Inc.",
-      "related_images": [
-        {
-          "digest": "sha256:08821c5d0be33de5170acf94ffd7a6cd92b9d2a26922af1f3869b502087f7f62",
-          "image": "registry.connect.redhat.com/turbonomic/kubeturbo-operator@sha256:08821c5d0be33de5170acf94ffd7a6cd92b9d2a26922af1f3869b502087f7f62",
-          "name": "kubeturbo-operator-08821c5d0be33de5170acf94ffd7a6cd92b9d2a26922af1f3869b502087f7f62-annotation"
-        },
-        {
-          "digest": "sha256:08821c5d0be33de5170acf94ffd7a6cd92b9d2a26922af1f3869b502087f7f62",
-          "image": "registry.connect.redhat.com/turbonomic/kubeturbo-operator@sha256:08821c5d0be33de5170acf94ffd7a6cd92b9d2a26922af1f3869b502087f7f62",
-          "name": "kubeturbo-operator"
-        },
-        {
-          "digest": "sha256:1af800b95cb2a80edb0359b46ab10d609acb3ebe062e019f9dfc7c4b40ae58c2",
-          "image": "registry.connect.redhat.com/turbonomic/kubeturbo@sha256:1af800b95cb2a80edb0359b46ab10d609acb3ebe062e019f9dfc7c4b40ae58c2",
-          "name": "kubeturbo"
-        }
-      ],
-      "replaces": null,
-      "skip_range": null,
-      "skips": [],
-      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.11",
-      "version": "8.6.0",
-      "version_original": "8.6.0"
-    },
-    {
-      "_id": "62defe0924301b1da4920e7e",
-      "alm_examples": [
-        {
-          "api_version": "charts.helm.k8s.io/v1",
-          "kind": "Kubeturbo",
-          "metadata": {
-            "name": "kubeturbo-release"
-          },
-          "spec": {
-            "serverMeta": {
-              "turboServer": "https://Turbo_server_URL"
-            },
-            "targetConfig": {
-              "targetName": "Cluster_Name"
-            }
-          }
-        }
-      ],
-      "annotations": {
-        "infrastructure_features": [],
-        "valid_subscription": []
-      },
-      "architectures": [],
-      "bundle_path": "registry.connect.redhat.com/turbonomic/kubeturbo-operator-bundle@sha256:bea7192e07456b6f23901e623137f7bde8c3a2313d80c3c6a8007f04e1fb3687",
-      "bundle_path_digest": "sha256:bea7192e07456b6f23901e623137f7bde8c3a2313d80c3c6a8007f04e1fb3687",
-      "capabilities": [
-        "Basic Install"
-      ],
-      "channel_name": "stable",
-      "creation_date": "2022-07-25T20:33:13.716000+00:00",
-      "csv_description": "### Application Resource Management for Kubernetes\nTurbonomic AI-powered Application Resource Management simultaneously optimizes performance, compliance, and cost in real time.\nSoftware manages the complete application stack, automatically. Applications are continually resourced to perform while satisfying business constraints.\n\nTurbonomic makes workloads smart \u2014 enabling them to self-manage and determines the specific actions that will drive continuous health:\n\n* Continuous placement for Pods (rescheduling)\n* Continuous scaling for applications and  the underlying cluster.\n\nIt assures application performance by giving workloads the resources they need when they need them.\n\n### How does it work?\nTurbonomic uses a container \u2014 KubeTurbo \u2014 that runs in your Kubernetes or Red Hat OpenShift cluster to discover and monitor your environment.\nKubeTurbo runs together with the default scheduler and sends this data back to the Turbonomic analytics engine.\nTurbonomic determines the right actions that drive continuous health, including continuous placement for Pods and continuous scaling for applications and the underlying cluster.",
-      "csv_display_name": "Kubeturbo Operator",
-      "csv_metadata_description": "Turbonomic Workload Automation for Multicloud simultaneously optimizes performance, compliance, and cost in real-time. Workloads are precisely resourced, automatically, to perform while satisfying business constraints.",
-      "csv_name": "kubeturbo-operator.v8.6.0",
-      "in_index_img": true,
-      "install_modes": [
-        {
-          "supported": true,
-          "type": "OwnNamespace"
-        },
-        {
-          "supported": true,
-          "type": "SingleNamespace"
-        },
-        {
-          "supported": false,
-          "type": "MultiNamespace"
-        },
-        {
-          "supported": false,
-          "type": "AllNamespaces"
-        }
-      ],
-      "is_default_channel": true,
-      "last_update_date": "2022-10-24T12:03:18.038000+00:00",
-      "latest_in_channel": false,
-      "ocp_version": "4.8",
-      "organization": "certified-operators",
-      "package": "kubeturbo-certified",
-      "provided_apis": [
-        {
-          "group": "charts.helm.k8s.io",
-          "kind": "Kubeturbo",
-          "plural": "kubeturbos",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "charts.helm.k8s.io",
-          "kind": "Kubeturbo",
-          "plural": "kubeturbos",
-          "version": "v1"
-        }
-      ],
-      "provider": "Turbonomic, Inc.",
-      "related_images": [
-        {
-          "digest": "sha256:08821c5d0be33de5170acf94ffd7a6cd92b9d2a26922af1f3869b502087f7f62",
-          "image": "registry.connect.redhat.com/turbonomic/kubeturbo-operator@sha256:08821c5d0be33de5170acf94ffd7a6cd92b9d2a26922af1f3869b502087f7f62",
-          "name": "kubeturbo-operator-08821c5d0be33de5170acf94ffd7a6cd92b9d2a26922af1f3869b502087f7f62-annotation"
-        },
-        {
-          "digest": "sha256:08821c5d0be33de5170acf94ffd7a6cd92b9d2a26922af1f3869b502087f7f62",
-          "image": "registry.connect.redhat.com/turbonomic/kubeturbo-operator@sha256:08821c5d0be33de5170acf94ffd7a6cd92b9d2a26922af1f3869b502087f7f62",
-          "name": "kubeturbo-operator"
-        },
-        {
-          "digest": "sha256:1af800b95cb2a80edb0359b46ab10d609acb3ebe062e019f9dfc7c4b40ae58c2",
-          "image": "registry.connect.redhat.com/turbonomic/kubeturbo@sha256:1af800b95cb2a80edb0359b46ab10d609acb3ebe062e019f9dfc7c4b40ae58c2",
-          "name": "kubeturbo"
-        }
-      ],
-      "replaces": null,
-      "skip_range": null,
-      "skips": [],
-      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.8",
-      "version": "8.6.0",
-      "version_original": "8.6.0"
-    },
-    {
-      "_id": "62defe8efcc8d6f8eabc05f0",
-      "alm_examples": [
-        {
-          "api_version": "apps.ibmz.com/v1alpha1",
-          "kind": "MongoDB",
-          "metadata": {
-            "name": "mongodb-sample"
-          },
-          "spec": {
-            "affinity": {},
-            "autoscaling": {
-              "enabled": false,
-              "maxReplicas": 100,
-              "minReplicas": 1,
-              "targetCPUUtilizationPercentage": 80
-            },
-            "database": {
-              "adminpassword": "snowball123",
-              "adminuser": "adminuser",
-              "name_database": "mydb"
-            },
-            "fullnameOverride": "",
-            "global": {
-              "license": true,
-              "persistence": {
-                "claims": {
-                  "accessMode": "ReadWriteMany",
-                  "capacity": 10,
-                  "capacityUnit": "Gi",
-                  "mountPath": "/data/db/",
-                  "name": "mongo-pv-claim",
-                  "storageClassName": "managed-nfs-storage"
-                },
-                "securityContext": {
-                  "fsGroup": 0,
-                  "supplementalGroup": 0
-                }
-              }
-            },
-            "image": {
-              "pullPolicy": "Always",
-              "repository": "quay.io/ibm/ibmz-mongodb-ee-database@sha256:d5035f260b288d063704a68ad6d185013d8d177815dd073b31f770f6b383b4e3"
-            },
-            "imagePullSecretRef": "registry-pull-secret",
-            "imagePullSecrets": [
-              {
-                "name": "registry-pull-secret"
-              }
-            ],
-            "ingress": {
-              "annotations": {},
-              "controller": "nginx",
-              "tls": []
-            },
-            "name": "mongodb",
-            "nameOverride": "",
-            "namespaceList": [],
-            "namespaced": true,
-            "nodeSelector": {},
-            "podSecurity": {
-              "enabled": true,
-              "securityContext": {
-                "fsGroup": 1000650000,
-                "runAsNonRoot": true,
-                "runAsUser": 1000650000
-              }
-            },
-            "replicaCount": 1,
-            "resources": {
-              "limits": {
-                "cpu": "250m",
-                "memory": "1Gi"
-              },
-              "requests": {
-                "cpu": "250m",
-                "memory": "1Gi"
-              }
-            },
-            "service": {
-              "port": 27017,
-              "type": "ClusterIP"
-            },
-            "serviceAccount": {
-              "annotations": {},
-              "create": true,
-              "name": "mongod"
-            },
-            "tolerations": []
-          }
-        }
-      ],
-      "annotations": {
-        "infrastructure_features": [],
-        "valid_subscription": []
-      },
-      "architectures": [
-        "s390x"
-      ],
-      "bundle_path": "registry.connect.redhat.com/tonyfieit/ibmz-mongodb-ee-operator-bundle@sha256:dc272911777fc8f73231e0e92a72202a1c6536368b10e57e98ac70bf57c96289",
-      "bundle_path_digest": "sha256:dc272911777fc8f73231e0e92a72202a1c6536368b10e57e98ac70bf57c96289",
-      "capabilities": [
-        "Basic Install"
-      ],
-      "channel_name": "alpha",
-      "creation_date": "2022-07-25T20:35:26.105000+00:00",
-      "csv_description": "IBM Operator to deploy MongoDB Enterprise on OpenShift Container",
-      "csv_display_name": "IBMz Mongodb EE operator 5.0",
-      "csv_metadata_description": "Run IBMz Mongodb Enterprise Edition on OpenShift on LinuxONE.",
-      "csv_name": "ibmz-mongodb-ee-operator.v5.0.9",
-      "in_index_img": true,
-      "install_modes": [
-        {
-          "supported": false,
-          "type": "OwnNamespace"
-        },
-        {
-          "supported": false,
-          "type": "SingleNamespace"
-        },
-        {
-          "supported": false,
-          "type": "MultiNamespace"
-        },
-        {
-          "supported": true,
-          "type": "AllNamespaces"
-        }
-      ],
-      "is_default_channel": true,
-      "last_update_date": "2022-10-24T11:10:23.568000+00:00",
-      "latest_in_channel": true,
-      "ocp_version": "4.10",
-      "organization": "certified-operators",
-      "package": "ibmz-mongodb-ee-operator",
-      "provided_apis": [
-        {
-          "group": "apps.ibmz.com",
-          "kind": "MongoDB",
-          "plural": "mongodbs",
-          "version": "v1alpha1"
-        }
-      ],
-      "provider": "IBMz",
-      "related_images": [
-        {
-          "digest": "sha256:def5981c7c0cc56ec8477074c17392f63ea045ee99a0812a384a5121d86f4fba",
-          "image": "quay.io/ibm/ibmz-mongodb-ee-operator@sha256:def5981c7c0cc56ec8477074c17392f63ea045ee99a0812a384a5121d86f4fba",
-          "name": "mongodb-enterprise-operator"
-        },
-        {
-          "digest": "sha256:d5035f260b288d063704a68ad6d185013d8d177815dd073b31f770f6b383b4e3",
-          "image": "quay.io/ibm/ibmz-mongodb-ee-database@sha256:d5035f260b288d063704a68ad6d185013d8d177815dd073b31f770f6b383b4e3",
-          "name": "mongo-enterprise-database"
-        },
-        {
-          "digest": "sha256:db06cc4c084dd0253134f156dddaaf53ef1c3fb3cc809e5d81711baa4029ea4c",
-          "image": "gcr.io/kubebuilder/kube-rbac-proxy@sha256:db06cc4c084dd0253134f156dddaaf53ef1c3fb3cc809e5d81711baa4029ea4c",
-          "name": "kube-rbac-proxy"
-        },
-        {
-          "digest": "sha256:def5981c7c0cc56ec8477074c17392f63ea045ee99a0812a384a5121d86f4fba",
-          "image": "quay.io/ibm/ibmz-mongodb-ee-operator@sha256:def5981c7c0cc56ec8477074c17392f63ea045ee99a0812a384a5121d86f4fba",
-          "name": "ibmz-mongodb-ee-operator-def5981c7c0cc56ec8477074c17392f63ea045ee99a0812a384a5121d86f4fba-annotation"
-        },
-        {
-          "digest": "sha256:def5981c7c0cc56ec8477074c17392f63ea045ee99a0812a384a5121d86f4fba",
-          "image": "quay.io/ibm/ibmz-mongodb-ee-operator@sha256:def5981c7c0cc56ec8477074c17392f63ea045ee99a0812a384a5121d86f4fba",
-          "name": "manager"
-        },
-        {
-          "digest": "sha256:d5035f260b288d063704a68ad6d185013d8d177815dd073b31f770f6b383b4e3",
-          "image": "quay.io/ibm/ibmz-mongodb-ee-database@sha256:d5035f260b288d063704a68ad6d185013d8d177815dd073b31f770f6b383b4e3",
-          "name": "ibmz-mongodb-ee-database-d5035f260b288d063704a68ad6d185013d8d177815dd073b31f770f6b383b4e3-annotation"
-        }
-      ],
-      "replaces": null,
-      "skip_range": ">=4.4.0 <4.4.1",
-      "skips": [],
-      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.10",
-      "version": "5.0.9",
-      "version_original": "5.0.9"
-    },
-    {
       "_id": "62defe8ec4cecb3d7134833e",
       "alm_examples": [
         {
@@ -16801,6 +16231,649 @@
       "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.7",
       "version": "8.6.1",
       "version_original": "8.6.1"
+    },
+    {
+      "_id": "62f144e996f50062ffb7a1d3",
+      "alm_examples": [
+        {
+          "api_version": "charts.helm.k8s.io/v1",
+          "kind": "Kubeturbo",
+          "metadata": {
+            "name": "kubeturbo-release"
+          },
+          "spec": {
+            "serverMeta": {
+              "turboServer": "https://Turbo_server_URL"
+            },
+            "targetConfig": {
+              "targetName": "Cluster_Name"
+            }
+          }
+        }
+      ],
+      "annotations": {
+        "infrastructure_features": [],
+        "valid_subscription": []
+      },
+      "architectures": [],
+      "bundle_path": "registry.connect.redhat.com/turbonomic/kubeturbo-operator-bundle@sha256:c6559cc748028d2098791b277d6316570b1985c616a7e3182fc6dde64296aa11",
+      "bundle_path_digest": "sha256:c6559cc748028d2098791b277d6316570b1985c616a7e3182fc6dde64296aa11",
+      "capabilities": [
+        "Basic Install"
+      ],
+      "channel_name": "stable",
+      "creation_date": "2022-08-08T17:16:25.018000+00:00",
+      "csv_description": "### Application Resource Management for Kubernetes\nTurbonomic AI-powered Application Resource Management simultaneously optimizes performance, compliance, and cost in real time.\nSoftware manages the complete application stack, automatically. Applications are continually resourced to perform while satisfying business constraints.\n\nTurbonomic makes workloads smart \u2014 enabling them to self-manage and determines the specific actions that will drive continuous health:\n\n* Continuous placement for Pods (rescheduling)\n* Continuous scaling for applications and  the underlying cluster.\n\nIt assures application performance by giving workloads the resources they need when they need them.\n\n### How does it work?\nTurbonomic uses a container \u2014 KubeTurbo \u2014 that runs in your Kubernetes or Red Hat OpenShift cluster to discover and monitor your environment.\nKubeTurbo runs together with the default scheduler and sends this data back to the Turbonomic analytics engine.\nTurbonomic determines the right actions that drive continuous health, including continuous placement for Pods and continuous scaling for applications and the underlying cluster.",
+      "csv_display_name": "Kubeturbo Operator",
+      "csv_metadata_description": "Turbonomic Workload Automation for Multicloud simultaneously optimizes performance, compliance, and cost in real-time. Workloads are precisely resourced, automatically, to perform while satisfying business constraints.",
+      "csv_name": "kubeturbo-operator.v8.6.1",
+      "in_index_img": true,
+      "install_modes": [
+        {
+          "supported": true,
+          "type": "OwnNamespace"
+        },
+        {
+          "supported": true,
+          "type": "SingleNamespace"
+        },
+        {
+          "supported": false,
+          "type": "MultiNamespace"
+        },
+        {
+          "supported": false,
+          "type": "AllNamespaces"
+        }
+      ],
+      "is_default_channel": true,
+      "last_update_date": "2022-10-24T10:45:39.598000+00:00",
+      "latest_in_channel": false,
+      "ocp_version": "4.6",
+      "organization": "certified-operators",
+      "package": "kubeturbo-certified",
+      "provided_apis": [
+        {
+          "group": "charts.helm.k8s.io",
+          "kind": "Kubeturbo",
+          "plural": "kubeturbos",
+          "version": "v1"
+        },
+        {
+          "group": "charts.helm.k8s.io",
+          "kind": "Kubeturbo",
+          "plural": "kubeturbos",
+          "version": "v1alpha1"
+        }
+      ],
+      "provider": "Turbonomic, Inc.",
+      "related_images": [
+        {
+          "digest": "sha256:352267882f0bc348290f860892831952299d64509b7e9722d6a5a847811ecdec",
+          "image": "registry.connect.redhat.com/turbonomic/kubeturbo-operator@sha256:352267882f0bc348290f860892831952299d64509b7e9722d6a5a847811ecdec",
+          "name": "kubeturbo-operator-352267882f0bc348290f860892831952299d64509b7e9722d6a5a847811ecdec-annotation"
+        },
+        {
+          "digest": "sha256:352267882f0bc348290f860892831952299d64509b7e9722d6a5a847811ecdec",
+          "image": "registry.connect.redhat.com/turbonomic/kubeturbo-operator@sha256:352267882f0bc348290f860892831952299d64509b7e9722d6a5a847811ecdec",
+          "name": "kubeturbo-operator"
+        },
+        {
+          "digest": "sha256:acbf1a49c061d80c76468137991816401b1c43f4921179013c682d6dfcf814fe",
+          "image": "registry.connect.redhat.com/turbonomic/kubeturbo@sha256:acbf1a49c061d80c76468137991816401b1c43f4921179013c682d6dfcf814fe",
+          "name": "kubeturbo"
+        }
+      ],
+      "replaces": null,
+      "skip_range": null,
+      "skips": [],
+      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.6",
+      "version": "8.6.1",
+      "version_original": "8.6.1"
+    },
+    {
+      "_id": "62f2e93ce81a172176146112",
+      "alm_examples": [
+        {
+          "api_version": "csi.hitachi.com/v1",
+          "kind": "HSPC",
+          "metadata": {
+            "name": "hspc",
+            "namespace": "kube-system"
+          },
+          "spec": {}
+        }
+      ],
+      "annotations": {
+        "infrastructure_features": [],
+        "valid_subscription": []
+      },
+      "architectures": [],
+      "bundle_path": "registry.connect.redhat.com/hitachi/hspc-operator-bundle@sha256:1fad515e245a132a30d185a68d487518c7b980ac63131569a3cf5d48e871de72",
+      "bundle_path_digest": "sha256:1fad515e245a132a30d185a68d487518c7b980ac63131569a3cf5d48e871de72",
+      "capabilities": [
+        "Basic Install"
+      ],
+      "channel_name": "stable",
+      "creation_date": "2022-08-09T23:09:48.824000+00:00",
+      "csv_description": "## About\nHitachi Storage Plug-in for Containers (HSPC) is a plugin that integrates Hitachi VSP storage into Kubernetes based clusters.\nHSPC provides dynamic persistent volume provisioning capabilities from Hitachi's block storage arrays.\n\nFor full documentation, go to our [Knowledge Base](https://knowledge.hitachivantara.com/Documents/Adapters_and_Drivers/Storage_Adapters_and_Drivers/Containers) and refer to the reference guide for HSPC v3.10.0.\n\n## Requirements\n\n### Supported Driver Version\n\n* HSPC v3.10.0\n\n### Supported Platforms\n\n* OpenShift v4.8, v4.9, v4.10\n\n### Supported Operating Systems\n\n* RHEL 7.x\n* RHEL 8.x",
+      "csv_display_name": "Hitachi Storage Plug-in for Containers",
+      "csv_metadata_description": "An operator for managing Hitachi Storage Plug-in for Containers CSI driver",
+      "csv_name": "hspc-operator.v1.10.0",
+      "in_index_img": true,
+      "install_modes": [
+        {
+          "supported": true,
+          "type": "OwnNamespace"
+        },
+        {
+          "supported": true,
+          "type": "SingleNamespace"
+        },
+        {
+          "supported": false,
+          "type": "MultiNamespace"
+        },
+        {
+          "supported": false,
+          "type": "AllNamespaces"
+        }
+      ],
+      "is_default_channel": true,
+      "last_update_date": "2022-10-24T11:09:49.828000+00:00",
+      "latest_in_channel": true,
+      "ocp_version": "4.10",
+      "organization": "certified-operators",
+      "package": "hspc-operator",
+      "provided_apis": [
+        {
+          "group": "csi.hitachi.com",
+          "kind": "HSPC",
+          "plural": "hspcs",
+          "version": "v1"
+        }
+      ],
+      "provider": "Hitachi",
+      "related_images": [
+        {
+          "digest": "sha256:7bac0aafe3b6ccaab0b0ee66648a6d4f31f2a989f10d67f97f3c50c211e8512f",
+          "image": "registry.connect.redhat.com/hitachi/hspc-csi-driver@sha256:7bac0aafe3b6ccaab0b0ee66648a6d4f31f2a989f10d67f97f3c50c211e8512f",
+          "name": "hspc-csi-driver"
+        },
+        {
+          "digest": "sha256:ca8fe419be1ac73c9930b12c68ccd78a7955a3bf22d7e0c6b499065a5eb6dda5",
+          "image": "registry.connect.redhat.com/hitachi/hspc-operator@sha256:ca8fe419be1ac73c9930b12c68ccd78a7955a3bf22d7e0c6b499065a5eb6dda5",
+          "name": "hspc-operator"
+        },
+        {
+          "digest": "sha256:e29462051266aa293115b4056d0b211fc35e8dfdcd716dd5480cbf2b4411f1c8",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-attacher@sha256:e29462051266aa293115b4056d0b211fc35e8dfdcd716dd5480cbf2b4411f1c8",
+          "name": "ose-csi-external-attacher-v4.8"
+        },
+        {
+          "digest": "sha256:ee5eb1f4f81d03798824a04f14d59dbdc2dbcd29f8b0784f9b43ab38d3032fc1",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-provisioner@sha256:ee5eb1f4f81d03798824a04f14d59dbdc2dbcd29f8b0784f9b43ab38d3032fc1",
+          "name": "ose-csi-external-provisioner-v4.8"
+        },
+        {
+          "digest": "sha256:1eb45a961aadc52f46a3d3084da6f667a9da4692e29672ed49d42a95d4c0597d",
+          "image": "registry.redhat.io/openshift4/ose-csi-node-driver-registrar@sha256:1eb45a961aadc52f46a3d3084da6f667a9da4692e29672ed49d42a95d4c0597d",
+          "name": "ose-csi-node-driver-registrar-v4.8"
+        },
+        {
+          "digest": "sha256:e8c4b045477241f14bb59fe2625b3bb6a010c2f205de8719ecbaabe62b6963ca",
+          "image": "registry.redhat.io/openshift4/ose-csi-livenessprobe@sha256:e8c4b045477241f14bb59fe2625b3bb6a010c2f205de8719ecbaabe62b6963ca",
+          "name": "ose-csi-livenessprobe-v4.8"
+        },
+        {
+          "digest": "sha256:eaf9d026d37644d16782cb3d4a9d74f7c969f073d3ba9aa45a83400670251499",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-resizer-rhel8@sha256:eaf9d026d37644d16782cb3d4a9d74f7c969f073d3ba9aa45a83400670251499",
+          "name": "ose-csi-external-resizer-rhel8-v4.8"
+        },
+        {
+          "digest": "sha256:b51e2413c4dd58a9073ddfe9bd48303c13ae5662ccbb1a56c75c75acd0fb1381",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-snapshotter-rhel8@sha256:b51e2413c4dd58a9073ddfe9bd48303c13ae5662ccbb1a56c75c75acd0fb1381",
+          "name": "ose-csi-external-snapshotter-rhel8-v4.8"
+        },
+        {
+          "digest": "sha256:1cdd882b2257fff3198cfc8e8dad47e4e2e067966b6c56633daf62c6e12964d4",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-attacher@sha256:1cdd882b2257fff3198cfc8e8dad47e4e2e067966b6c56633daf62c6e12964d4",
+          "name": "ose-csi-external-attacher-v4.9"
+        },
+        {
+          "digest": "sha256:448ad197f941249247a9672b38cdf2c91b33fd588c4c7c54eda83df1f3e9bc7e",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-provisioner@sha256:448ad197f941249247a9672b38cdf2c91b33fd588c4c7c54eda83df1f3e9bc7e",
+          "name": "ose-csi-external-provisioner-v4.9"
+        },
+        {
+          "digest": "sha256:09be9f710932bc2f4f73eefaca2aa24e5da48ac178fa3f55a972d2a2e3e9c3bc",
+          "image": "registry.redhat.io/openshift4/ose-csi-node-driver-registrar@sha256:09be9f710932bc2f4f73eefaca2aa24e5da48ac178fa3f55a972d2a2e3e9c3bc",
+          "name": "ose-csi-node-driver-registrar-v4.9"
+        },
+        {
+          "digest": "sha256:c61a887f2135c82fb4409cdaaba1c4e81f93c20ca335a40c228242f3329e0547",
+          "image": "registry.redhat.io/openshift4/ose-csi-livenessprobe@sha256:c61a887f2135c82fb4409cdaaba1c4e81f93c20ca335a40c228242f3329e0547",
+          "name": "ose-csi-livenessprobe-v4.9"
+        },
+        {
+          "digest": "sha256:10c2e6528ac30691aa9f42d6b53f5b65c41321be51d2a6a93991959829db004f",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-resizer-rhel8@sha256:10c2e6528ac30691aa9f42d6b53f5b65c41321be51d2a6a93991959829db004f",
+          "name": "ose-csi-external-resizer-rhel8-v4.9"
+        },
+        {
+          "digest": "sha256:0c37ebb246653199b76ad6114f584b1b4db1ff1048d6b0f228ed843fa2e2eb16",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-snapshotter-rhel8@sha256:0c37ebb246653199b76ad6114f584b1b4db1ff1048d6b0f228ed843fa2e2eb16",
+          "name": "ose-csi-external-snapshotter-rhel8-v4.9"
+        },
+        {
+          "digest": "sha256:cdaf874ffaff5e3e4cae473c40372ef45f7d9e3bb35a93c7a715bcc30ff03a4f",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-attacher@sha256:cdaf874ffaff5e3e4cae473c40372ef45f7d9e3bb35a93c7a715bcc30ff03a4f",
+          "name": "ose-csi-external-attacher-v4.10"
+        },
+        {
+          "digest": "sha256:95010584242f9705ffad17632bd11cf1299955b986d1e5b4b8892f9fda75bb00",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-provisioner@sha256:95010584242f9705ffad17632bd11cf1299955b986d1e5b4b8892f9fda75bb00",
+          "name": "ose-csi-external-provisioner-v4.10"
+        },
+        {
+          "digest": "sha256:90792483c531bfa2c51e5be45efdc0e52e3e2461a4c9a6921428d719415dc8b0",
+          "image": "registry.redhat.io/openshift4/ose-csi-node-driver-registrar@sha256:90792483c531bfa2c51e5be45efdc0e52e3e2461a4c9a6921428d719415dc8b0",
+          "name": "ose-csi-node-driver-registrar-v4.10"
+        },
+        {
+          "digest": "sha256:b9db5f0eb8a4d145b6f5a89e12d3361a04616e27b8b8d4bcdfd2c1545f6dc407",
+          "image": "registry.redhat.io/openshift4/ose-csi-livenessprobe@sha256:b9db5f0eb8a4d145b6f5a89e12d3361a04616e27b8b8d4bcdfd2c1545f6dc407",
+          "name": "ose-csi-livenessprobe-v4.10"
+        },
+        {
+          "digest": "sha256:34386f8c0227015c1abd9d7dfd8e9b687cba7047ec021d393ab39133e67178b9",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-resizer-rhel8@sha256:34386f8c0227015c1abd9d7dfd8e9b687cba7047ec021d393ab39133e67178b9",
+          "name": "ose-csi-external-resizer-rhel8-v4.10"
+        },
+        {
+          "digest": "sha256:cb781aff7b4ead2e0535274186b5e97274d734e19e9ef404e187bc39d11bb2cc",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-snapshotter-rhel8@sha256:cb781aff7b4ead2e0535274186b5e97274d734e19e9ef404e187bc39d11bb2cc",
+          "name": "ose-csi-external-snapshotter-rhel8-v4.10"
+        },
+        {
+          "digest": "sha256:ca8fe419be1ac73c9930b12c68ccd78a7955a3bf22d7e0c6b499065a5eb6dda5",
+          "image": "registry.connect.redhat.com/hitachi/hspc-operator@sha256:ca8fe419be1ac73c9930b12c68ccd78a7955a3bf22d7e0c6b499065a5eb6dda5",
+          "name": "hspc-operator-ca8fe419be1ac73c9930b12c68ccd78a7955a3bf22d7e0c6b499065a5eb6dda5-annotation"
+        },
+        {
+          "digest": "sha256:ca8fe419be1ac73c9930b12c68ccd78a7955a3bf22d7e0c6b499065a5eb6dda5",
+          "image": "registry.connect.redhat.com/hitachi/hspc-operator@sha256:ca8fe419be1ac73c9930b12c68ccd78a7955a3bf22d7e0c6b499065a5eb6dda5",
+          "name": "manager"
+        }
+      ],
+      "replaces": null,
+      "skip_range": null,
+      "skips": [],
+      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.10",
+      "version": "1.10.0",
+      "version_original": "1.10.0"
+    },
+    {
+      "_id": "62f2e95bc7996e54ea0a2e91",
+      "alm_examples": [
+        {
+          "api_version": "csi.hitachi.com/v1",
+          "kind": "HSPC",
+          "metadata": {
+            "name": "hspc",
+            "namespace": "kube-system"
+          },
+          "spec": {}
+        }
+      ],
+      "annotations": {
+        "infrastructure_features": [],
+        "valid_subscription": []
+      },
+      "architectures": [],
+      "bundle_path": "registry.connect.redhat.com/hitachi/hspc-operator-bundle@sha256:1fad515e245a132a30d185a68d487518c7b980ac63131569a3cf5d48e871de72",
+      "bundle_path_digest": "sha256:1fad515e245a132a30d185a68d487518c7b980ac63131569a3cf5d48e871de72",
+      "capabilities": [
+        "Basic Install"
+      ],
+      "channel_name": "stable",
+      "creation_date": "2022-08-09T23:10:19.368000+00:00",
+      "csv_description": "## About\nHitachi Storage Plug-in for Containers (HSPC) is a plugin that integrates Hitachi VSP storage into Kubernetes based clusters.\nHSPC provides dynamic persistent volume provisioning capabilities from Hitachi's block storage arrays.\n\nFor full documentation, go to our [Knowledge Base](https://knowledge.hitachivantara.com/Documents/Adapters_and_Drivers/Storage_Adapters_and_Drivers/Containers) and refer to the reference guide for HSPC v3.10.0.\n\n## Requirements\n\n### Supported Driver Version\n\n* HSPC v3.10.0\n\n### Supported Platforms\n\n* OpenShift v4.8, v4.9, v4.10\n\n### Supported Operating Systems\n\n* RHEL 7.x\n* RHEL 8.x",
+      "csv_display_name": "Hitachi Storage Plug-in for Containers",
+      "csv_metadata_description": "An operator for managing Hitachi Storage Plug-in for Containers CSI driver",
+      "csv_name": "hspc-operator.v1.10.0",
+      "in_index_img": true,
+      "install_modes": [
+        {
+          "supported": true,
+          "type": "OwnNamespace"
+        },
+        {
+          "supported": true,
+          "type": "SingleNamespace"
+        },
+        {
+          "supported": false,
+          "type": "MultiNamespace"
+        },
+        {
+          "supported": false,
+          "type": "AllNamespaces"
+        }
+      ],
+      "is_default_channel": true,
+      "last_update_date": "2022-10-24T11:08:05.640000+00:00",
+      "latest_in_channel": true,
+      "ocp_version": "4.9",
+      "organization": "certified-operators",
+      "package": "hspc-operator",
+      "provided_apis": [
+        {
+          "group": "csi.hitachi.com",
+          "kind": "HSPC",
+          "version": "v1"
+        }
+      ],
+      "provider": "Hitachi",
+      "related_images": [
+        {
+          "digest": "sha256:7bac0aafe3b6ccaab0b0ee66648a6d4f31f2a989f10d67f97f3c50c211e8512f",
+          "image": "registry.connect.redhat.com/hitachi/hspc-csi-driver@sha256:7bac0aafe3b6ccaab0b0ee66648a6d4f31f2a989f10d67f97f3c50c211e8512f",
+          "name": "hspc-csi-driver"
+        },
+        {
+          "digest": "sha256:ca8fe419be1ac73c9930b12c68ccd78a7955a3bf22d7e0c6b499065a5eb6dda5",
+          "image": "registry.connect.redhat.com/hitachi/hspc-operator@sha256:ca8fe419be1ac73c9930b12c68ccd78a7955a3bf22d7e0c6b499065a5eb6dda5",
+          "name": "hspc-operator"
+        },
+        {
+          "digest": "sha256:e29462051266aa293115b4056d0b211fc35e8dfdcd716dd5480cbf2b4411f1c8",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-attacher@sha256:e29462051266aa293115b4056d0b211fc35e8dfdcd716dd5480cbf2b4411f1c8",
+          "name": "ose-csi-external-attacher-v4.8"
+        },
+        {
+          "digest": "sha256:ee5eb1f4f81d03798824a04f14d59dbdc2dbcd29f8b0784f9b43ab38d3032fc1",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-provisioner@sha256:ee5eb1f4f81d03798824a04f14d59dbdc2dbcd29f8b0784f9b43ab38d3032fc1",
+          "name": "ose-csi-external-provisioner-v4.8"
+        },
+        {
+          "digest": "sha256:1eb45a961aadc52f46a3d3084da6f667a9da4692e29672ed49d42a95d4c0597d",
+          "image": "registry.redhat.io/openshift4/ose-csi-node-driver-registrar@sha256:1eb45a961aadc52f46a3d3084da6f667a9da4692e29672ed49d42a95d4c0597d",
+          "name": "ose-csi-node-driver-registrar-v4.8"
+        },
+        {
+          "digest": "sha256:e8c4b045477241f14bb59fe2625b3bb6a010c2f205de8719ecbaabe62b6963ca",
+          "image": "registry.redhat.io/openshift4/ose-csi-livenessprobe@sha256:e8c4b045477241f14bb59fe2625b3bb6a010c2f205de8719ecbaabe62b6963ca",
+          "name": "ose-csi-livenessprobe-v4.8"
+        },
+        {
+          "digest": "sha256:eaf9d026d37644d16782cb3d4a9d74f7c969f073d3ba9aa45a83400670251499",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-resizer-rhel8@sha256:eaf9d026d37644d16782cb3d4a9d74f7c969f073d3ba9aa45a83400670251499",
+          "name": "ose-csi-external-resizer-rhel8-v4.8"
+        },
+        {
+          "digest": "sha256:b51e2413c4dd58a9073ddfe9bd48303c13ae5662ccbb1a56c75c75acd0fb1381",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-snapshotter-rhel8@sha256:b51e2413c4dd58a9073ddfe9bd48303c13ae5662ccbb1a56c75c75acd0fb1381",
+          "name": "ose-csi-external-snapshotter-rhel8-v4.8"
+        },
+        {
+          "digest": "sha256:1cdd882b2257fff3198cfc8e8dad47e4e2e067966b6c56633daf62c6e12964d4",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-attacher@sha256:1cdd882b2257fff3198cfc8e8dad47e4e2e067966b6c56633daf62c6e12964d4",
+          "name": "ose-csi-external-attacher-v4.9"
+        },
+        {
+          "digest": "sha256:448ad197f941249247a9672b38cdf2c91b33fd588c4c7c54eda83df1f3e9bc7e",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-provisioner@sha256:448ad197f941249247a9672b38cdf2c91b33fd588c4c7c54eda83df1f3e9bc7e",
+          "name": "ose-csi-external-provisioner-v4.9"
+        },
+        {
+          "digest": "sha256:09be9f710932bc2f4f73eefaca2aa24e5da48ac178fa3f55a972d2a2e3e9c3bc",
+          "image": "registry.redhat.io/openshift4/ose-csi-node-driver-registrar@sha256:09be9f710932bc2f4f73eefaca2aa24e5da48ac178fa3f55a972d2a2e3e9c3bc",
+          "name": "ose-csi-node-driver-registrar-v4.9"
+        },
+        {
+          "digest": "sha256:c61a887f2135c82fb4409cdaaba1c4e81f93c20ca335a40c228242f3329e0547",
+          "image": "registry.redhat.io/openshift4/ose-csi-livenessprobe@sha256:c61a887f2135c82fb4409cdaaba1c4e81f93c20ca335a40c228242f3329e0547",
+          "name": "ose-csi-livenessprobe-v4.9"
+        },
+        {
+          "digest": "sha256:10c2e6528ac30691aa9f42d6b53f5b65c41321be51d2a6a93991959829db004f",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-resizer-rhel8@sha256:10c2e6528ac30691aa9f42d6b53f5b65c41321be51d2a6a93991959829db004f",
+          "name": "ose-csi-external-resizer-rhel8-v4.9"
+        },
+        {
+          "digest": "sha256:0c37ebb246653199b76ad6114f584b1b4db1ff1048d6b0f228ed843fa2e2eb16",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-snapshotter-rhel8@sha256:0c37ebb246653199b76ad6114f584b1b4db1ff1048d6b0f228ed843fa2e2eb16",
+          "name": "ose-csi-external-snapshotter-rhel8-v4.9"
+        },
+        {
+          "digest": "sha256:cdaf874ffaff5e3e4cae473c40372ef45f7d9e3bb35a93c7a715bcc30ff03a4f",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-attacher@sha256:cdaf874ffaff5e3e4cae473c40372ef45f7d9e3bb35a93c7a715bcc30ff03a4f",
+          "name": "ose-csi-external-attacher-v4.10"
+        },
+        {
+          "digest": "sha256:95010584242f9705ffad17632bd11cf1299955b986d1e5b4b8892f9fda75bb00",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-provisioner@sha256:95010584242f9705ffad17632bd11cf1299955b986d1e5b4b8892f9fda75bb00",
+          "name": "ose-csi-external-provisioner-v4.10"
+        },
+        {
+          "digest": "sha256:90792483c531bfa2c51e5be45efdc0e52e3e2461a4c9a6921428d719415dc8b0",
+          "image": "registry.redhat.io/openshift4/ose-csi-node-driver-registrar@sha256:90792483c531bfa2c51e5be45efdc0e52e3e2461a4c9a6921428d719415dc8b0",
+          "name": "ose-csi-node-driver-registrar-v4.10"
+        },
+        {
+          "digest": "sha256:b9db5f0eb8a4d145b6f5a89e12d3361a04616e27b8b8d4bcdfd2c1545f6dc407",
+          "image": "registry.redhat.io/openshift4/ose-csi-livenessprobe@sha256:b9db5f0eb8a4d145b6f5a89e12d3361a04616e27b8b8d4bcdfd2c1545f6dc407",
+          "name": "ose-csi-livenessprobe-v4.10"
+        },
+        {
+          "digest": "sha256:34386f8c0227015c1abd9d7dfd8e9b687cba7047ec021d393ab39133e67178b9",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-resizer-rhel8@sha256:34386f8c0227015c1abd9d7dfd8e9b687cba7047ec021d393ab39133e67178b9",
+          "name": "ose-csi-external-resizer-rhel8-v4.10"
+        },
+        {
+          "digest": "sha256:cb781aff7b4ead2e0535274186b5e97274d734e19e9ef404e187bc39d11bb2cc",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-snapshotter-rhel8@sha256:cb781aff7b4ead2e0535274186b5e97274d734e19e9ef404e187bc39d11bb2cc",
+          "name": "ose-csi-external-snapshotter-rhel8-v4.10"
+        },
+        {
+          "digest": "sha256:ca8fe419be1ac73c9930b12c68ccd78a7955a3bf22d7e0c6b499065a5eb6dda5",
+          "image": "registry.connect.redhat.com/hitachi/hspc-operator@sha256:ca8fe419be1ac73c9930b12c68ccd78a7955a3bf22d7e0c6b499065a5eb6dda5",
+          "name": "hspc-operator-ca8fe419be1ac73c9930b12c68ccd78a7955a3bf22d7e0c6b499065a5eb6dda5-annotation"
+        },
+        {
+          "digest": "sha256:ca8fe419be1ac73c9930b12c68ccd78a7955a3bf22d7e0c6b499065a5eb6dda5",
+          "image": "registry.connect.redhat.com/hitachi/hspc-operator@sha256:ca8fe419be1ac73c9930b12c68ccd78a7955a3bf22d7e0c6b499065a5eb6dda5",
+          "name": "manager"
+        }
+      ],
+      "replaces": null,
+      "skip_range": null,
+      "skips": [],
+      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.9",
+      "version": "1.10.0",
+      "version_original": "1.10.0"
+    },
+    {
+      "_id": "62f2ea31ecdd7d25b4360c70",
+      "alm_examples": [
+        {
+          "api_version": "csi.hitachi.com/v1",
+          "kind": "HSPC",
+          "metadata": {
+            "name": "hspc",
+            "namespace": "kube-system"
+          },
+          "spec": {}
+        }
+      ],
+      "annotations": {
+        "infrastructure_features": [],
+        "valid_subscription": []
+      },
+      "architectures": [],
+      "bundle_path": "registry.connect.redhat.com/hitachi/hspc-operator-bundle@sha256:1fad515e245a132a30d185a68d487518c7b980ac63131569a3cf5d48e871de72",
+      "bundle_path_digest": "sha256:1fad515e245a132a30d185a68d487518c7b980ac63131569a3cf5d48e871de72",
+      "capabilities": [
+        "Basic Install"
+      ],
+      "channel_name": "stable",
+      "creation_date": "2022-08-09T23:13:53.793000+00:00",
+      "csv_description": "## About\nHitachi Storage Plug-in for Containers (HSPC) is a plugin that integrates Hitachi VSP storage into Kubernetes based clusters.\nHSPC provides dynamic persistent volume provisioning capabilities from Hitachi's block storage arrays.\n\nFor full documentation, go to our [Knowledge Base](https://knowledge.hitachivantara.com/Documents/Adapters_and_Drivers/Storage_Adapters_and_Drivers/Containers) and refer to the reference guide for HSPC v3.10.0.\n\n## Requirements\n\n### Supported Driver Version\n\n* HSPC v3.10.0\n\n### Supported Platforms\n\n* OpenShift v4.8, v4.9, v4.10\n\n### Supported Operating Systems\n\n* RHEL 7.x\n* RHEL 8.x",
+      "csv_display_name": "Hitachi Storage Plug-in for Containers",
+      "csv_metadata_description": "An operator for managing Hitachi Storage Plug-in for Containers CSI driver",
+      "csv_name": "hspc-operator.v1.10.0",
+      "in_index_img": true,
+      "install_modes": [
+        {
+          "supported": true,
+          "type": "OwnNamespace"
+        },
+        {
+          "supported": true,
+          "type": "SingleNamespace"
+        },
+        {
+          "supported": false,
+          "type": "MultiNamespace"
+        },
+        {
+          "supported": false,
+          "type": "AllNamespaces"
+        }
+      ],
+      "is_default_channel": true,
+      "last_update_date": "2022-10-24T12:03:10.102000+00:00",
+      "latest_in_channel": true,
+      "ocp_version": "4.8",
+      "organization": "certified-operators",
+      "package": "hspc-operator",
+      "provided_apis": [
+        {
+          "group": "csi.hitachi.com",
+          "kind": "HSPC",
+          "version": "v1"
+        }
+      ],
+      "provider": "Hitachi",
+      "related_images": [
+        {
+          "digest": "sha256:7bac0aafe3b6ccaab0b0ee66648a6d4f31f2a989f10d67f97f3c50c211e8512f",
+          "image": "registry.connect.redhat.com/hitachi/hspc-csi-driver@sha256:7bac0aafe3b6ccaab0b0ee66648a6d4f31f2a989f10d67f97f3c50c211e8512f",
+          "name": "hspc-csi-driver"
+        },
+        {
+          "digest": "sha256:ca8fe419be1ac73c9930b12c68ccd78a7955a3bf22d7e0c6b499065a5eb6dda5",
+          "image": "registry.connect.redhat.com/hitachi/hspc-operator@sha256:ca8fe419be1ac73c9930b12c68ccd78a7955a3bf22d7e0c6b499065a5eb6dda5",
+          "name": "hspc-operator"
+        },
+        {
+          "digest": "sha256:e29462051266aa293115b4056d0b211fc35e8dfdcd716dd5480cbf2b4411f1c8",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-attacher@sha256:e29462051266aa293115b4056d0b211fc35e8dfdcd716dd5480cbf2b4411f1c8",
+          "name": "ose-csi-external-attacher-v4.8"
+        },
+        {
+          "digest": "sha256:ee5eb1f4f81d03798824a04f14d59dbdc2dbcd29f8b0784f9b43ab38d3032fc1",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-provisioner@sha256:ee5eb1f4f81d03798824a04f14d59dbdc2dbcd29f8b0784f9b43ab38d3032fc1",
+          "name": "ose-csi-external-provisioner-v4.8"
+        },
+        {
+          "digest": "sha256:1eb45a961aadc52f46a3d3084da6f667a9da4692e29672ed49d42a95d4c0597d",
+          "image": "registry.redhat.io/openshift4/ose-csi-node-driver-registrar@sha256:1eb45a961aadc52f46a3d3084da6f667a9da4692e29672ed49d42a95d4c0597d",
+          "name": "ose-csi-node-driver-registrar-v4.8"
+        },
+        {
+          "digest": "sha256:e8c4b045477241f14bb59fe2625b3bb6a010c2f205de8719ecbaabe62b6963ca",
+          "image": "registry.redhat.io/openshift4/ose-csi-livenessprobe@sha256:e8c4b045477241f14bb59fe2625b3bb6a010c2f205de8719ecbaabe62b6963ca",
+          "name": "ose-csi-livenessprobe-v4.8"
+        },
+        {
+          "digest": "sha256:eaf9d026d37644d16782cb3d4a9d74f7c969f073d3ba9aa45a83400670251499",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-resizer-rhel8@sha256:eaf9d026d37644d16782cb3d4a9d74f7c969f073d3ba9aa45a83400670251499",
+          "name": "ose-csi-external-resizer-rhel8-v4.8"
+        },
+        {
+          "digest": "sha256:b51e2413c4dd58a9073ddfe9bd48303c13ae5662ccbb1a56c75c75acd0fb1381",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-snapshotter-rhel8@sha256:b51e2413c4dd58a9073ddfe9bd48303c13ae5662ccbb1a56c75c75acd0fb1381",
+          "name": "ose-csi-external-snapshotter-rhel8-v4.8"
+        },
+        {
+          "digest": "sha256:1cdd882b2257fff3198cfc8e8dad47e4e2e067966b6c56633daf62c6e12964d4",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-attacher@sha256:1cdd882b2257fff3198cfc8e8dad47e4e2e067966b6c56633daf62c6e12964d4",
+          "name": "ose-csi-external-attacher-v4.9"
+        },
+        {
+          "digest": "sha256:448ad197f941249247a9672b38cdf2c91b33fd588c4c7c54eda83df1f3e9bc7e",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-provisioner@sha256:448ad197f941249247a9672b38cdf2c91b33fd588c4c7c54eda83df1f3e9bc7e",
+          "name": "ose-csi-external-provisioner-v4.9"
+        },
+        {
+          "digest": "sha256:09be9f710932bc2f4f73eefaca2aa24e5da48ac178fa3f55a972d2a2e3e9c3bc",
+          "image": "registry.redhat.io/openshift4/ose-csi-node-driver-registrar@sha256:09be9f710932bc2f4f73eefaca2aa24e5da48ac178fa3f55a972d2a2e3e9c3bc",
+          "name": "ose-csi-node-driver-registrar-v4.9"
+        },
+        {
+          "digest": "sha256:c61a887f2135c82fb4409cdaaba1c4e81f93c20ca335a40c228242f3329e0547",
+          "image": "registry.redhat.io/openshift4/ose-csi-livenessprobe@sha256:c61a887f2135c82fb4409cdaaba1c4e81f93c20ca335a40c228242f3329e0547",
+          "name": "ose-csi-livenessprobe-v4.9"
+        },
+        {
+          "digest": "sha256:10c2e6528ac30691aa9f42d6b53f5b65c41321be51d2a6a93991959829db004f",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-resizer-rhel8@sha256:10c2e6528ac30691aa9f42d6b53f5b65c41321be51d2a6a93991959829db004f",
+          "name": "ose-csi-external-resizer-rhel8-v4.9"
+        },
+        {
+          "digest": "sha256:0c37ebb246653199b76ad6114f584b1b4db1ff1048d6b0f228ed843fa2e2eb16",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-snapshotter-rhel8@sha256:0c37ebb246653199b76ad6114f584b1b4db1ff1048d6b0f228ed843fa2e2eb16",
+          "name": "ose-csi-external-snapshotter-rhel8-v4.9"
+        },
+        {
+          "digest": "sha256:cdaf874ffaff5e3e4cae473c40372ef45f7d9e3bb35a93c7a715bcc30ff03a4f",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-attacher@sha256:cdaf874ffaff5e3e4cae473c40372ef45f7d9e3bb35a93c7a715bcc30ff03a4f",
+          "name": "ose-csi-external-attacher-v4.10"
+        },
+        {
+          "digest": "sha256:95010584242f9705ffad17632bd11cf1299955b986d1e5b4b8892f9fda75bb00",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-provisioner@sha256:95010584242f9705ffad17632bd11cf1299955b986d1e5b4b8892f9fda75bb00",
+          "name": "ose-csi-external-provisioner-v4.10"
+        },
+        {
+          "digest": "sha256:90792483c531bfa2c51e5be45efdc0e52e3e2461a4c9a6921428d719415dc8b0",
+          "image": "registry.redhat.io/openshift4/ose-csi-node-driver-registrar@sha256:90792483c531bfa2c51e5be45efdc0e52e3e2461a4c9a6921428d719415dc8b0",
+          "name": "ose-csi-node-driver-registrar-v4.10"
+        },
+        {
+          "digest": "sha256:b9db5f0eb8a4d145b6f5a89e12d3361a04616e27b8b8d4bcdfd2c1545f6dc407",
+          "image": "registry.redhat.io/openshift4/ose-csi-livenessprobe@sha256:b9db5f0eb8a4d145b6f5a89e12d3361a04616e27b8b8d4bcdfd2c1545f6dc407",
+          "name": "ose-csi-livenessprobe-v4.10"
+        },
+        {
+          "digest": "sha256:34386f8c0227015c1abd9d7dfd8e9b687cba7047ec021d393ab39133e67178b9",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-resizer-rhel8@sha256:34386f8c0227015c1abd9d7dfd8e9b687cba7047ec021d393ab39133e67178b9",
+          "name": "ose-csi-external-resizer-rhel8-v4.10"
+        },
+        {
+          "digest": "sha256:cb781aff7b4ead2e0535274186b5e97274d734e19e9ef404e187bc39d11bb2cc",
+          "image": "registry.redhat.io/openshift4/ose-csi-external-snapshotter-rhel8@sha256:cb781aff7b4ead2e0535274186b5e97274d734e19e9ef404e187bc39d11bb2cc",
+          "name": "ose-csi-external-snapshotter-rhel8-v4.10"
+        },
+        {
+          "digest": "sha256:ca8fe419be1ac73c9930b12c68ccd78a7955a3bf22d7e0c6b499065a5eb6dda5",
+          "image": "registry.connect.redhat.com/hitachi/hspc-operator@sha256:ca8fe419be1ac73c9930b12c68ccd78a7955a3bf22d7e0c6b499065a5eb6dda5",
+          "name": "hspc-operator-ca8fe419be1ac73c9930b12c68ccd78a7955a3bf22d7e0c6b499065a5eb6dda5-annotation"
+        },
+        {
+          "digest": "sha256:ca8fe419be1ac73c9930b12c68ccd78a7955a3bf22d7e0c6b499065a5eb6dda5",
+          "image": "registry.connect.redhat.com/hitachi/hspc-operator@sha256:ca8fe419be1ac73c9930b12c68ccd78a7955a3bf22d7e0c6b499065a5eb6dda5",
+          "name": "manager"
+        }
+      ],
+      "replaces": null,
+      "skip_range": null,
+      "skips": [],
+      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.8",
+      "version": "1.10.0",
+      "version_original": "1.10.0"
     }
   ]
 }

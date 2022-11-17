@@ -1,450 +1,6 @@
 {
   "data": [
     {
-      "_id": "6310136f279a8cd9593be840",
-      "alm_examples": [
-        {
-          "api_version": "appdirector.randoli.ca/v1beta1",
-          "kind": "ClusterWideAppDirectorAgent",
-          "metadata": {
-            "name": "guvnor"
-          },
-          "spec": {
-            "agentCertsSecretName": "guvnor-certs",
-            "agentConfigSecretName": "guvnor-secret",
-            "namespace": "app-director"
-          }
-        },
-        {
-          "api_version": "appdirector.randoli.ca/v1beta1",
-          "kind": "AppDirectorAgent",
-          "metadata": {
-            "name": "guvnor",
-            "namespace": "app-director"
-          },
-          "spec": {
-            "agentCertsSecretName": "guvnor-certs",
-            "agentConfigSecretName": "guvnor-secret",
-            "managedNamespaces": [
-              "dev"
-            ]
-          }
-        }
-      ],
-      "annotations": {
-        "infrastructure_features": [],
-        "valid_subscription": []
-      },
-      "architectures": [],
-      "bundle_path": "registry.connect.redhat.com/randoli/app-director-operator@sha256:d469f76f82764a406530fd086447b9228bfb4eb17204c1f3c8e7d6995b4f2261",
-      "bundle_path_digest": "sha256:d469f76f82764a406530fd086447b9228bfb4eb17204c1f3c8e7d6995b4f2261",
-      "capabilities": [
-        "Basic Install"
-      ],
-      "channel_name": "0.8.0",
-      "creation_date": "2022-09-01T02:05:35.313000+00:00",
-      "csv_description": "App Director\u00ae Platform enables developers to Containerize, Deploy, Scale and Manage Applications Across Multiple OpenShift Clusters. The App Director Agent (Guvnor) connects with the App Director\u00ae Platform to receive commands and send back events. The agent can be scoped to one or more namespaces or cluster-wide. More information can be found at https://www.randoli.ca/app-director-overview. Tekton Pipelines are a pre-requisite for this operator to work. If not already installed, the operator will install the correct version on initial start-up.",
-      "csv_display_name": "App Director",
-      "csv_metadata_description": "Containerize, Deploy, Scale and Manage Applications Across Multiple OpenShift Clusters",
-      "csv_name": "app-director-operator.v0.8.0",
-      "in_index_img": true,
-      "install_modes": [
-        {
-          "supported": false,
-          "type": "OwnNamespace"
-        },
-        {
-          "supported": false,
-          "type": "SingleNamespace"
-        },
-        {
-          "supported": false,
-          "type": "MultiNamespace"
-        },
-        {
-          "supported": true,
-          "type": "AllNamespaces"
-        }
-      ],
-      "is_default_channel": false,
-      "last_update_date": "2022-10-24T10:54:29.014000+00:00",
-      "latest_in_channel": true,
-      "ocp_version": "4.9",
-      "organization": "certified-operators",
-      "package": "app-director-operator",
-      "provided_apis": [
-        {
-          "group": "appdirector.randoli.ca",
-          "kind": "AppDirectorAgent",
-          "plural": "appdirectoragents",
-          "version": "v1beta1"
-        },
-        {
-          "group": "appdirector.randoli.ca",
-          "kind": "ClusterWideAppDirectorAgent",
-          "plural": "clusterwideappdirectoragents",
-          "version": "v1beta1"
-        }
-      ],
-      "provider": "Randoli",
-      "related_images": [
-        {
-          "digest": "sha256:891e7c163d5fe10ceb8d60781a3694c7c134f70bbb4094af0b43352a141a8cfe",
-          "image": "docker.io/randoli/app-director-operator:0.8.0@sha256:891e7c163d5fe10ceb8d60781a3694c7c134f70bbb4094af0b43352a141a8cfe",
-          "name": "app-director-operator:0.8.0-891e7c163d5fe10ceb8d60781a3694c7c134f70bbb4094af0b43352a141a8cfe-annotation"
-        },
-        {
-          "digest": "sha256:e10d1d982dd653db74ca87a1d1ad017bc5ef1aeb651bdea089debf16485b080b",
-          "image": "gcr.io/kubebuilder/kube-rbac-proxy:v0.5.0@sha256:e10d1d982dd653db74ca87a1d1ad017bc5ef1aeb651bdea089debf16485b080b",
-          "name": "kube-rbac-proxy"
-        },
-        {
-          "digest": "sha256:891e7c163d5fe10ceb8d60781a3694c7c134f70bbb4094af0b43352a141a8cfe",
-          "image": "docker.io/randoli/app-director-operator:0.8.0@sha256:891e7c163d5fe10ceb8d60781a3694c7c134f70bbb4094af0b43352a141a8cfe",
-          "name": "manager"
-        }
-      ],
-      "replaces": null,
-      "skip_range": null,
-      "skips": [],
-      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.9",
-      "version": "0.8.0",
-      "version_original": "0.8.0"
-    },
-    {
-      "_id": "6310155e985940d2bc3be55d",
-      "alm_examples": [
-        {
-          "api_version": "appdirector.randoli.ca/v1beta1",
-          "kind": "ClusterWideAppDirectorAgent",
-          "metadata": {
-            "name": "guvnor"
-          },
-          "spec": {
-            "agentCertsSecretName": "guvnor-certs",
-            "agentConfigSecretName": "guvnor-secret",
-            "namespace": "app-director"
-          }
-        },
-        {
-          "api_version": "appdirector.randoli.ca/v1beta1",
-          "kind": "AppDirectorAgent",
-          "metadata": {
-            "name": "guvnor",
-            "namespace": "app-director"
-          },
-          "spec": {
-            "agentCertsSecretName": "guvnor-certs",
-            "agentConfigSecretName": "guvnor-secret",
-            "managedNamespaces": [
-              "dev"
-            ]
-          }
-        }
-      ],
-      "annotations": {
-        "infrastructure_features": [],
-        "valid_subscription": []
-      },
-      "architectures": [],
-      "bundle_path": "registry.connect.redhat.com/randoli/app-director-operator@sha256:d469f76f82764a406530fd086447b9228bfb4eb17204c1f3c8e7d6995b4f2261",
-      "bundle_path_digest": "sha256:d469f76f82764a406530fd086447b9228bfb4eb17204c1f3c8e7d6995b4f2261",
-      "capabilities": [
-        "Basic Install"
-      ],
-      "channel_name": "0.8.0",
-      "creation_date": "2022-09-01T02:13:50.103000+00:00",
-      "csv_description": "App Director\u00ae Platform enables developers to Containerize, Deploy, Scale and Manage Applications Across Multiple OpenShift Clusters. The App Director Agent (Guvnor) connects with the App Director\u00ae Platform to receive commands and send back events. The agent can be scoped to one or more namespaces or cluster-wide. More information can be found at https://www.randoli.ca/app-director-overview. Tekton Pipelines are a pre-requisite for this operator to work. If not already installed, the operator will install the correct version on initial start-up.",
-      "csv_display_name": "App Director",
-      "csv_metadata_description": "Containerize, Deploy, Scale and Manage Applications Across Multiple OpenShift Clusters",
-      "csv_name": "app-director-operator.v0.8.0",
-      "in_index_img": true,
-      "install_modes": [
-        {
-          "supported": false,
-          "type": "OwnNamespace"
-        },
-        {
-          "supported": false,
-          "type": "SingleNamespace"
-        },
-        {
-          "supported": false,
-          "type": "MultiNamespace"
-        },
-        {
-          "supported": true,
-          "type": "AllNamespaces"
-        }
-      ],
-      "is_default_channel": false,
-      "last_update_date": "2022-10-24T10:58:32.710000+00:00",
-      "latest_in_channel": true,
-      "ocp_version": "4.8",
-      "organization": "certified-operators",
-      "package": "app-director-operator",
-      "provided_apis": [
-        {
-          "group": "appdirector.randoli.ca",
-          "kind": "AppDirectorAgent",
-          "plural": "appdirectoragents",
-          "version": "v1beta1"
-        },
-        {
-          "group": "appdirector.randoli.ca",
-          "kind": "ClusterWideAppDirectorAgent",
-          "plural": "clusterwideappdirectoragents",
-          "version": "v1beta1"
-        }
-      ],
-      "provider": "Randoli",
-      "related_images": [
-        {
-          "digest": "sha256:891e7c163d5fe10ceb8d60781a3694c7c134f70bbb4094af0b43352a141a8cfe",
-          "image": "docker.io/randoli/app-director-operator:0.8.0@sha256:891e7c163d5fe10ceb8d60781a3694c7c134f70bbb4094af0b43352a141a8cfe",
-          "name": "app-director-operator:0.8.0-891e7c163d5fe10ceb8d60781a3694c7c134f70bbb4094af0b43352a141a8cfe-annotation"
-        },
-        {
-          "digest": "sha256:e10d1d982dd653db74ca87a1d1ad017bc5ef1aeb651bdea089debf16485b080b",
-          "image": "gcr.io/kubebuilder/kube-rbac-proxy:v0.5.0@sha256:e10d1d982dd653db74ca87a1d1ad017bc5ef1aeb651bdea089debf16485b080b",
-          "name": "kube-rbac-proxy"
-        },
-        {
-          "digest": "sha256:891e7c163d5fe10ceb8d60781a3694c7c134f70bbb4094af0b43352a141a8cfe",
-          "image": "docker.io/randoli/app-director-operator:0.8.0@sha256:891e7c163d5fe10ceb8d60781a3694c7c134f70bbb4094af0b43352a141a8cfe",
-          "name": "manager"
-        }
-      ],
-      "replaces": null,
-      "skip_range": null,
-      "skips": [],
-      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.8",
-      "version": "0.8.0",
-      "version_original": "0.8.0"
-    },
-    {
-      "_id": "63101cf7499018a313daf936",
-      "alm_examples": [
-        {
-          "api_version": "appdirector.randoli.ca/v1beta1",
-          "kind": "ClusterWideAppDirectorAgent",
-          "metadata": {
-            "name": "guvnor"
-          },
-          "spec": {
-            "agentCertsSecretName": "guvnor-certs",
-            "agentConfigSecretName": "guvnor-secret",
-            "namespace": "app-director"
-          }
-        },
-        {
-          "api_version": "appdirector.randoli.ca/v1beta1",
-          "kind": "AppDirectorAgent",
-          "metadata": {
-            "name": "guvnor",
-            "namespace": "app-director"
-          },
-          "spec": {
-            "agentCertsSecretName": "guvnor-certs",
-            "agentConfigSecretName": "guvnor-secret",
-            "managedNamespaces": [
-              "dev"
-            ]
-          }
-        }
-      ],
-      "annotations": {
-        "infrastructure_features": [],
-        "valid_subscription": []
-      },
-      "architectures": [],
-      "bundle_path": "registry.connect.redhat.com/randoli/app-director-operator@sha256:d469f76f82764a406530fd086447b9228bfb4eb17204c1f3c8e7d6995b4f2261",
-      "bundle_path_digest": "sha256:d469f76f82764a406530fd086447b9228bfb4eb17204c1f3c8e7d6995b4f2261",
-      "capabilities": [
-        "Basic Install"
-      ],
-      "channel_name": "0.8.0",
-      "creation_date": "2022-09-01T02:46:15.495000+00:00",
-      "csv_description": "App Director\u00ae Platform enables developers to Containerize, Deploy, Scale and Manage Applications Across Multiple OpenShift Clusters. The App Director Agent (Guvnor) connects with the App Director\u00ae Platform to receive commands and send back events. The agent can be scoped to one or more namespaces or cluster-wide. More information can be found at https://www.randoli.ca/app-director-overview. Tekton Pipelines are a pre-requisite for this operator to work. If not already installed, the operator will install the correct version on initial start-up.",
-      "csv_display_name": "App Director",
-      "csv_metadata_description": "Containerize, Deploy, Scale and Manage Applications Across Multiple OpenShift Clusters",
-      "csv_name": "app-director-operator.v0.8.0",
-      "in_index_img": true,
-      "install_modes": [
-        {
-          "supported": false,
-          "type": "OwnNamespace"
-        },
-        {
-          "supported": false,
-          "type": "SingleNamespace"
-        },
-        {
-          "supported": false,
-          "type": "MultiNamespace"
-        },
-        {
-          "supported": true,
-          "type": "AllNamespaces"
-        }
-      ],
-      "is_default_channel": false,
-      "last_update_date": "2022-10-24T11:48:59.004000+00:00",
-      "latest_in_channel": true,
-      "ocp_version": "4.7",
-      "organization": "certified-operators",
-      "package": "app-director-operator",
-      "provided_apis": [
-        {
-          "group": "appdirector.randoli.ca",
-          "kind": "AppDirectorAgent",
-          "plural": "appdirectoragents",
-          "version": "v1beta1"
-        },
-        {
-          "group": "appdirector.randoli.ca",
-          "kind": "ClusterWideAppDirectorAgent",
-          "plural": "clusterwideappdirectoragents",
-          "version": "v1beta1"
-        }
-      ],
-      "provider": "Randoli",
-      "related_images": [
-        {
-          "digest": "sha256:891e7c163d5fe10ceb8d60781a3694c7c134f70bbb4094af0b43352a141a8cfe",
-          "image": "docker.io/randoli/app-director-operator:0.8.0@sha256:891e7c163d5fe10ceb8d60781a3694c7c134f70bbb4094af0b43352a141a8cfe",
-          "name": "app-director-operator:0.8.0-891e7c163d5fe10ceb8d60781a3694c7c134f70bbb4094af0b43352a141a8cfe-annotation"
-        },
-        {
-          "digest": "sha256:e10d1d982dd653db74ca87a1d1ad017bc5ef1aeb651bdea089debf16485b080b",
-          "image": "gcr.io/kubebuilder/kube-rbac-proxy:v0.5.0@sha256:e10d1d982dd653db74ca87a1d1ad017bc5ef1aeb651bdea089debf16485b080b",
-          "name": "kube-rbac-proxy"
-        },
-        {
-          "digest": "sha256:891e7c163d5fe10ceb8d60781a3694c7c134f70bbb4094af0b43352a141a8cfe",
-          "image": "docker.io/randoli/app-director-operator:0.8.0@sha256:891e7c163d5fe10ceb8d60781a3694c7c134f70bbb4094af0b43352a141a8cfe",
-          "name": "manager"
-        }
-      ],
-      "replaces": null,
-      "skip_range": null,
-      "skips": [],
-      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.7",
-      "version": "0.8.0",
-      "version_original": "0.8.0"
-    },
-    {
-      "_id": "63101ee6a1804ab2b56e14d0",
-      "alm_examples": [
-        {
-          "api_version": "appdirector.randoli.ca/v1beta1",
-          "kind": "ClusterWideAppDirectorAgent",
-          "metadata": {
-            "name": "guvnor"
-          },
-          "spec": {
-            "agentCertsSecretName": "guvnor-certs",
-            "agentConfigSecretName": "guvnor-secret",
-            "namespace": "app-director"
-          }
-        },
-        {
-          "api_version": "appdirector.randoli.ca/v1beta1",
-          "kind": "AppDirectorAgent",
-          "metadata": {
-            "name": "guvnor",
-            "namespace": "app-director"
-          },
-          "spec": {
-            "agentCertsSecretName": "guvnor-certs",
-            "agentConfigSecretName": "guvnor-secret",
-            "managedNamespaces": [
-              "dev"
-            ]
-          }
-        }
-      ],
-      "annotations": {
-        "infrastructure_features": [],
-        "valid_subscription": []
-      },
-      "architectures": [],
-      "bundle_path": "registry.connect.redhat.com/randoli/app-director-operator@sha256:d469f76f82764a406530fd086447b9228bfb4eb17204c1f3c8e7d6995b4f2261",
-      "bundle_path_digest": "sha256:d469f76f82764a406530fd086447b9228bfb4eb17204c1f3c8e7d6995b4f2261",
-      "capabilities": [
-        "Basic Install"
-      ],
-      "channel_name": "0.8.0",
-      "creation_date": "2022-09-01T02:54:30.643000+00:00",
-      "csv_description": "App Director\u00ae Platform enables developers to Containerize, Deploy, Scale and Manage Applications Across Multiple OpenShift Clusters. The App Director Agent (Guvnor) connects with the App Director\u00ae Platform to receive commands and send back events. The agent can be scoped to one or more namespaces or cluster-wide. More information can be found at https://www.randoli.ca/app-director-overview. Tekton Pipelines are a pre-requisite for this operator to work. If not already installed, the operator will install the correct version on initial start-up.",
-      "csv_display_name": "App Director",
-      "csv_metadata_description": "Containerize, Deploy, Scale and Manage Applications Across Multiple OpenShift Clusters",
-      "csv_name": "app-director-operator.v0.8.0",
-      "in_index_img": true,
-      "install_modes": [
-        {
-          "supported": false,
-          "type": "OwnNamespace"
-        },
-        {
-          "supported": false,
-          "type": "SingleNamespace"
-        },
-        {
-          "supported": false,
-          "type": "MultiNamespace"
-        },
-        {
-          "supported": true,
-          "type": "AllNamespaces"
-        }
-      ],
-      "is_default_channel": false,
-      "last_update_date": "2022-10-24T11:01:41.307000+00:00",
-      "latest_in_channel": true,
-      "ocp_version": "4.6",
-      "organization": "certified-operators",
-      "package": "app-director-operator",
-      "provided_apis": [
-        {
-          "group": "appdirector.randoli.ca",
-          "kind": "AppDirectorAgent",
-          "plural": "appdirectoragents",
-          "version": "v1beta1"
-        },
-        {
-          "group": "appdirector.randoli.ca",
-          "kind": "ClusterWideAppDirectorAgent",
-          "plural": "clusterwideappdirectoragents",
-          "version": "v1beta1"
-        }
-      ],
-      "provider": "Randoli",
-      "related_images": [
-        {
-          "digest": "sha256:891e7c163d5fe10ceb8d60781a3694c7c134f70bbb4094af0b43352a141a8cfe",
-          "image": "docker.io/randoli/app-director-operator:0.8.0@sha256:891e7c163d5fe10ceb8d60781a3694c7c134f70bbb4094af0b43352a141a8cfe",
-          "name": "app-director-operator:0.8.0-891e7c163d5fe10ceb8d60781a3694c7c134f70bbb4094af0b43352a141a8cfe-annotation"
-        },
-        {
-          "digest": "sha256:e10d1d982dd653db74ca87a1d1ad017bc5ef1aeb651bdea089debf16485b080b",
-          "image": "gcr.io/kubebuilder/kube-rbac-proxy:v0.5.0@sha256:e10d1d982dd653db74ca87a1d1ad017bc5ef1aeb651bdea089debf16485b080b",
-          "name": "kube-rbac-proxy"
-        },
-        {
-          "digest": "sha256:891e7c163d5fe10ceb8d60781a3694c7c134f70bbb4094af0b43352a141a8cfe",
-          "image": "docker.io/randoli/app-director-operator:0.8.0@sha256:891e7c163d5fe10ceb8d60781a3694c7c134f70bbb4094af0b43352a141a8cfe",
-          "name": "manager"
-        }
-      ],
-      "replaces": null,
-      "skip_range": null,
-      "skips": [],
-      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.6",
-      "version": "0.8.0",
-      "version_original": "0.8.0"
-    },
-    {
       "_id": "631118be0590b6e67b6e161b",
       "alm_examples": [
         {
@@ -15331,6 +14887,602 @@
       "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.6",
       "version": "5.2.0",
       "version_original": "5.2.0"
+    },
+    {
+      "_id": "632121d6eeedbe5c5aeb3f78",
+      "alm_examples": [
+        {
+          "api_version": "rtf.operators.mulesoft.com/v1",
+          "kind": "RuntimeFabric",
+          "metadata": {
+            "name": "runtime-fabric"
+          },
+          "spec": {
+            "agent": {
+              "app": {
+                "resources": {
+                  "limits": {
+                    "cpu": "1000m",
+                    "memory": "500Mi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "200Mi"
+                  }
+                }
+              },
+              "rtfd": {
+                "resources": {
+                  "limits": {
+                    "cpu": "50m",
+                    "memory": "50Mi"
+                  },
+                  "requests": {
+                    "cpu": "20m",
+                    "memory": "50Mi"
+                  }
+                }
+              }
+            },
+            "global": {
+              "authorizedNamespaces": false,
+              "cluster": {
+                "flavor": "byok",
+                "type": "openshift"
+              },
+              "containerLogPaths": [
+                "/var/lib/docker/containers",
+                "/var/log/containers",
+                "/var/log/pods"
+              ],
+              "core": {
+                "affinity": {},
+                "tolerations": []
+              },
+              "deployment": {
+                "nodeSelector": ""
+              },
+              "image": {
+                "provider": "aws",
+                "pullSecretName": "rtf-pull-secret",
+                "rtfRegistry": "rtf-runtime-registry.kprod.msap.io"
+              },
+              "logForwarding": {
+                "anypointMonitoring": false
+              },
+              "mule": {
+                "disablePerAppSA": false
+              },
+              "service": {}
+            },
+            "proxy": {}
+          }
+        }
+      ],
+      "annotations": {
+        "infrastructure_features": [],
+        "valid_subscription": []
+      },
+      "architectures": [],
+      "bundle_path": "registry.connect.redhat.com/oscargcervantes/runtime-fabric-operator@sha256:06dafc64ad74815cbdc9c8426400d251fc4861c40436aecc38eadbac486c86e8",
+      "bundle_path_digest": "sha256:06dafc64ad74815cbdc9c8426400d251fc4861c40436aecc38eadbac486c86e8",
+      "capabilities": [
+        "Basic Install"
+      ],
+      "channel_name": "alpha",
+      "creation_date": "2022-09-14T00:35:34.643000+00:00",
+      "csv_description": "Anypoint Runtime Fabric is a container service that you install in your existing Red Hat OpenShift cluster that enables you to run Mule applications, composite APIs, and API gateways across any environment with centralized management via Anypoint Platform.\n\nCapabilities of Runtime Fabric include:\n\n* Isolation between applications by running a separate Mule runtime server per application.\n* Ability to run multiple versions of Mule runtime server on the same set of resources.\n* Scaling applications across multiple replicas.\n* Automated application fail-over.\n* Application management with Anypoint Runtime Manager.\n\nRuntime Fabric supports the following Red Hat OpenShift deployment options:\n\n* Red Hat OpenShift Service on AWS\n* Microsoft Azure Red Hat OpenShift\n* Red Hat OpenShift Dedicated\n* Red Hat OpenShift on IBM Cloud\n* Self-managed Red Hat OpenShift editions (Performance Plus, OCP, Kubernetes engine)\n\nRuntime Fabric supports Red Hat OpenShift versions 4.6 to 4.10.",
+      "csv_display_name": "Runtime Fabric Operator",
+      "csv_metadata_description": "Runtime Fabric Operator Application from Mulesoft",
+      "csv_name": "runtime-fabric-operator.v2.0.0",
+      "in_index_img": true,
+      "install_modes": [
+        {
+          "supported": false,
+          "type": "OwnNamespace"
+        },
+        {
+          "supported": false,
+          "type": "SingleNamespace"
+        },
+        {
+          "supported": false,
+          "type": "MultiNamespace"
+        },
+        {
+          "supported": true,
+          "type": "AllNamespaces"
+        }
+      ],
+      "is_default_channel": true,
+      "last_update_date": "2022-10-24T11:29:23.243000+00:00",
+      "latest_in_channel": true,
+      "ocp_version": "4.10",
+      "organization": "certified-operators",
+      "package": "runtime-fabric-operator",
+      "provided_apis": [
+        {
+          "group": "rtf.operators.mulesoft.com",
+          "kind": "RuntimeFabric",
+          "version": "v1"
+        }
+      ],
+      "provider": "MuleSoft",
+      "related_images": [
+        {
+          "digest": "sha256:7cfc84f28da1a6350f2c2f9c610bc425e4717757536fd908a4d0ec7ca5ff414f",
+          "image": "quay.io/mulesoft/runtime-fabric-operator@sha256:7cfc84f28da1a6350f2c2f9c610bc425e4717757536fd908a4d0ec7ca5ff414f",
+          "name": "runtime-fabric-operator"
+        },
+        {
+          "digest": "sha256:7cfc84f28da1a6350f2c2f9c610bc425e4717757536fd908a4d0ec7ca5ff414f",
+          "image": "quay.io/mulesoft/runtime-fabric-operator@sha256:7cfc84f28da1a6350f2c2f9c610bc425e4717757536fd908a4d0ec7ca5ff414f",
+          "name": "runtime-fabric-operator-7cfc84f28da1a6350f2c2f9c610bc425e4717757536fd908a4d0ec7ca5ff414f-annotation"
+        },
+        {
+          "digest": "sha256:a4f6c39b17f2ba68366c6d4e139ed18ede2ad9f3f9d5bf7477bdcbef73b43e54",
+          "image": "quay.io/mulesoft/kube-rbac-proxy@sha256:a4f6c39b17f2ba68366c6d4e139ed18ede2ad9f3f9d5bf7477bdcbef73b43e54",
+          "name": "kube-rbac-proxy"
+        },
+        {
+          "digest": "sha256:7cfc84f28da1a6350f2c2f9c610bc425e4717757536fd908a4d0ec7ca5ff414f",
+          "image": "quay.io/mulesoft/runtime-fabric-operator@sha256:7cfc84f28da1a6350f2c2f9c610bc425e4717757536fd908a4d0ec7ca5ff414f",
+          "name": "manager"
+        }
+      ],
+      "replaces": null,
+      "skip_range": null,
+      "skips": [],
+      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.10",
+      "version": "2.0.0",
+      "version_original": "2.0.0"
+    },
+    {
+      "_id": "632121f6b180bb9cb665ef2c",
+      "alm_examples": [
+        {
+          "api_version": "rtf.operators.mulesoft.com/v1",
+          "kind": "RuntimeFabric",
+          "metadata": {
+            "name": "runtime-fabric"
+          },
+          "spec": {
+            "agent": {
+              "app": {
+                "resources": {
+                  "limits": {
+                    "cpu": "1000m",
+                    "memory": "500Mi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "200Mi"
+                  }
+                }
+              },
+              "rtfd": {
+                "resources": {
+                  "limits": {
+                    "cpu": "50m",
+                    "memory": "50Mi"
+                  },
+                  "requests": {
+                    "cpu": "20m",
+                    "memory": "50Mi"
+                  }
+                }
+              }
+            },
+            "global": {
+              "authorizedNamespaces": false,
+              "cluster": {
+                "flavor": "byok",
+                "type": "openshift"
+              },
+              "containerLogPaths": [
+                "/var/lib/docker/containers",
+                "/var/log/containers",
+                "/var/log/pods"
+              ],
+              "core": {
+                "affinity": {},
+                "tolerations": []
+              },
+              "deployment": {
+                "nodeSelector": ""
+              },
+              "image": {
+                "provider": "aws",
+                "pullSecretName": "rtf-pull-secret",
+                "rtfRegistry": "rtf-runtime-registry.kprod.msap.io"
+              },
+              "logForwarding": {
+                "anypointMonitoring": false
+              },
+              "mule": {
+                "disablePerAppSA": false
+              },
+              "service": {}
+            },
+            "proxy": {}
+          }
+        }
+      ],
+      "annotations": {
+        "infrastructure_features": [],
+        "valid_subscription": []
+      },
+      "architectures": [],
+      "bundle_path": "registry.connect.redhat.com/oscargcervantes/runtime-fabric-operator@sha256:06dafc64ad74815cbdc9c8426400d251fc4861c40436aecc38eadbac486c86e8",
+      "bundle_path_digest": "sha256:06dafc64ad74815cbdc9c8426400d251fc4861c40436aecc38eadbac486c86e8",
+      "capabilities": [
+        "Basic Install"
+      ],
+      "channel_name": "alpha",
+      "creation_date": "2022-09-14T00:36:06.266000+00:00",
+      "csv_description": "Anypoint Runtime Fabric is a container service that you install in your existing Red Hat OpenShift cluster that enables you to run Mule applications, composite APIs, and API gateways across any environment with centralized management via Anypoint Platform.\n\nCapabilities of Runtime Fabric include:\n\n* Isolation between applications by running a separate Mule runtime server per application.\n* Ability to run multiple versions of Mule runtime server on the same set of resources.\n* Scaling applications across multiple replicas.\n* Automated application fail-over.\n* Application management with Anypoint Runtime Manager.\n\nRuntime Fabric supports the following Red Hat OpenShift deployment options:\n\n* Red Hat OpenShift Service on AWS\n* Microsoft Azure Red Hat OpenShift\n* Red Hat OpenShift Dedicated\n* Red Hat OpenShift on IBM Cloud\n* Self-managed Red Hat OpenShift editions (Performance Plus, OCP, Kubernetes engine)\n\nRuntime Fabric supports Red Hat OpenShift versions 4.6 to 4.10.",
+      "csv_display_name": "Runtime Fabric Operator",
+      "csv_metadata_description": "Runtime Fabric Operator Application from Mulesoft",
+      "csv_name": "runtime-fabric-operator.v2.0.0",
+      "in_index_img": true,
+      "install_modes": [
+        {
+          "supported": false,
+          "type": "OwnNamespace"
+        },
+        {
+          "supported": false,
+          "type": "SingleNamespace"
+        },
+        {
+          "supported": false,
+          "type": "MultiNamespace"
+        },
+        {
+          "supported": true,
+          "type": "AllNamespaces"
+        }
+      ],
+      "is_default_channel": true,
+      "last_update_date": "2022-10-24T11:28:54.910000+00:00",
+      "latest_in_channel": true,
+      "ocp_version": "4.9",
+      "organization": "certified-operators",
+      "package": "runtime-fabric-operator",
+      "provided_apis": [
+        {
+          "group": "rtf.operators.mulesoft.com",
+          "kind": "RuntimeFabric",
+          "version": "v1"
+        }
+      ],
+      "provider": "MuleSoft",
+      "related_images": [
+        {
+          "digest": "sha256:7cfc84f28da1a6350f2c2f9c610bc425e4717757536fd908a4d0ec7ca5ff414f",
+          "image": "quay.io/mulesoft/runtime-fabric-operator@sha256:7cfc84f28da1a6350f2c2f9c610bc425e4717757536fd908a4d0ec7ca5ff414f",
+          "name": "runtime-fabric-operator"
+        },
+        {
+          "digest": "sha256:7cfc84f28da1a6350f2c2f9c610bc425e4717757536fd908a4d0ec7ca5ff414f",
+          "image": "quay.io/mulesoft/runtime-fabric-operator@sha256:7cfc84f28da1a6350f2c2f9c610bc425e4717757536fd908a4d0ec7ca5ff414f",
+          "name": "runtime-fabric-operator-7cfc84f28da1a6350f2c2f9c610bc425e4717757536fd908a4d0ec7ca5ff414f-annotation"
+        },
+        {
+          "digest": "sha256:a4f6c39b17f2ba68366c6d4e139ed18ede2ad9f3f9d5bf7477bdcbef73b43e54",
+          "image": "quay.io/mulesoft/kube-rbac-proxy@sha256:a4f6c39b17f2ba68366c6d4e139ed18ede2ad9f3f9d5bf7477bdcbef73b43e54",
+          "name": "kube-rbac-proxy"
+        },
+        {
+          "digest": "sha256:7cfc84f28da1a6350f2c2f9c610bc425e4717757536fd908a4d0ec7ca5ff414f",
+          "image": "quay.io/mulesoft/runtime-fabric-operator@sha256:7cfc84f28da1a6350f2c2f9c610bc425e4717757536fd908a4d0ec7ca5ff414f",
+          "name": "manager"
+        }
+      ],
+      "replaces": null,
+      "skip_range": null,
+      "skips": [],
+      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.9",
+      "version": "2.0.0",
+      "version_original": "2.0.0"
+    },
+    {
+      "_id": "632121ff02d5613a21173682",
+      "alm_examples": [
+        {
+          "api_version": "rtf.operators.mulesoft.com/v1",
+          "kind": "RuntimeFabric",
+          "metadata": {
+            "name": "runtime-fabric"
+          },
+          "spec": {
+            "agent": {
+              "app": {
+                "resources": {
+                  "limits": {
+                    "cpu": "1000m",
+                    "memory": "500Mi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "200Mi"
+                  }
+                }
+              },
+              "rtfd": {
+                "resources": {
+                  "limits": {
+                    "cpu": "50m",
+                    "memory": "50Mi"
+                  },
+                  "requests": {
+                    "cpu": "20m",
+                    "memory": "50Mi"
+                  }
+                }
+              }
+            },
+            "global": {
+              "authorizedNamespaces": false,
+              "cluster": {
+                "flavor": "byok",
+                "type": "openshift"
+              },
+              "containerLogPaths": [
+                "/var/lib/docker/containers",
+                "/var/log/containers",
+                "/var/log/pods"
+              ],
+              "core": {
+                "affinity": {},
+                "tolerations": []
+              },
+              "deployment": {
+                "nodeSelector": ""
+              },
+              "image": {
+                "provider": "aws",
+                "pullSecretName": "rtf-pull-secret",
+                "rtfRegistry": "rtf-runtime-registry.kprod.msap.io"
+              },
+              "logForwarding": {
+                "anypointMonitoring": false
+              },
+              "mule": {
+                "disablePerAppSA": false
+              },
+              "service": {}
+            },
+            "proxy": {}
+          }
+        }
+      ],
+      "annotations": {
+        "infrastructure_features": [],
+        "valid_subscription": []
+      },
+      "architectures": [],
+      "bundle_path": "registry.connect.redhat.com/oscargcervantes/runtime-fabric-operator@sha256:06dafc64ad74815cbdc9c8426400d251fc4861c40436aecc38eadbac486c86e8",
+      "bundle_path_digest": "sha256:06dafc64ad74815cbdc9c8426400d251fc4861c40436aecc38eadbac486c86e8",
+      "capabilities": [
+        "Basic Install"
+      ],
+      "channel_name": "alpha",
+      "creation_date": "2022-09-14T00:36:15.864000+00:00",
+      "csv_description": "Anypoint Runtime Fabric is a container service that you install in your existing Red Hat OpenShift cluster that enables you to run Mule applications, composite APIs, and API gateways across any environment with centralized management via Anypoint Platform.\n\nCapabilities of Runtime Fabric include:\n\n* Isolation between applications by running a separate Mule runtime server per application.\n* Ability to run multiple versions of Mule runtime server on the same set of resources.\n* Scaling applications across multiple replicas.\n* Automated application fail-over.\n* Application management with Anypoint Runtime Manager.\n\nRuntime Fabric supports the following Red Hat OpenShift deployment options:\n\n* Red Hat OpenShift Service on AWS\n* Microsoft Azure Red Hat OpenShift\n* Red Hat OpenShift Dedicated\n* Red Hat OpenShift on IBM Cloud\n* Self-managed Red Hat OpenShift editions (Performance Plus, OCP, Kubernetes engine)\n\nRuntime Fabric supports Red Hat OpenShift versions 4.6 to 4.10.",
+      "csv_display_name": "Runtime Fabric Operator",
+      "csv_metadata_description": "Runtime Fabric Operator Application from Mulesoft",
+      "csv_name": "runtime-fabric-operator.v2.0.0",
+      "in_index_img": true,
+      "install_modes": [
+        {
+          "supported": false,
+          "type": "OwnNamespace"
+        },
+        {
+          "supported": false,
+          "type": "SingleNamespace"
+        },
+        {
+          "supported": false,
+          "type": "MultiNamespace"
+        },
+        {
+          "supported": true,
+          "type": "AllNamespaces"
+        }
+      ],
+      "is_default_channel": true,
+      "last_update_date": "2022-10-24T11:54:56.483000+00:00",
+      "latest_in_channel": true,
+      "ocp_version": "4.11",
+      "organization": "certified-operators",
+      "package": "runtime-fabric-operator",
+      "provided_apis": [
+        {
+          "group": "rtf.operators.mulesoft.com",
+          "kind": "RuntimeFabric",
+          "version": "v1"
+        }
+      ],
+      "provider": "MuleSoft",
+      "related_images": [
+        {
+          "digest": "sha256:7cfc84f28da1a6350f2c2f9c610bc425e4717757536fd908a4d0ec7ca5ff414f",
+          "image": "quay.io/mulesoft/runtime-fabric-operator@sha256:7cfc84f28da1a6350f2c2f9c610bc425e4717757536fd908a4d0ec7ca5ff414f",
+          "name": "runtime-fabric-operator"
+        },
+        {
+          "digest": "sha256:7cfc84f28da1a6350f2c2f9c610bc425e4717757536fd908a4d0ec7ca5ff414f",
+          "image": "quay.io/mulesoft/runtime-fabric-operator@sha256:7cfc84f28da1a6350f2c2f9c610bc425e4717757536fd908a4d0ec7ca5ff414f",
+          "name": "runtime-fabric-operator-7cfc84f28da1a6350f2c2f9c610bc425e4717757536fd908a4d0ec7ca5ff414f-annotation"
+        },
+        {
+          "digest": "sha256:a4f6c39b17f2ba68366c6d4e139ed18ede2ad9f3f9d5bf7477bdcbef73b43e54",
+          "image": "quay.io/mulesoft/kube-rbac-proxy@sha256:a4f6c39b17f2ba68366c6d4e139ed18ede2ad9f3f9d5bf7477bdcbef73b43e54",
+          "name": "kube-rbac-proxy"
+        },
+        {
+          "digest": "sha256:7cfc84f28da1a6350f2c2f9c610bc425e4717757536fd908a4d0ec7ca5ff414f",
+          "image": "quay.io/mulesoft/runtime-fabric-operator@sha256:7cfc84f28da1a6350f2c2f9c610bc425e4717757536fd908a4d0ec7ca5ff414f",
+          "name": "manager"
+        }
+      ],
+      "replaces": null,
+      "skip_range": null,
+      "skips": [],
+      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.11",
+      "version": "2.0.0",
+      "version_original": "2.0.0"
+    },
+    {
+      "_id": "6321226ceeedbe5c5aeb3f88",
+      "alm_examples": [
+        {
+          "api_version": "rtf.operators.mulesoft.com/v1",
+          "kind": "RuntimeFabric",
+          "metadata": {
+            "name": "runtime-fabric"
+          },
+          "spec": {
+            "agent": {
+              "app": {
+                "resources": {
+                  "limits": {
+                    "cpu": "1000m",
+                    "memory": "500Mi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "200Mi"
+                  }
+                }
+              },
+              "rtfd": {
+                "resources": {
+                  "limits": {
+                    "cpu": "50m",
+                    "memory": "50Mi"
+                  },
+                  "requests": {
+                    "cpu": "20m",
+                    "memory": "50Mi"
+                  }
+                }
+              }
+            },
+            "global": {
+              "authorizedNamespaces": false,
+              "cluster": {
+                "flavor": "byok",
+                "type": "openshift"
+              },
+              "containerLogPaths": [
+                "/var/lib/docker/containers",
+                "/var/log/containers",
+                "/var/log/pods"
+              ],
+              "core": {
+                "affinity": {},
+                "tolerations": []
+              },
+              "deployment": {
+                "nodeSelector": ""
+              },
+              "image": {
+                "provider": "aws",
+                "pullSecretName": "rtf-pull-secret",
+                "rtfRegistry": "rtf-runtime-registry.kprod.msap.io"
+              },
+              "logForwarding": {
+                "anypointMonitoring": false
+              },
+              "mule": {
+                "disablePerAppSA": false
+              },
+              "service": {}
+            },
+            "proxy": {}
+          }
+        }
+      ],
+      "annotations": {
+        "infrastructure_features": [],
+        "valid_subscription": []
+      },
+      "architectures": [],
+      "bundle_path": "registry.connect.redhat.com/oscargcervantes/runtime-fabric-operator@sha256:06dafc64ad74815cbdc9c8426400d251fc4861c40436aecc38eadbac486c86e8",
+      "bundle_path_digest": "sha256:06dafc64ad74815cbdc9c8426400d251fc4861c40436aecc38eadbac486c86e8",
+      "capabilities": [
+        "Basic Install"
+      ],
+      "channel_name": "alpha",
+      "creation_date": "2022-09-14T00:38:04.918000+00:00",
+      "csv_description": "Anypoint Runtime Fabric is a container service that you install in your existing Red Hat OpenShift cluster that enables you to run Mule applications, composite APIs, and API gateways across any environment with centralized management via Anypoint Platform.\n\nCapabilities of Runtime Fabric include:\n\n* Isolation between applications by running a separate Mule runtime server per application.\n* Ability to run multiple versions of Mule runtime server on the same set of resources.\n* Scaling applications across multiple replicas.\n* Automated application fail-over.\n* Application management with Anypoint Runtime Manager.\n\nRuntime Fabric supports the following Red Hat OpenShift deployment options:\n\n* Red Hat OpenShift Service on AWS\n* Microsoft Azure Red Hat OpenShift\n* Red Hat OpenShift Dedicated\n* Red Hat OpenShift on IBM Cloud\n* Self-managed Red Hat OpenShift editions (Performance Plus, OCP, Kubernetes engine)\n\nRuntime Fabric supports Red Hat OpenShift versions 4.6 to 4.10.",
+      "csv_display_name": "Runtime Fabric Operator",
+      "csv_metadata_description": "Runtime Fabric Operator Application from Mulesoft",
+      "csv_name": "runtime-fabric-operator.v2.0.0",
+      "in_index_img": true,
+      "install_modes": [
+        {
+          "supported": false,
+          "type": "OwnNamespace"
+        },
+        {
+          "supported": false,
+          "type": "SingleNamespace"
+        },
+        {
+          "supported": false,
+          "type": "MultiNamespace"
+        },
+        {
+          "supported": true,
+          "type": "AllNamespaces"
+        }
+      ],
+      "is_default_channel": true,
+      "last_update_date": "2022-10-24T11:15:52.422000+00:00",
+      "latest_in_channel": true,
+      "ocp_version": "4.8",
+      "organization": "certified-operators",
+      "package": "runtime-fabric-operator",
+      "provided_apis": [
+        {
+          "group": "rtf.operators.mulesoft.com",
+          "kind": "RuntimeFabric",
+          "version": "v1"
+        }
+      ],
+      "provider": "MuleSoft",
+      "related_images": [
+        {
+          "digest": "sha256:7cfc84f28da1a6350f2c2f9c610bc425e4717757536fd908a4d0ec7ca5ff414f",
+          "image": "quay.io/mulesoft/runtime-fabric-operator@sha256:7cfc84f28da1a6350f2c2f9c610bc425e4717757536fd908a4d0ec7ca5ff414f",
+          "name": "runtime-fabric-operator"
+        },
+        {
+          "digest": "sha256:7cfc84f28da1a6350f2c2f9c610bc425e4717757536fd908a4d0ec7ca5ff414f",
+          "image": "quay.io/mulesoft/runtime-fabric-operator@sha256:7cfc84f28da1a6350f2c2f9c610bc425e4717757536fd908a4d0ec7ca5ff414f",
+          "name": "runtime-fabric-operator-7cfc84f28da1a6350f2c2f9c610bc425e4717757536fd908a4d0ec7ca5ff414f-annotation"
+        },
+        {
+          "digest": "sha256:a4f6c39b17f2ba68366c6d4e139ed18ede2ad9f3f9d5bf7477bdcbef73b43e54",
+          "image": "quay.io/mulesoft/kube-rbac-proxy@sha256:a4f6c39b17f2ba68366c6d4e139ed18ede2ad9f3f9d5bf7477bdcbef73b43e54",
+          "name": "kube-rbac-proxy"
+        },
+        {
+          "digest": "sha256:7cfc84f28da1a6350f2c2f9c610bc425e4717757536fd908a4d0ec7ca5ff414f",
+          "image": "quay.io/mulesoft/runtime-fabric-operator@sha256:7cfc84f28da1a6350f2c2f9c610bc425e4717757536fd908a4d0ec7ca5ff414f",
+          "name": "manager"
+        }
+      ],
+      "replaces": null,
+      "skip_range": null,
+      "skips": [],
+      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.8",
+      "version": "2.0.0",
+      "version_original": "2.0.0"
     }
   ]
 }

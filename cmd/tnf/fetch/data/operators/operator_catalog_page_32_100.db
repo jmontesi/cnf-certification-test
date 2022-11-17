@@ -1,593 +1,6 @@
 {
   "data": [
     {
-      "_id": "6328414aeb69678e80bd1d50",
-      "alm_examples": [
-        {
-          "api_version": "anzograph.clusters.cambridgesemantics.com/v2",
-          "kind": "AnzoGraph",
-          "metadata": {
-            "name": "azg01"
-          },
-          "spec": {
-            "db": {
-              "nodeConfig": {
-                "spec": {
-                  "replicas": 1,
-                  "selector": {
-                    "matchLabels": {
-                      "app_data": "anzograph-data-grpc",
-                      "app_mgmt": "anzograph-mgmt-grpc"
-                    }
-                  },
-                  "serviceName": "anzograph-azg01",
-                  "template": {
-                    "metadata": {
-                      "labels": {
-                        "app_data": "anzograph-data-grpc",
-                        "app_mgmt": "anzograph-mgmt-grpc"
-                      }
-                    },
-                    "spec": {
-                      "containers": [
-                        {
-                          "image": "registry.connect.redhat.com/cambridgesemantics/anzograph-db@sha256:8a5bd26551990929fdb776d6b421a9713cb84e03b19c18f81b625582f7f41af5",
-                          "name": "db",
-                          "resources": {
-                            "limits": {
-                              "cpu": "8000m",
-                              "memory": "8Gi"
-                            },
-                            "requests": {
-                              "cpu": "8000m",
-                              "memory": "8Gi"
-                            }
-                          }
-                        }
-                      ],
-                      "serviceAccountName": "anzograph-operator"
-                    }
-                  }
-                }
-              }
-            },
-            "deployFrontend": false,
-            "frontend": {
-              "nodeConfig": {
-                "spec": {
-                  "replicas": 1,
-                  "selector": {
-                    "matchLabels": {
-                      "app_mgmt": "anzograph-frontend"
-                    }
-                  },
-                  "serviceName": "anzograph-azg01",
-                  "template": {
-                    "metadata": {
-                      "labels": {
-                        "app_mgmt": "anzograph-frontend"
-                      }
-                    },
-                    "spec": {
-                      "containers": [
-                        {
-                          "image": "registry.connect.redhat.com/cambridgesemantics/anzograph-frontend@sha256:c1443bcdc8e998fc699f61980a665f1a083350adf2d3d1d55a7cb55e31ca50b3",
-                          "name": "frontend",
-                          "resources": {
-                            "limits": {
-                              "cpu": "2000m",
-                              "memory": "4Gi"
-                            },
-                            "requests": {
-                              "cpu": "2000m",
-                              "memory": "4Gi"
-                            }
-                          }
-                        }
-                      ],
-                      "serviceAccountName": "anzograph-operator"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      ],
-      "annotations": {
-        "infrastructure_features": [],
-        "valid_subscription": []
-      },
-      "architectures": [],
-      "bundle_path": "registry.connect.redhat.com/cambridgesemantics/anzograph-operator-bundle@sha256:9418a3505873ac387f2b5455ec7e696739a2bb6f03232f8c0f59489c605b96f2",
-      "bundle_path_digest": "sha256:9418a3505873ac387f2b5455ec7e696739a2bb6f03232f8c0f59489c605b96f2",
-      "capabilities": [
-        "Basic Install"
-      ],
-      "channel_name": "stable",
-      "creation_date": "2022-09-19T10:15:38.246000+00:00",
-      "csv_description": "The AnzoGraph Operator provides the way to install and configure an AnzoGraph\ncluster on Red Hat K8S environment.\n\n### Installation\n Refer [installation instructions]( https://github.com/cambridgesemantics/csi-k8s-operator-anzograph/blob/v2.0.1/README_openshift_marketplace.md )\n\n### Documentation\n\nYou can find our documentation [here.]( https://docs.cambridgesemantics.com/anzograph/userdoc/ )\n\n### Support\n\nWe offer Support to our customers with the AnzoGraph db Enterprise Edition License [here]( https://customercenter.cambridgesemantics.com/ ). For AnzoGraph db Free Edition questions, get help from our Anzograph User Community at Stack Overflow. When submitting a question, include the tag 'anzograph'.",
-      "csv_display_name": "AnzoGraph Operator",
-      "csv_metadata_description": "kubernetes operator for AnzoGraph DB",
-      "csv_name": "anzograph-operator.v2.0.102",
-      "in_index_img": true,
-      "install_modes": [
-        {
-          "supported": true,
-          "type": "OwnNamespace"
-        },
-        {
-          "supported": true,
-          "type": "SingleNamespace"
-        },
-        {
-          "supported": false,
-          "type": "MultiNamespace"
-        },
-        {
-          "supported": false,
-          "type": "AllNamespaces"
-        }
-      ],
-      "is_default_channel": true,
-      "last_update_date": "2022-10-24T12:05:13.794000+00:00",
-      "latest_in_channel": true,
-      "ocp_version": "4.12",
-      "organization": "certified-operators",
-      "package": "anzograph-operator",
-      "provided_apis": [
-        {
-          "group": "anzograph.clusters.cambridgesemantics.com",
-          "kind": "AnzoGraph",
-          "version": "v2"
-        }
-      ],
-      "provider": "Cambridge Semantics Inc.",
-      "related_images": [
-        {
-          "digest": "sha256:a5b212558f748ddc8156541b546290320b656506e039a18903ad9fa6e638e732",
-          "image": "registry.connect.redhat.com/cambridgesemantics/anzograph-operator@sha256:a5b212558f748ddc8156541b546290320b656506e039a18903ad9fa6e638e732",
-          "name": "anzograph-operator-a5b212558f748ddc8156541b546290320b656506e039a18903ad9fa6e638e732-annotation"
-        },
-        {
-          "digest": "sha256:a5b212558f748ddc8156541b546290320b656506e039a18903ad9fa6e638e732",
-          "image": "registry.connect.redhat.com/cambridgesemantics/anzograph-operator@sha256:a5b212558f748ddc8156541b546290320b656506e039a18903ad9fa6e638e732",
-          "name": "manager"
-        },
-        {
-          "digest": "sha256:e3bdddf811b5ba69f388d023aea1ba538edd00e9f415c33ec555321d39129a36",
-          "image": "registry.connect.redhat.com/cambridgesemantics/anzograph@sha256:e3bdddf811b5ba69f388d023aea1ba538edd00e9f415c33ec555321d39129a36",
-          "name": "anzograph_allinone"
-        },
-        {
-          "digest": "sha256:8a5bd26551990929fdb776d6b421a9713cb84e03b19c18f81b625582f7f41af5",
-          "image": "registry.connect.redhat.com/cambridgesemantics/anzograph-db@sha256:8a5bd26551990929fdb776d6b421a9713cb84e03b19c18f81b625582f7f41af5",
-          "name": "anzograph_db"
-        },
-        {
-          "digest": "sha256:c1443bcdc8e998fc699f61980a665f1a083350adf2d3d1d55a7cb55e31ca50b3",
-          "image": "registry.connect.redhat.com/cambridgesemantics/anzograph-frontend@sha256:c1443bcdc8e998fc699f61980a665f1a083350adf2d3d1d55a7cb55e31ca50b3",
-          "name": "anzograph_frontend"
-        },
-        {
-          "digest": "sha256:c1443bcdc8e998fc699f61980a665f1a083350adf2d3d1d55a7cb55e31ca50b3",
-          "image": "registry.connect.redhat.com/cambridgesemantics/anzograph-frontend@sha256:c1443bcdc8e998fc699f61980a665f1a083350adf2d3d1d55a7cb55e31ca50b3",
-          "name": "anzograph-frontend-c1443bcdc8e998fc699f61980a665f1a083350adf2d3d1d55a7cb55e31ca50b3-annotation"
-        },
-        {
-          "digest": "sha256:8a5bd26551990929fdb776d6b421a9713cb84e03b19c18f81b625582f7f41af5",
-          "image": "registry.connect.redhat.com/cambridgesemantics/anzograph-db@sha256:8a5bd26551990929fdb776d6b421a9713cb84e03b19c18f81b625582f7f41af5",
-          "name": "anzograph-db-8a5bd26551990929fdb776d6b421a9713cb84e03b19c18f81b625582f7f41af5-annotation"
-        }
-      ],
-      "replaces": null,
-      "skip_range": null,
-      "skips": [],
-      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.12",
-      "version": "2.0.1",
-      "version_original": "2.0.1"
-    },
-    {
-      "_id": "6328414deb69678e80bd1d53",
-      "alm_examples": [
-        {
-          "api_version": "gateway-operator.konghq.com/v1alpha1",
-          "kind": "ControlPlane",
-          "metadata": {
-            "name": "controlplane-example"
-          },
-          "spec": {
-            "dataplane": "dataplane-example",
-            "gatewayClass": "kong"
-          }
-        },
-        {
-          "api_version": "gateway-operator.konghq.com/v1alpha1",
-          "kind": "DataPlane",
-          "metadata": {
-            "name": "dataplane-example"
-          },
-          "spec": {
-            "env": [
-              {
-                "name": "KONG_LOG_LEVEL",
-                "value": "debug"
-              }
-            ]
-          }
-        },
-        {
-          "api_version": "gateway-operator.konghq.com/v1alpha1",
-          "kind": "GatewayConfiguration",
-          "metadata": {
-            "name": "kong",
-            "namespace": "default"
-          },
-          "spec": {
-            "controlPlaneDeploymentOptions": {
-              "env": [
-                {
-                  "name": "CONTROLLER_LOG_LEVEL",
-                  "value": "debug"
-                }
-              ]
-            },
-            "dataPlaneDeploymentOptions": {
-              "containerImage": "kong",
-              "version": "2.8"
-            }
-          }
-        }
-      ],
-      "annotations": {
-        "infrastructure_features": [],
-        "valid_subscription": []
-      },
-      "architectures": [],
-      "bundle_path": "registry.connect.redhat.com/kong/gateway-operator-bundle@sha256:cd5e7ce02e87b0768fc7a3ea752ac8125554fd3e47be92cc8f0ea500a6f96ef4",
-      "bundle_path_digest": "sha256:cd5e7ce02e87b0768fc7a3ea752ac8125554fd3e47be92cc8f0ea500a6f96ef4",
-      "capabilities": [
-        "Basic Install"
-      ],
-      "channel_name": "alpha",
-      "creation_date": "2022-09-19T10:15:41.656000+00:00",
-      "csv_description": "Kong Operator for Kubernetes",
-      "csv_display_name": "Kong",
-      "csv_metadata_description": "Kong Operator for Kubernetes",
-      "csv_name": "kong-gateway-operator.v0.0.1",
-      "in_index_img": true,
-      "install_modes": [
-        {
-          "supported": false,
-          "type": "OwnNamespace"
-        },
-        {
-          "supported": false,
-          "type": "SingleNamespace"
-        },
-        {
-          "supported": false,
-          "type": "MultiNamespace"
-        },
-        {
-          "supported": true,
-          "type": "AllNamespaces"
-        }
-      ],
-      "is_default_channel": true,
-      "last_update_date": "2022-10-24T12:03:03.416000+00:00",
-      "latest_in_channel": false,
-      "ocp_version": "4.12",
-      "organization": "certified-operators",
-      "package": "kong-gateway-operator",
-      "provided_apis": [
-        {
-          "group": "gateway-operator.konghq.com",
-          "kind": "ControlPlane",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "gateway-operator.konghq.com",
-          "kind": "DataPlane",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "gateway-operator.konghq.com",
-          "kind": "GatewayConfiguration",
-          "version": "v1alpha1"
-        }
-      ],
-      "provider": "Kong Inc.",
-      "related_images": [
-        {
-          "digest": "sha256:54e7c7e57bf93810a7cc36327023b8699f754c4c40c5c289548d54170caa5db2",
-          "image": "registry.connect.redhat.com/kong/kong@sha256:54e7c7e57bf93810a7cc36327023b8699f754c4c40c5c289548d54170caa5db2",
-          "name": "kong"
-        },
-        {
-          "digest": "sha256:f691db070e7c604da9e163800903d0942ec6fda879eb9dcd5d8e90618ae787da",
-          "image": "registry.connect.redhat.com/kong/kong-ingress-controller@sha256:f691db070e7c604da9e163800903d0942ec6fda879eb9dcd5d8e90618ae787da",
-          "name": "kong-controller"
-        },
-        {
-          "digest": "sha256:395781c55e081db08355e9dc1a10a9dcccec74c1fb8959396f3477bf908a4bee",
-          "image": "ghcr.io/kong/gateway-operator@sha256:395781c55e081db08355e9dc1a10a9dcccec74c1fb8959396f3477bf908a4bee",
-          "name": "manager"
-        },
-        {
-          "digest": "sha256:db06cc4c084dd0253134f156dddaaf53ef1c3fb3cc809e5d81711baa4029ea4c",
-          "image": "gcr.io/kubebuilder/kube-rbac-proxy@sha256:db06cc4c084dd0253134f156dddaaf53ef1c3fb3cc809e5d81711baa4029ea4c",
-          "name": "kube-rbac-proxy"
-        },
-        {
-          "digest": "sha256:f691db070e7c604da9e163800903d0942ec6fda879eb9dcd5d8e90618ae787da",
-          "image": "registry.connect.redhat.com/kong/kong-ingress-controller@sha256:f691db070e7c604da9e163800903d0942ec6fda879eb9dcd5d8e90618ae787da",
-          "name": "kong_controller"
-        }
-      ],
-      "replaces": null,
-      "skip_range": null,
-      "skips": [],
-      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.12",
-      "version": "0.0.1",
-      "version_original": "0.0.1"
-    },
-    {
-      "_id": "632841501fe6c3c921e6b17c",
-      "alm_examples": [
-        {
-          "api_version": "gateway-operator.konghq.com/v1alpha1",
-          "kind": "ControlPlane",
-          "metadata": {
-            "name": "controlplane-example"
-          },
-          "spec": {
-            "dataplane": "dataplane-example",
-            "gatewayClass": "kong"
-          }
-        },
-        {
-          "api_version": "gateway-operator.konghq.com/v1alpha1",
-          "kind": "DataPlane",
-          "metadata": {
-            "name": "dataplane-example"
-          },
-          "spec": {
-            "env": [
-              {
-                "name": "KONG_LOG_LEVEL",
-                "value": "debug"
-              }
-            ]
-          }
-        },
-        {
-          "api_version": "gateway-operator.konghq.com/v1alpha1",
-          "kind": "GatewayConfiguration",
-          "metadata": {
-            "name": "kong",
-            "namespace": "default"
-          },
-          "spec": {
-            "controlPlaneDeploymentOptions": {
-              "env": [
-                {
-                  "name": "CONTROLLER_LOG_LEVEL",
-                  "value": "debug"
-                }
-              ]
-            },
-            "dataPlaneDeploymentOptions": {
-              "containerImage": "kong",
-              "version": "2.8"
-            }
-          }
-        }
-      ],
-      "annotations": {
-        "infrastructure_features": [],
-        "valid_subscription": []
-      },
-      "architectures": [],
-      "bundle_path": "registry.connect.redhat.com/kong/gateway-operator-bundle@sha256:91b3d73bc75eb170035110e5c63747e4918f738841aa97b6df27d22e37b4879b",
-      "bundle_path_digest": "sha256:91b3d73bc75eb170035110e5c63747e4918f738841aa97b6df27d22e37b4879b",
-      "capabilities": [
-        "Basic Install"
-      ],
-      "channel_name": "alpha",
-      "creation_date": "2022-09-19T10:15:44.481000+00:00",
-      "csv_description": "Kong Operator for Kubernetes. Technical preview.",
-      "csv_display_name": "Kong",
-      "csv_metadata_description": "",
-      "csv_name": "kong-gateway-operator.v0.0.2",
-      "in_index_img": true,
-      "install_modes": [
-        {
-          "supported": false,
-          "type": "OwnNamespace"
-        },
-        {
-          "supported": false,
-          "type": "SingleNamespace"
-        },
-        {
-          "supported": false,
-          "type": "MultiNamespace"
-        },
-        {
-          "supported": true,
-          "type": "AllNamespaces"
-        }
-      ],
-      "is_default_channel": true,
-      "last_update_date": "2022-10-24T12:03:06.494000+00:00",
-      "latest_in_channel": true,
-      "ocp_version": "4.12",
-      "organization": "certified-operators",
-      "package": "kong-gateway-operator",
-      "provided_apis": [
-        {
-          "group": "gateway-operator.konghq.com",
-          "kind": "ControlPlane",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "gateway-operator.konghq.com",
-          "kind": "DataPlane",
-          "version": "v1alpha1"
-        },
-        {
-          "group": "gateway-operator.konghq.com",
-          "kind": "GatewayConfiguration",
-          "version": "v1alpha1"
-        }
-      ],
-      "provider": "Kong Inc.",
-      "related_images": [
-        {
-          "digest": "sha256:54e7c7e57bf93810a7cc36327023b8699f754c4c40c5c289548d54170caa5db2",
-          "image": "registry.connect.redhat.com/kong/kong@sha256:54e7c7e57bf93810a7cc36327023b8699f754c4c40c5c289548d54170caa5db2",
-          "name": "kong"
-        },
-        {
-          "digest": "sha256:f691db070e7c604da9e163800903d0942ec6fda879eb9dcd5d8e90618ae787da",
-          "image": "registry.connect.redhat.com/kong/kong-ingress-controller@sha256:f691db070e7c604da9e163800903d0942ec6fda879eb9dcd5d8e90618ae787da",
-          "name": "kong-controller"
-        },
-        {
-          "digest": "sha256:76b227715a3e1915a28f8aaa1e2ff8495349d29d0d61e7b85a72d74b03fbcc7f",
-          "image": "ghcr.io/kong/gateway-operator@sha256:76b227715a3e1915a28f8aaa1e2ff8495349d29d0d61e7b85a72d74b03fbcc7f",
-          "name": "manager"
-        },
-        {
-          "digest": "sha256:db06cc4c084dd0253134f156dddaaf53ef1c3fb3cc809e5d81711baa4029ea4c",
-          "image": "gcr.io/kubebuilder/kube-rbac-proxy@sha256:db06cc4c084dd0253134f156dddaaf53ef1c3fb3cc809e5d81711baa4029ea4c",
-          "name": "kube-rbac-proxy"
-        },
-        {
-          "digest": "sha256:f691db070e7c604da9e163800903d0942ec6fda879eb9dcd5d8e90618ae787da",
-          "image": "registry.connect.redhat.com/kong/kong-ingress-controller@sha256:f691db070e7c604da9e163800903d0942ec6fda879eb9dcd5d8e90618ae787da",
-          "name": "kong_controller"
-        }
-      ],
-      "replaces": null,
-      "skip_range": null,
-      "skips": [],
-      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.12",
-      "version": "0.0.2",
-      "version_original": "0.0.2"
-    },
-    {
-      "_id": "632841521fe6c3c921e6b180",
-      "alm_examples": [
-        {
-          "api_version": "xcrypt.zettaset.com/v1alpha1",
-          "kind": "XCrypt",
-          "metadata": {
-            "name": "zts-masterset"
-          },
-          "spec": {
-            "status": {
-              "podNames": "zts-ca",
-              "replicas": "1,"
-            }
-          }
-        }
-      ],
-      "annotations": {
-        "infrastructure_features": [],
-        "valid_subscription": []
-      },
-      "architectures": [],
-      "bundle_path": "registry.connect.redhat.com/zts/xcrypt-operator-1-bundle@sha256:c3913778f986ae4f3a7d94da2a9d0157233dbb676e3c1eecacbdbc02a864685a",
-      "bundle_path_digest": "sha256:c3913778f986ae4f3a7d94da2a9d0157233dbb676e3c1eecacbdbc02a864685a",
-      "capabilities": [
-        "Basic Install"
-      ],
-      "channel_name": "alpha",
-      "creation_date": "2022-09-19T10:15:46.987000+00:00",
-      "csv_description": "Zettaset\u2019s RedHat Certified XCrypt Operator allows users to deploy multiple XCrypt components on OpenShift with just a few simple commands. The XCrypt Operator deployment provides software-defined encryption that transparently protects container data throughout your OpenShift environment.\n\n## Core Features\n* **Automated XCrypt provisioning** - Deploying a Zettaset XCrypt has never been easier. Adjust cluster specific configuration and let the Zettaset Operator take care of provisioning XCrypt services and setting up the XCrypt encryption to your exact specification. \n* **CSI Driver deployment**: Zettaset XCrypt Operator automatically deploys Zettaset XCrypt CSI Driver in order to provide automated and transparent data-at-rest  encryption functionality compatible with Openshift and any other container orchestrator. Once the Operator is provisioned, the driver runs fine tuned and ready to work with other XCrypt components.\n* **Multi-node topology**: Encrypt as many nodes and volumes as you need to. XCrypt components can be installed on multiple nodes across the cluster. This is defined by two labels: zts-master and zts-worker. Normally zts-master node is a single node that runs Zettaset XCrypt major services required for the product operation. Multiple nodes can be marked as zts-worker and those are the nodes that can have encrypted volumes.\n* **Seamless Encrypted Volume mount**: Volumes are not only being encrypted, but also are mounted/unmounted to containers with Persistent Volume Claims. This happens as seamlessly as regular volumes provision and mount/unmount.\n* **Robust failover**: A node failure doesn\u2019t affect XCrypt operations on other nodes of the cluster. Encryption on a restarted/recovered node gets back to normal functioning if the node stays healthy and data hasn\u2019t been corrupted during the restart\n\n## About Zettaset XCrypt Kubernetes Encryption for OpenShift\nXCrypt Kubernetes Encryption for OpenShift is a software-only solution that enables encryption of data at rest stored in Red Hat OpenShift container environments without slowing down the DevSecOps process. In addition to providing a transparent and high-performance layer of security that flexibly protects container data across on-premise, in hybrid, and multi-cloud environments, it also helps your organization efficiently transition from DevOps to DevSecOps.  \n\nMore information about Zettaset XCrypt Kubernetes Encryption for OpenShift can be found in the [Deployment and Administration Guide](https://1f2aca073706bb52f501-133f3466c38fdb0417539cdf095d8336.ssl.cf1.rackcdn.com/ZettasetXCryptContainerEncryption.8.5.0.Final.pdf)\n\n## RedHat OpenShift + Zettaset: The next generation of secure enterprise infrastructure for DevSecOps  \nBy combining RedHat\u2019s Container Platform with Zettaset\u2019s certified software-defined encryption, you can create the next generation of secure enterprise infrastructure that DevSecOps requires. Together they create the stable, consistent, and supported base that your organization needs to develop applications faster, simplify updates, drive innovation, and reduce the risk of potential security breaches and data theft.\n### Core Features\n* Software-only for simple and scalable deployments \n* Negligible performance impact\n* Transparent to developers and administrators \n* Works with AWS, Google, and Azure \n* Unique encryption key per container volume \n* Encrypted volumes are only available when in use\n* Direct integration with OpenShift \n* Automated encryption policy management Secure erase of volumes\n* Ability to securely decommission a node\n\n## How does XCrypt Kubernetes Encryption fit into OpenShift? \nXCrypt XCrypt Kubernetes Encryption for OpenShift Encryption makes it incredibly easy to protect container data in your OpenShift environment. \n### Use cases include:\n* Transitioning from DevOps to DevSecOps \n* Ensuring data protection in OpenShift container environments with negligible performance impact \n* Achieving compliance in regulated industries like healthcare and finance\n\n## Other Information\nRole-based access control needs to be configured prior to the Operator installation. Please find details in the [Deployment and Administration Guide](https://1f2aca073706bb52f501-133f3466c38fdb0417539cdf095d8336.ssl.cf1.rackcdn.com/ZettasetXCryptContainerEncryption.8.5.0.Final.pdf)    ",
-      "csv_display_name": "Zettaset XCrypt Operator",
-      "csv_metadata_description": "XCrypt Operator deploys Zettaset XCrypt Container Encryption  - the only software-defined solution that offers transparent high performance data-at-rest encryption of critical data in container environments.",
-      "csv_name": "zts-xcrypt-operator.v0.0.17",
-      "in_index_img": true,
-      "install_modes": [
-        {
-          "supported": true,
-          "type": "OwnNamespace"
-        },
-        {
-          "supported": true,
-          "type": "SingleNamespace"
-        },
-        {
-          "supported": false,
-          "type": "MultiNamespace"
-        },
-        {
-          "supported": true,
-          "type": "AllNamespaces"
-        }
-      ],
-      "is_default_channel": true,
-      "last_update_date": "2022-10-24T12:04:46.948000+00:00",
-      "latest_in_channel": true,
-      "ocp_version": "4.12",
-      "organization": "certified-operators",
-      "package": "xcrypt-operator",
-      "provided_apis": [
-        {
-          "group": "xcrypt.zettaset.com",
-          "kind": "XCrypt",
-          "version": "v1alpha1"
-        }
-      ],
-      "provider": "Zettaset",
-      "related_images": [
-        {
-          "digest": "sha256:7e6316a6c41dd71c4d9025bd958a475929369284eee1a02d9e870e883acfd9ac",
-          "image": "registry.connect.redhat.com/zts/xcrypt-operator-1@sha256:7e6316a6c41dd71c4d9025bd958a475929369284eee1a02d9e870e883acfd9ac",
-          "name": "xcrypt-operator-1-7e6316a6c41dd71c4d9025bd958a475929369284eee1a02d9e870e883acfd9ac-annotation"
-        },
-        {
-          "digest": "sha256:7e6316a6c41dd71c4d9025bd958a475929369284eee1a02d9e870e883acfd9ac",
-          "image": "registry.connect.redhat.com/zts/xcrypt-operator-1@sha256:7e6316a6c41dd71c4d9025bd958a475929369284eee1a02d9e870e883acfd9ac",
-          "name": "zts-xcrypt-operator"
-        },
-        {
-          "digest": "sha256:9f1015dfb459b69f5dbf449efa0517452095a6cf4f20826ebae278f9f800ffe7",
-          "image": "registry.connect.redhat.com/zts/xcrypt-ca-1@sha256:9f1015dfb459b69f5dbf449efa0517452095a6cf4f20826ebae278f9f800ffe7",
-          "name": "ca"
-        },
-        {
-          "digest": "sha256:9af5d21dd748dfbf4e107f27a5f10fa3c0ba928ade9b989a744b620ce34ec757",
-          "image": "registry.connect.redhat.com/zts/xcrypt-kmip-server-1@sha256:9af5d21dd748dfbf4e107f27a5f10fa3c0ba928ade9b989a744b620ce34ec757",
-          "name": "kmip"
-        },
-        {
-          "digest": "sha256:bc5486892a41e70f5dc4c4e1d82fca8db2149598fb8b5950ba5da1ee2d9d245d",
-          "image": "registry.connect.redhat.com/zts/xcrypt-license-server-1@sha256:bc5486892a41e70f5dc4c4e1d82fca8db2149598fb8b5950ba5da1ee2d9d245d",
-          "name": "ls"
-        },
-        {
-          "digest": "sha256:9faa4b597eb74df412761dffa057b64fb69dbf9fa016414962eb2099a343e734",
-          "image": "registry.connect.redhat.com/zts/xcrypt-host-manager-1@sha256:9faa4b597eb74df412761dffa057b64fb69dbf9fa016414962eb2099a343e734",
-          "name": "hm"
-        },
-        {
-          "digest": "sha256:c15fa9a7cc40891103f426206663dcebe1210c8ee3ab6037cbf64e1f86b9c7e5",
-          "image": "registry.connect.redhat.com/zts/zts-csi-driver-1@sha256:c15fa9a7cc40891103f426206663dcebe1210c8ee3ab6037cbf64e1f86b9c7e5",
-          "name": "csi_driver"
-        }
-      ],
-      "replaces": null,
-      "skip_range": null,
-      "skips": [],
-      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.12",
-      "version": "0.0.17",
-      "version_original": "0.0.17"
-    },
-    {
       "_id": "632841561fe6c3c921e6b186",
       "alm_examples": [
         {
@@ -16993,6 +16406,354 @@
       "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.12",
       "version": "0.0.22",
       "version_original": "0.0.22"
+    },
+    {
+      "_id": "632842a4316b8eb377f076eb",
+      "alm_examples": [
+        {
+          "api_version": "app.joget.com/v1alpha1",
+          "kind": "JogetDX",
+          "metadata": {
+            "name": "example-joget"
+          },
+          "spec": {
+            "size": 1
+          }
+        }
+      ],
+      "annotations": {
+        "infrastructure_features": [],
+        "valid_subscription": []
+      },
+      "architectures": [],
+      "bundle_path": "registry.connect.redhat.com/joget/joget-dx-operator-bundle@sha256:b0429d13d8f0146a431bb9a009b1c1c691ec0afea12c23547f46c73f7e116a38",
+      "bundle_path_digest": "sha256:b0429d13d8f0146a431bb9a009b1c1c691ec0afea12c23547f46c73f7e116a38",
+      "capabilities": [
+        "Seamless Upgrades"
+      ],
+      "channel_name": "alpha",
+      "creation_date": "2022-09-19T10:21:24.408000+00:00",
+      "csv_description": "Joget DX is the next generation open source no-code / low-code application platform that combines the best of Rapid Application Development, Business Process Automation and Workflow Management. \nJoget DX empowers business users, non-coders or coders with a single platform to easily build, deliver, monitor and maintain enterprise applications.\n\nThis operator installs a Joget DX cluster running on JBoss EAP 7.\n\n### Features\n* Build full-fledged apps e.g. CRM, HR, Healthcare, etc\n* Drag and drop forms, lists, UI\n* Add workflow to automate processes\n* Extend via plugins\n* Apps are mobile optimized and cloud ready\n* Download ready-made apps from the Joget Marketplace\n\n### Before You Start\nDeploy a [MySQL](https://docs.openshift.com/online/pro/using_images/db_images/mysql.html) or [MariaDB](https://docs.openshift.com/online/pro/using_images/db_images/mariadb.html) database.\n\n### Post Deployment\nAccess the service URL and complete the one-time [Database Setup](https://dev.joget.org/community/display/DX7/Setting+Up+Database)\n\n### More Information\nMore information about Joget DX on JBoss EAP 7 is available in the [Joget Knowledge Base](https://dev.joget.org/community/display/DX7/Automated+Deployment+on+Red+Hat+OpenShift+with+the+Joget+Operator)\n",
+      "csv_display_name": "Joget DX Operator",
+      "csv_metadata_description": "No-code/low-code application platform to visually build, run and maintain apps",
+      "csv_name": "joget-dx-openshift-operator.v0.0.23",
+      "in_index_img": true,
+      "install_modes": [
+        {
+          "supported": true,
+          "type": "OwnNamespace"
+        },
+        {
+          "supported": true,
+          "type": "SingleNamespace"
+        },
+        {
+          "supported": false,
+          "type": "MultiNamespace"
+        },
+        {
+          "supported": true,
+          "type": "AllNamespaces"
+        }
+      ],
+      "is_default_channel": true,
+      "last_update_date": "2022-10-24T12:10:46.644000+00:00",
+      "latest_in_channel": false,
+      "ocp_version": "4.12",
+      "organization": "certified-operators",
+      "package": "joget-dx-operator",
+      "provided_apis": [
+        {
+          "group": "app.joget.com",
+          "kind": "JogetDX",
+          "version": "v1alpha1"
+        }
+      ],
+      "provider": "Joget, Inc",
+      "related_images": [
+        {
+          "digest": "sha256:79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749",
+          "image": "registry.connect.redhat.com/joget/joget-dx-operator@sha256:79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749",
+          "name": "joget-dx-operator-79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749-annotation"
+        },
+        {
+          "digest": "sha256:79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749",
+          "image": "registry.connect.redhat.com/joget/joget-dx-operator@sha256:79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749",
+          "name": "operator"
+        },
+        {
+          "digest": "sha256:20361ef412dab120fe6ac4793db463e9e32cdaca348791c97043af874e8326d2",
+          "image": "registry.connect.redhat.com/joget/joget-dx7-eap7@sha256:20361ef412dab120fe6ac4793db463e9e32cdaca348791c97043af874e8326d2",
+          "name": "joget"
+        }
+      ],
+      "replaces": null,
+      "skip_range": null,
+      "skips": [],
+      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.12",
+      "version": "0.0.23",
+      "version_original": "0.0.23"
+    },
+    {
+      "_id": "632842a88454bee1cb723a9d",
+      "alm_examples": [
+        {
+          "api_version": "app.joget.com/v1alpha1",
+          "kind": "JogetDX",
+          "metadata": {
+            "name": "example-joget"
+          },
+          "spec": {
+            "size": 1
+          }
+        }
+      ],
+      "annotations": {
+        "infrastructure_features": [],
+        "valid_subscription": []
+      },
+      "architectures": [],
+      "bundle_path": "registry.connect.redhat.com/joget/joget-dx-operator-bundle@sha256:2c1d558f9e8253d1573cbb36f3a5254a6d87041b2bf1ad9a69b23b81e2bc67e2",
+      "bundle_path_digest": "sha256:2c1d558f9e8253d1573cbb36f3a5254a6d87041b2bf1ad9a69b23b81e2bc67e2",
+      "capabilities": [
+        "Seamless Upgrades"
+      ],
+      "channel_name": "alpha",
+      "creation_date": "2022-09-19T10:21:28.041000+00:00",
+      "csv_description": "Joget DX is the next generation open source no-code / low-code application platform that combines the best of Rapid Application Development, Business Process Automation and Workflow Management. \nJoget DX empowers business users, non-coders or coders with a single platform to easily build, deliver, monitor and maintain enterprise applications.\n\nThis operator installs a Joget DX cluster running on JBoss EAP 7.\n\n### Features\n* Build full-fledged apps e.g. CRM, HR, Healthcare, etc\n* Drag and drop forms, lists, UI\n* Add workflow to automate processes\n* Extend via plugins\n* Apps are mobile optimized and cloud ready\n* Download ready-made apps from the Joget Marketplace\n\n### Before You Start\nDeploy a [MySQL](https://docs.openshift.com/online/pro/using_images/db_images/mysql.html) or [MariaDB](https://docs.openshift.com/online/pro/using_images/db_images/mariadb.html) database.\n\n### Post Deployment\nAccess the service URL and complete the one-time [Database Setup](https://dev.joget.org/community/display/DX7/Setting+Up+Database)\n\n### More Information\nMore information about Joget DX on JBoss EAP 7 is available in the [Joget Knowledge Base](https://dev.joget.org/community/display/DX7/Automated+Deployment+on+Red+Hat+OpenShift+with+the+Joget+Operator)\n",
+      "csv_display_name": "Joget DX Operator",
+      "csv_metadata_description": "No-code/low-code application platform to visually build, run and maintain apps",
+      "csv_name": "joget-dx-openshift-operator.v0.0.32",
+      "in_index_img": true,
+      "install_modes": [
+        {
+          "supported": true,
+          "type": "OwnNamespace"
+        },
+        {
+          "supported": true,
+          "type": "SingleNamespace"
+        },
+        {
+          "supported": false,
+          "type": "MultiNamespace"
+        },
+        {
+          "supported": true,
+          "type": "AllNamespaces"
+        }
+      ],
+      "is_default_channel": true,
+      "last_update_date": "2022-11-04T03:05:09.942000+00:00",
+      "latest_in_channel": false,
+      "ocp_version": "4.12",
+      "organization": "certified-operators",
+      "package": "joget-dx-operator",
+      "provided_apis": [
+        {
+          "group": "app.joget.com",
+          "kind": "JogetDX",
+          "version": "v1alpha1"
+        }
+      ],
+      "provider": "Joget, Inc",
+      "related_images": [
+        {
+          "digest": "sha256:79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749",
+          "image": "registry.connect.redhat.com/joget/joget-dx-operator@sha256:79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749",
+          "name": "joget-dx-operator-79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749-annotation"
+        },
+        {
+          "digest": "sha256:79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749",
+          "image": "registry.connect.redhat.com/joget/joget-dx-operator@sha256:79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749",
+          "name": "operator"
+        },
+        {
+          "digest": "sha256:5956e2fb7bd8f177e5997fb3ef57ae16ce8b793ad2c90b7d2902222bab896e2d",
+          "image": "registry.connect.redhat.com/joget/joget-dx7-eap7@sha256:5956e2fb7bd8f177e5997fb3ef57ae16ce8b793ad2c90b7d2902222bab896e2d",
+          "name": "joget"
+        }
+      ],
+      "replaces": null,
+      "skip_range": null,
+      "skips": [],
+      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.12",
+      "version": "0.0.32",
+      "version_original": "0.0.32"
+    },
+    {
+      "_id": "632842ab2dd1cd9660afba61",
+      "alm_examples": [
+        {
+          "api_version": "app.joget.com/v1alpha1",
+          "kind": "JogetDX",
+          "metadata": {
+            "name": "example-joget"
+          },
+          "spec": {
+            "size": 1
+          }
+        }
+      ],
+      "annotations": {
+        "infrastructure_features": [],
+        "valid_subscription": []
+      },
+      "architectures": [],
+      "bundle_path": "registry.connect.redhat.com/joget/joget-dx-operator-bundle@sha256:e95e296f6633c6154f21dfabd0caf27fd0db871fe4ed987b5415f6f9b62ac230",
+      "bundle_path_digest": "sha256:e95e296f6633c6154f21dfabd0caf27fd0db871fe4ed987b5415f6f9b62ac230",
+      "capabilities": [
+        "Seamless Upgrades"
+      ],
+      "channel_name": "alpha",
+      "creation_date": "2022-09-19T10:21:31.534000+00:00",
+      "csv_description": "Joget DX is the next generation open source no-code / low-code application platform that combines the best of Rapid Application Development, Business Process Automation and Workflow Management. \nJoget DX empowers business users, non-coders or coders with a single platform to easily build, deliver, monitor and maintain enterprise applications.\n\nThis operator installs a Joget DX cluster running on JBoss EAP 7.\n\n### Features\n* Build full-fledged apps e.g. CRM, HR, Healthcare, etc\n* Drag and drop forms, lists, UI\n* Add workflow to automate processes\n* Extend via plugins\n* Apps are mobile optimized and cloud ready\n* Download ready-made apps from the Joget Marketplace\n\n### Before You Start\nDeploy a [MySQL](https://docs.openshift.com/online/pro/using_images/db_images/mysql.html) or [MariaDB](https://docs.openshift.com/online/pro/using_images/db_images/mariadb.html) database.\n\n### Post Deployment\nAccess the service URL and complete the one-time [Database Setup](https://dev.joget.org/community/display/DX7/Setting+Up+Database)\n\n### More Information\nMore information about Joget DX on JBoss EAP 7 is available in the [Joget Knowledge Base](https://dev.joget.org/community/display/DX7/Automated+Deployment+on+Red+Hat+OpenShift+with+the+Joget+Operator)\n",
+      "csv_display_name": "Joget DX Operator",
+      "csv_metadata_description": "No-code/low-code application platform to visually build, run and maintain apps",
+      "csv_name": "joget-dx-openshift-operator.v0.0.26",
+      "in_index_img": true,
+      "install_modes": [
+        {
+          "supported": true,
+          "type": "OwnNamespace"
+        },
+        {
+          "supported": true,
+          "type": "SingleNamespace"
+        },
+        {
+          "supported": false,
+          "type": "MultiNamespace"
+        },
+        {
+          "supported": true,
+          "type": "AllNamespaces"
+        }
+      ],
+      "is_default_channel": true,
+      "last_update_date": "2022-10-24T12:11:25.803000+00:00",
+      "latest_in_channel": false,
+      "ocp_version": "4.12",
+      "organization": "certified-operators",
+      "package": "joget-dx-operator",
+      "provided_apis": [
+        {
+          "group": "app.joget.com",
+          "kind": "JogetDX",
+          "version": "v1alpha1"
+        }
+      ],
+      "provider": "Joget, Inc",
+      "related_images": [
+        {
+          "digest": "sha256:79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749",
+          "image": "registry.connect.redhat.com/joget/joget-dx-operator@sha256:79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749",
+          "name": "joget-dx-operator-79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749-annotation"
+        },
+        {
+          "digest": "sha256:79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749",
+          "image": "registry.connect.redhat.com/joget/joget-dx-operator@sha256:79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749",
+          "name": "operator"
+        },
+        {
+          "digest": "sha256:46a5da986ccec2377cf27b6d7220dade459b534c69030162dbbd544a560a2c5e",
+          "image": "registry.connect.redhat.com/joget/joget-dx7-eap7@sha256:46a5da986ccec2377cf27b6d7220dade459b534c69030162dbbd544a560a2c5e",
+          "name": "joget"
+        }
+      ],
+      "replaces": null,
+      "skip_range": null,
+      "skips": [],
+      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.12",
+      "version": "0.0.26",
+      "version_original": "0.0.26"
+    },
+    {
+      "_id": "632842af703b1887dc1c74cd",
+      "alm_examples": [
+        {
+          "api_version": "app.joget.com/v1alpha1",
+          "kind": "JogetDX",
+          "metadata": {
+            "name": "example-joget"
+          },
+          "spec": {
+            "size": 1
+          }
+        }
+      ],
+      "annotations": {
+        "infrastructure_features": [],
+        "valid_subscription": []
+      },
+      "architectures": [],
+      "bundle_path": "registry.connect.redhat.com/joget/joget-dx-operator-bundle@sha256:1a7445f65072dc48009b174bc8bd66de5c2d18d98c235c1fa9b3af2dda6de6ce",
+      "bundle_path_digest": "sha256:1a7445f65072dc48009b174bc8bd66de5c2d18d98c235c1fa9b3af2dda6de6ce",
+      "capabilities": [
+        "Seamless Upgrades"
+      ],
+      "channel_name": "alpha",
+      "creation_date": "2022-09-19T10:21:35.058000+00:00",
+      "csv_description": "Joget DX is the next generation open source no-code / low-code application platform that combines the best of Rapid Application Development, Business Process Automation and Workflow Management. \nJoget DX empowers business users, non-coders or coders with a single platform to easily build, deliver, monitor and maintain enterprise applications.\n\nThis operator installs a Joget DX cluster running on JBoss EAP 7.\n\n### Features\n* Build full-fledged apps e.g. CRM, HR, Healthcare, etc\n* Drag and drop forms, lists, UI\n* Add workflow to automate processes\n* Extend via plugins\n* Apps are mobile optimized and cloud ready\n* Download ready-made apps from the Joget Marketplace\n\n### Before You Start\nDeploy a [MySQL](https://docs.openshift.com/online/pro/using_images/db_images/mysql.html) or [MariaDB](https://docs.openshift.com/online/pro/using_images/db_images/mariadb.html) database.\n\n### Post Deployment\nAccess the service URL and complete the one-time [Database Setup](https://dev.joget.org/community/display/DX7/Setting+Up+Database)\n\n### More Information\nMore information about Joget DX on JBoss EAP 7 is available in the [Joget Knowledge Base](https://dev.joget.org/community/display/DX7/Automated+Deployment+on+Red+Hat+OpenShift+with+the+Joget+Operator)\n",
+      "csv_display_name": "Joget DX Operator",
+      "csv_metadata_description": "No-code/low-code application platform to visually build, run and maintain apps",
+      "csv_name": "joget-dx-openshift-operator.v0.0.27",
+      "in_index_img": true,
+      "install_modes": [
+        {
+          "supported": true,
+          "type": "OwnNamespace"
+        },
+        {
+          "supported": true,
+          "type": "SingleNamespace"
+        },
+        {
+          "supported": false,
+          "type": "MultiNamespace"
+        },
+        {
+          "supported": true,
+          "type": "AllNamespaces"
+        }
+      ],
+      "is_default_channel": true,
+      "last_update_date": "2022-10-24T12:11:13.450000+00:00",
+      "latest_in_channel": false,
+      "ocp_version": "4.12",
+      "organization": "certified-operators",
+      "package": "joget-dx-operator",
+      "provided_apis": [
+        {
+          "group": "app.joget.com",
+          "kind": "JogetDX",
+          "version": "v1alpha1"
+        }
+      ],
+      "provider": "Joget, Inc",
+      "related_images": [
+        {
+          "digest": "sha256:79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749",
+          "image": "registry.connect.redhat.com/joget/joget-dx-operator@sha256:79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749",
+          "name": "joget-dx-operator-79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749-annotation"
+        },
+        {
+          "digest": "sha256:79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749",
+          "image": "registry.connect.redhat.com/joget/joget-dx-operator@sha256:79856e88008da33fc0323e197819fec39fbd6b6bf2b03a0bf799b517bcf8e749",
+          "name": "operator"
+        },
+        {
+          "digest": "sha256:73f7a5500e2af1c40506fb43d7150988c665fab8f1d0df8cc75b5d7c0b325007",
+          "image": "registry.connect.redhat.com/joget/joget-dx7-eap7@sha256:73f7a5500e2af1c40506fb43d7150988c665fab8f1d0df8cc75b5d7c0b325007",
+          "name": "joget"
+        }
+      ],
+      "replaces": null,
+      "skip_range": null,
+      "skips": [],
+      "source_index_container_path": "registry.redhat.io/redhat/certified-operator-index:v4.12",
+      "version": "0.0.27",
+      "version_original": "0.0.27"
     }
   ]
 }
