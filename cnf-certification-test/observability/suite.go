@@ -26,9 +26,6 @@ import (
 	"github.com/test-network-function/cnf-certification-test/cnf-certification-test/common"
 	"github.com/test-network-function/cnf-certification-test/cnf-certification-test/identifiers"
 	pdbv1 "github.com/test-network-function/cnf-certification-test/cnf-certification-test/observability/pdb"
-
-	// "github.com/test-network-function/cnf-certification-test/cnf-certification-test/results"
-
 	"github.com/test-network-function/cnf-certification-test/internal/clientsholder"
 	"github.com/test-network-function/cnf-certification-test/internal/log"
 	"github.com/test-network-function/cnf-certification-test/pkg/checksdb"
@@ -46,32 +43,6 @@ var (
 		env = provider.GetTestEnvironment()
 		return nil
 	}
-
-	skipIfNoContainersFn = func() (bool, string) {
-		if len(env.Containers) == 0 {
-			logrus.Warnf("No containers to check...")
-			return true, "There are no containers to check. Please check under test labels."
-		}
-
-		return false, ""
-	}
-
-	skipIfNoCrdsFn = func() (bool, string) {
-		if len(env.Crds) == 0 {
-			logrus.Warn("No CRDs to check.")
-			return true, "There are no CRDs to check."
-		}
-
-		return false, ""
-	}
-
-	skipIfNoDeploymentsNorStatefulSets = func() (bool, string) {
-		if len(env.Deployments) == 0 && len(env.StatefulSets) == 0 {
-			logrus.Warn("No deployments nor statefulsets to check.")
-			return true, "There are no deployments nor statefulsets to check."
-		}
-		return false, ""
-	}
 )
 
 func LoadChecks() {
@@ -83,7 +54,7 @@ func LoadChecks() {
 
 	testID, tags := identifiers.GetGinkgoTestIDAndLabels(identifiers.TestLoggingIdentifier)
 	check := checksdb.NewCheck(testID, tags).
-		WithSkipCheckFn(skipIfNoContainersFn).
+		WithSkipCheckFn(testhelper.GetNoContainersUnderTestSkipFn(&env)).
 		WithCheckFn(func(c *checksdb.Check) error {
 			testContainersLogging(c, &env)
 			return nil
@@ -93,7 +64,7 @@ func LoadChecks() {
 
 	testID, tags = identifiers.GetGinkgoTestIDAndLabels(identifiers.TestCrdsStatusSubresourceIdentifier)
 	check = checksdb.NewCheck(testID, tags).
-		WithSkipCheckFn(skipIfNoCrdsFn).
+		WithSkipCheckFn(testhelper.GetNoCrdsUnderTestSkipFn(&env)).
 		WithCheckFn(func(c *checksdb.Check) error {
 			testCrds(c, &env)
 			return nil
@@ -103,7 +74,7 @@ func LoadChecks() {
 
 	testID, tags = identifiers.GetGinkgoTestIDAndLabels(identifiers.TestTerminationMessagePolicyIdentifier)
 	check = checksdb.NewCheck(testID, tags).
-		WithSkipCheckFn(skipIfNoContainersFn).
+		WithSkipCheckFn(testhelper.GetNoContainersUnderTestSkipFn(&env)).
 		WithCheckFn(func(c *checksdb.Check) error {
 			testTerminationMessagePolicy(c, &env)
 			return nil
@@ -113,7 +84,8 @@ func LoadChecks() {
 
 	testID, tags = identifiers.GetGinkgoTestIDAndLabels(identifiers.TestPodDisruptionBudgetIdentifier)
 	check = checksdb.NewCheck(testID, tags).
-		WithSkipCheckFn(skipIfNoDeploymentsNorStatefulSets).
+		WithSkipCheckFn(testhelper.GetNoDeploymentsUnderTestSkipFn(&env), testhelper.GetNoStatefulSetsUnderTestSkipFn(&env)).
+		WithSkipModeAll().
 		WithCheckFn(func(c *checksdb.Check) error {
 			testPodDisruptionBudgets(c, &env)
 			return nil

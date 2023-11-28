@@ -20,7 +20,6 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/onsi/ginkgo/v2"
 	"github.com/sirupsen/logrus"
 	"github.com/test-network-function/cnf-certification-test/cnf-certification-test/common"
 	"github.com/test-network-function/cnf-certification-test/cnf-certification-test/identifiers"
@@ -30,6 +29,7 @@ import (
 	"github.com/test-network-function/cnf-certification-test/cnf-certification-test/lifecycle/scaling"
 	"github.com/test-network-function/cnf-certification-test/cnf-certification-test/lifecycle/tolerations"
 	"github.com/test-network-function/cnf-certification-test/cnf-certification-test/lifecycle/volumes"
+	"github.com/test-network-function/cnf-certification-test/pkg/checksdb"
 	"github.com/test-network-function/cnf-certification-test/pkg/configuration"
 	"github.com/test-network-function/cnf-certification-test/pkg/postmortem"
 	"github.com/test-network-function/cnf-certification-test/pkg/provider"
@@ -48,155 +48,216 @@ const (
 	intrusiveTcSkippedReason   = "This is an intrusive test case and the env var TNF_NON_INTRUSIVE_ONLY was set"
 )
 
-// All actual test code belongs below here.  Utilities belong above.
-var _ = ginkgo.Describe(common.LifecycleTestKey, func() {
-	logrus.Debugf("Entering %s suite", common.LifecycleTestKey)
-	env := provider.GetTestEnvironment()
-	ginkgo.BeforeEach(func() {
+var (
+	env provider.TestEnvironment
+
+	beforeEachFn = func(check *checksdb.Check) error {
+		logrus.Infof("Check %s: getting test environment.", check.ID)
 		env = provider.GetTestEnvironment()
-	})
+		return nil
+	}
 
+	// podset = deployment or statefulset
+	skipIfNoPodSetsetsUnderTest = func() (bool, string) {
+		if len(env.Deployments) == 0 && len(env.StatefulSets) == 0 {
+			return true, "no deployments nor statefulsets to check found"
+		}
+		return false, ""
+	}
+)
+
+//nolint:funlen
+func init() {
+	logrus.Debugf("Entering %s suite", common.LifecycleTestKey)
+
+	checksGroup := checksdb.NewChecksGroup(common.LifecycleTestKey).
+		WithBeforeEachFn(beforeEachFn)
+
+	// Prestop test
 	testID, tags := identifiers.GetGinkgoTestIDAndLabels(identifiers.TestShutdownIdentifier)
-	ginkgo.It(testID, ginkgo.Label(tags...), func() {
-		testhelper.SkipIfEmptyAll(ginkgo.Skip, testhelper.NewSkipObject(env.Containers, "env.Containers"))
-		testContainersPreStop(&env)
-	})
+	checksGroup.Add(checksdb.NewCheck(testID, tags).
+		WithSkipCheckFn(testhelper.GetNoContainersUnderTestSkipFn(&env)).
+		WithCheckFn(func(c *checksdb.Check) error {
+			testContainersPreStop(c, &env)
+			return nil
+		}))
+
+	// Scale CRD test
 	testID, tags = identifiers.GetGinkgoTestIDAndLabels(identifiers.TestCrdScalingIdentifier)
-	ginkgo.It(testID, ginkgo.Label(tags...), func() {
-		if !env.IsIntrusive() {
-			ginkgo.Skip(intrusiveTcSkippedReason)
-		}
-		testhelper.SkipIfEmptyAny(ginkgo.Skip, testhelper.NewSkipObject(env.ScaleCrUnderTest, "env.ScaleCrUnderTest"))
-		// Note: We skip this test because 'testHighAvailability' in the lifecycle suite is already
-		// testing the replicas and antiaffinity rules that should already be in place for crd.
-		testScaleCrd(&env, timeout)
-	})
+	checksGroup.Add(checksdb.NewCheck(testID, tags).
+		WithSkipCheckFn(
+			testhelper.GetNoCrdsUnderTestSkipFn(&env),
+			testhelper.GetNotIntrusiveSkipFn(&env)).
+		WithCheckFn(func(c *checksdb.Check) error {
+			// Note: We skip this test because 'testHighAvailability' in the lifecycle suite is already
+			// testing the replicas and antiaffinity rules that should already be in place for crd.
+			testScaleCrd(&env, timeout, c)
+			return nil
+		}))
+
+	// Poststart test
 	testID, tags = identifiers.GetGinkgoTestIDAndLabels(identifiers.TestStartupIdentifier)
-	ginkgo.It(testID, ginkgo.Label(tags...), func() {
-		testhelper.SkipIfEmptyAll(ginkgo.Skip, testhelper.NewSkipObject(env.Containers, "env.Containers"))
-		testContainersPostStart(&env)
-	})
+	checksGroup.Add(checksdb.NewCheck(testID, tags).
+		WithSkipCheckFn(testhelper.GetNoContainersUnderTestSkipFn(&env)).
+		WithCheckFn(func(c *checksdb.Check) error {
+			testContainersPostStart(c, &env)
+			return nil
+		}))
 
+	// Image pull policy test
 	testID, tags = identifiers.GetGinkgoTestIDAndLabels(identifiers.TestImagePullPolicyIdentifier)
-	ginkgo.It(testID, ginkgo.Label(tags...), func() {
-		testhelper.SkipIfEmptyAll(ginkgo.Skip, testhelper.NewSkipObject(env.Containers, "env.Containers"))
-		testContainersImagePolicy(&env)
-	})
+	checksGroup.Add(checksdb.NewCheck(testID, tags).
+		WithSkipCheckFn(testhelper.GetNoContainersUnderTestSkipFn(&env)).
+		WithCheckFn(func(c *checksdb.Check) error {
+			testContainersImagePolicy(c, &env)
+			return nil
+		}))
 
+	// Readiness probe test
 	testID, tags = identifiers.GetGinkgoTestIDAndLabels(identifiers.TestReadinessProbeIdentifier)
-	ginkgo.It(testID, ginkgo.Label(tags...), func() {
-		testhelper.SkipIfEmptyAll(ginkgo.Skip, testhelper.NewSkipObject(env.Containers, "env.Containers"))
-		testContainersReadinessProbe(&env)
-	})
+	checksGroup.Add(checksdb.NewCheck(testID, tags).
+		WithSkipCheckFn(testhelper.GetNoContainersUnderTestSkipFn(&env)).
+		WithCheckFn(func(c *checksdb.Check) error {
+			testContainersReadinessProbe(c, &env)
+			return nil
+		}))
 
+	// Liveness probe test
 	testID, tags = identifiers.GetGinkgoTestIDAndLabels(identifiers.TestLivenessProbeIdentifier)
-	ginkgo.It(testID, ginkgo.Label(tags...), func() {
-		testhelper.SkipIfEmptyAll(ginkgo.Skip, testhelper.NewSkipObject(env.Containers, "env.Containers"))
-		testContainersLivenessProbe(&env)
-	})
+	checksGroup.Add(checksdb.NewCheck(testID, tags).
+		WithSkipCheckFn(testhelper.GetNoContainersUnderTestSkipFn(&env)).
+		WithCheckFn(func(c *checksdb.Check) error {
+			testContainersLivenessProbe(c, &env)
+			return nil
+		}))
 
+	// Startup probe test
 	testID, tags = identifiers.GetGinkgoTestIDAndLabels(identifiers.TestStartupProbeIdentifier)
-	ginkgo.It(testID, ginkgo.Label(tags...), func() {
-		testhelper.SkipIfEmptyAll(ginkgo.Skip, testhelper.NewSkipObject(env.Containers, "env.Containers"))
-		testContainersStartupProbe(&env)
-	})
+	checksGroup.Add(checksdb.NewCheck(testID, tags).
+		WithSkipCheckFn(testhelper.GetNoContainersUnderTestSkipFn(&env)).
+		WithCheckFn(func(c *checksdb.Check) error {
+			testContainersStartupProbe(c, &env)
+			return nil
+		}))
 
+	// Pod owner reference test
 	testID, tags = identifiers.GetGinkgoTestIDAndLabels(identifiers.TestPodDeploymentBestPracticesIdentifier)
-	ginkgo.It(testID, ginkgo.Label(tags...), func() {
-		testhelper.SkipIfEmptyAll(ginkgo.Skip, testhelper.NewSkipObject(env.Pods, "env.Pods"))
-		testPodsOwnerReference(&env)
-	})
+	checksGroup.Add(checksdb.NewCheck(testID, tags).
+		WithSkipCheckFn(testhelper.GetNoPodsUnderTestSkipFn(&env)).
+		WithCheckFn(func(c *checksdb.Check) error {
+			testPodsOwnerReference(c, &env)
+			return nil
+		}))
 
+	// High availability test
 	testID, tags = identifiers.GetGinkgoTestIDAndLabels(identifiers.TestPodHighAvailabilityBestPractices)
-	ginkgo.It(testID, ginkgo.Label(tags...), func() {
-		if env.GetWorkerCount() < minWorkerNodesForLifecycle {
-			ginkgo.Skip("Skipping pod high availability test because invalid number of available workers.")
-		}
-		testhelper.SkipIfEmptyAll(ginkgo.Skip, testhelper.NewSkipObject(env.Deployments, "env.Deployments"), testhelper.NewSkipObject(env.StatefulSets, "env.StatefulSets"))
-		testHighAvailability(&env)
-	})
+	checksGroup.Add(checksdb.NewCheck(testID, tags).
+		WithSkipCheckFn(testhelper.GetNotEnoughWorkersSkipFn(&env, minWorkerNodesForLifecycle)).
+		WithSkipCheckFn(skipIfNoPodSetsetsUnderTest).
+		WithCheckFn(func(c *checksdb.Check) error {
+			testHighAvailability(c, &env)
+			return nil
+		}))
 
+	// Selector and affinity best practices test
 	testID, tags = identifiers.GetGinkgoTestIDAndLabels(identifiers.TestPodNodeSelectorAndAffinityBestPractices)
-	ginkgo.It(testID, ginkgo.Label(tags...), func() {
-		if env.GetWorkerCount() < minWorkerNodesForLifecycle {
-			ginkgo.Skip("Skipping pod scheduling test because invalid number of available workers.")
-		}
-		testPods := env.GetPodsWithoutAffinityRequiredLabel()
-		testhelper.SkipIfEmptyAny(ginkgo.Skip, testhelper.NewSkipObject(testPods, "testPods"))
-		testPodNodeSelectorAndAffinityBestPractices(testPods)
-	})
+	checksGroup.Add(checksdb.NewCheck(testID, tags).
+		WithSkipCheckFn(
+			testhelper.GetNotEnoughWorkersSkipFn(&env, minWorkerNodesForLifecycle),
+			testhelper.GetPodsWithoutAffinityRequiredLabelSkipFn(&env)).
+		WithCheckFn(func(c *checksdb.Check) error {
+			testPodNodeSelectorAndAffinityBestPractices(env.GetPodsWithoutAffinityRequiredLabel(), c)
+			return nil
+		}))
 
+	// Pod recreation test
 	testID, tags = identifiers.GetGinkgoTestIDAndLabels(identifiers.TestPodRecreationIdentifier)
-	ginkgo.It(testID, ginkgo.Label(tags...), func() {
-		if !env.IsIntrusive() {
-			ginkgo.Skip(intrusiveTcSkippedReason)
-		}
-		testhelper.SkipIfEmptyAll(ginkgo.Skip, testhelper.NewSkipObject(env.Deployments, "env.Deployments"), testhelper.NewSkipObject(env.StatefulSets, "env.StatefulSets"))
-		if env.GetWorkerCount() < minWorkerNodesForLifecycle {
-			ginkgo.Skip("Skipping pod recreation scaling test because invalid number of available workers.")
-		}
-		// Testing pod re-creation for deployments
-		testPodsRecreation(&env)
-	})
+	checksGroup.Add(checksdb.NewCheck(testID, tags).
+		WithSkipCheckFn(
+			testhelper.GetNotEnoughWorkersSkipFn(&env, minWorkerNodesForLifecycle),
+			testhelper.GetNotIntrusiveSkipFn(&env)).
+		WithSkipCheckFn(skipIfNoPodSetsetsUnderTest).
+		WithCheckFn(func(c *checksdb.Check) error {
+			testPodsRecreation(c, &env)
+			return nil
+		}))
 
+	// Deployment scaling test
 	testID, tags = identifiers.GetGinkgoTestIDAndLabels(identifiers.TestDeploymentScalingIdentifier)
-	ginkgo.It(testID, ginkgo.Label(tags...), func() {
-		if !env.IsIntrusive() {
-			ginkgo.Skip(intrusiveTcSkippedReason)
-		}
-		testhelper.SkipIfEmptyAny(ginkgo.Skip, testhelper.NewSkipObject(env.Deployments, "env.Deployments"))
-		if env.GetWorkerCount() < minWorkerNodesForLifecycle {
-			// Note: We skip this test because 'testHighAvailability' in the lifecycle suite is already
-			// testing the replicas and antiaffinity rules that should already be in place for deployments.
-			ginkgo.Skip("Skipping deployment scaling test because invalid number of available workers.")
-		}
-		testDeploymentScaling(&env, timeout)
-	})
+	checksGroup.Add(checksdb.NewCheck(testID, tags).
+		WithSkipCheckFn(
+			testhelper.GetNotIntrusiveSkipFn(&env),
+			testhelper.GetNotEnoughWorkersSkipFn(&env, minWorkerNodesForLifecycle)).
+		WithSkipCheckFn(skipIfNoPodSetsetsUnderTest).
+		WithCheckFn(func(c *checksdb.Check) error {
+			testDeploymentScaling(&env, timeout, c)
+			return nil
+		}))
+
+	// Statefulset scaling test
 	testID, tags = identifiers.GetGinkgoTestIDAndLabels(identifiers.TestStateFulSetScalingIdentifier)
-	ginkgo.It(testID, ginkgo.Label(tags...), func() {
-		if !env.IsIntrusive() {
-			ginkgo.Skip(intrusiveTcSkippedReason)
-		}
-		testhelper.SkipIfEmptyAny(ginkgo.Skip, testhelper.NewSkipObject(env.StatefulSets, "env.StatefulSets"))
-		if env.GetWorkerCount() < minWorkerNodesForLifecycle {
-			// Note: We skip this test because 'testHighAvailability' in the lifecycle suite is already
-			// testing the replicas and antiaffinity rules that should already be in place for statefulset.
-			ginkgo.Skip("Skipping statefulset scaling test because invalid number of available workers.")
-		}
-		testStatefulSetScaling(&env, timeout)
-	})
+	checksGroup.Add(checksdb.NewCheck(testID, tags).
+		WithSkipCheckFn(
+			testhelper.GetNotIntrusiveSkipFn(&env),
+			testhelper.GetNotEnoughWorkersSkipFn(&env, minWorkerNodesForLifecycle)).
+		WithSkipCheckFn(skipIfNoPodSetsetsUnderTest).
+		WithCheckFn(func(c *checksdb.Check) error {
+			testStatefulSetScaling(&env, timeout, c)
+			return nil
+		}))
 
+	// Persistent volume reclaim policy test
 	testID, tags = identifiers.GetGinkgoTestIDAndLabels(identifiers.TestPersistentVolumeReclaimPolicyIdentifier)
-	ginkgo.It(testID, ginkgo.Label(tags...), func() {
-		testhelper.SkipIfEmptyAny(ginkgo.Skip, testhelper.NewSkipObject(env.Pods, "env.Pods"), testhelper.NewSkipObject(env.PersistentVolumes, "env.PersistentVolumes"))
-		testPodPersistentVolumeReclaimPolicy(&env)
-	})
+	checksGroup.Add(checksdb.NewCheck(testID, tags).
+		WithSkipCheckFn(
+			testhelper.GetNoPersistentVolumesSkipFn(&env),
+			testhelper.GetNoPodsUnderTestSkipFn(&env)).
+		WithCheckFn(func(c *checksdb.Check) error {
+			testPodPersistentVolumeReclaimPolicy(c, &env)
+			return nil
+		}))
 
+	// CPU Isolation test
 	testID, tags = identifiers.GetGinkgoTestIDAndLabels(identifiers.TestCPUIsolationIdentifier)
-	ginkgo.It(testID, ginkgo.Label(tags...), func() {
-		testhelper.SkipIfEmptyAny(ginkgo.Skip, testhelper.NewSkipObject(env.GetGuaranteedPodsWithExclusiveCPUs(), "env.GetGuaranteedPodsWithExclusiveCPUs()"))
-		testCPUIsolation(&env)
-	})
+	checksGroup.Add(checksdb.NewCheck(testID, tags).
+		WithSkipCheckFn(testhelper.GetNoGuaranteedPodsWithExclusiveCPUsSkipFn(&env)).
+		WithCheckFn(func(c *checksdb.Check) error {
+			testCPUIsolation(c, &env)
+			return nil
+		}))
 
+	// Affinity required pods test
 	testID, tags = identifiers.GetGinkgoTestIDAndLabels(identifiers.TestAffinityRequiredPods)
-	ginkgo.It(testID, ginkgo.Label(tags...), func() {
-		testAffinityRequiredPods(&env)
-	})
+	checksGroup.Add(checksdb.NewCheck(testID, tags).
+		WithSkipCheckFn(testhelper.GetNoAffinityRequiredPodsSkipFn(&env)).
+		WithCheckFn(func(c *checksdb.Check) error {
+			testAffinityRequiredPods(c, &env)
+			return nil
+		}))
 
+	// Pod toleration bypass test
 	testID, tags = identifiers.GetGinkgoTestIDAndLabels(identifiers.TestPodTolerationBypassIdentifier)
-	ginkgo.It(testID, ginkgo.Label(tags...), func() {
-		testhelper.SkipIfEmptyAny(ginkgo.Skip, testhelper.NewSkipObject(env.Pods, "env.Pods"))
-		testPodTolerationBypass(&env)
-	})
+	checksGroup.Add(checksdb.NewCheck(testID, tags).
+		WithSkipCheckFn(testhelper.GetNoPodsUnderTestSkipFn(&env)).
+		WithCheckFn(func(c *checksdb.Check) error {
+			testPodTolerationBypass(c, &env)
+			return nil
+		}))
 
+	// Storage provisioner test
 	testID, tags = identifiers.GetGinkgoTestIDAndLabels(identifiers.TestStorageProvisioner)
-	ginkgo.It(testID, ginkgo.Label(tags...), func() {
-		testhelper.SkipIfEmptyAny(ginkgo.Skip, testhelper.NewSkipObject(env.Pods, "env.Pods"))
-		testStorageProvisioner(&env)
-	})
-})
+	checksGroup.Add(checksdb.NewCheck(testID, tags).
+		WithSkipCheckFn(
+			testhelper.GetNoPodsUnderTestSkipFn(&env),
+			testhelper.GetNoStorageClassesSkipFn(&env),
+			testhelper.GetNoPersistentVolumeClaimsSkipFn(&env)).
+		WithCheckFn(func(c *checksdb.Check) error {
+			testStorageProvisioner(c, &env)
+			return nil
+		}))
+}
 
-func testContainersPreStop(env *provider.TestEnvironment) {
+func testContainersPreStop(check *checksdb.Check, env *provider.TestEnvironment) {
 	var compliantObjects []*testhelper.ReportObject
 	var nonCompliantObjects []*testhelper.ReportObject
 	for _, cut := range env.Containers {
@@ -209,10 +270,10 @@ func testContainersPreStop(env *provider.TestEnvironment) {
 			compliantObjects = append(compliantObjects, testhelper.NewContainerReportObject(cut.Namespace, cut.Podname, cut.Name, "Container has preStop defined", true))
 		}
 	}
-	testhelper.AddTestResultReason(compliantObjects, nonCompliantObjects, tnf.ClaimFilePrintf, ginkgo.Fail)
+	check.SetResult(compliantObjects, nonCompliantObjects)
 }
 
-func testContainersPostStart(env *provider.TestEnvironment) {
+func testContainersPostStart(check *checksdb.Check, env *provider.TestEnvironment) {
 	var compliantObjects []*testhelper.ReportObject
 	var nonCompliantObjects []*testhelper.ReportObject
 	for _, cut := range env.Containers {
@@ -225,11 +286,10 @@ func testContainersPostStart(env *provider.TestEnvironment) {
 			compliantObjects = append(compliantObjects, testhelper.NewContainerReportObject(cut.Namespace, cut.Podname, cut.Name, "Container has postStart defined", true))
 		}
 	}
-	testhelper.AddTestResultReason(compliantObjects, nonCompliantObjects, tnf.ClaimFilePrintf, ginkgo.Fail)
+	check.SetResult(compliantObjects, nonCompliantObjects)
 }
 
-func testContainersImagePolicy(env *provider.TestEnvironment) {
-	testhelper.SkipIfEmptyAll(ginkgo.Skip, testhelper.NewSkipObject(env.Containers, "env.Containers"))
+func testContainersImagePolicy(check *checksdb.Check, env *provider.TestEnvironment) {
 	var compliantObjects []*testhelper.ReportObject
 	var nonCompliantObjects []*testhelper.ReportObject
 	for _, cut := range env.Containers {
@@ -241,10 +301,10 @@ func testContainersImagePolicy(env *provider.TestEnvironment) {
 			compliantObjects = append(compliantObjects, testhelper.NewContainerReportObject(cut.Namespace, cut.Podname, cut.Name, "Container is using IfNotPresent as ImagePullPolicy", true))
 		}
 	}
-	testhelper.AddTestResultReason(compliantObjects, nonCompliantObjects, tnf.ClaimFilePrintf, ginkgo.Fail)
+	check.SetResult(compliantObjects, nonCompliantObjects)
 }
 
-func testContainersReadinessProbe(env *provider.TestEnvironment) {
+func testContainersReadinessProbe(check *checksdb.Check, env *provider.TestEnvironment) {
 	var compliantObjects []*testhelper.ReportObject
 	var nonCompliantObjects []*testhelper.ReportObject
 	for _, cut := range env.Containers {
@@ -256,10 +316,10 @@ func testContainersReadinessProbe(env *provider.TestEnvironment) {
 			compliantObjects = append(compliantObjects, testhelper.NewContainerReportObject(cut.Namespace, cut.Podname, cut.Name, "Container has ReadinessProbe defined", true))
 		}
 	}
-	testhelper.AddTestResultReason(compliantObjects, nonCompliantObjects, tnf.ClaimFilePrintf, ginkgo.Fail)
+	check.SetResult(compliantObjects, nonCompliantObjects)
 }
 
-func testContainersLivenessProbe(env *provider.TestEnvironment) {
+func testContainersLivenessProbe(check *checksdb.Check, env *provider.TestEnvironment) {
 	var compliantObjects []*testhelper.ReportObject
 	var nonCompliantObjects []*testhelper.ReportObject
 	for _, cut := range env.Containers {
@@ -271,10 +331,10 @@ func testContainersLivenessProbe(env *provider.TestEnvironment) {
 			compliantObjects = append(compliantObjects, testhelper.NewContainerReportObject(cut.Namespace, cut.Podname, cut.Name, "Container has LivenessProbe defined", true))
 		}
 	}
-	testhelper.AddTestResultReason(compliantObjects, nonCompliantObjects, tnf.ClaimFilePrintf, ginkgo.Fail)
+	check.SetResult(compliantObjects, nonCompliantObjects)
 }
 
-func testContainersStartupProbe(env *provider.TestEnvironment) {
+func testContainersStartupProbe(check *checksdb.Check, env *provider.TestEnvironment) {
 	var compliantObjects []*testhelper.ReportObject
 	var nonCompliantObjects []*testhelper.ReportObject
 	for _, cut := range env.Containers {
@@ -286,11 +346,11 @@ func testContainersStartupProbe(env *provider.TestEnvironment) {
 			compliantObjects = append(compliantObjects, testhelper.NewContainerReportObject(cut.Namespace, cut.Podname, cut.Name, "Container has StartupProbe defined", true))
 		}
 	}
-	testhelper.AddTestResultReason(compliantObjects, nonCompliantObjects, tnf.ClaimFilePrintf, ginkgo.Fail)
+	check.SetResult(compliantObjects, nonCompliantObjects)
 }
 
-func testPodsOwnerReference(env *provider.TestEnvironment) {
-	ginkgo.By("Testing owners of CNF pod, should be replicas Set")
+func testPodsOwnerReference(check *checksdb.Check, env *provider.TestEnvironment) {
+	tnf.Logf(logrus.InfoLevel, "Testing owners of CNF pod, should be replicas Set")
 	var compliantObjects []*testhelper.ReportObject
 	var nonCompliantObjects []*testhelper.ReportObject
 	for _, put := range env.Pods {
@@ -304,10 +364,10 @@ func testPodsOwnerReference(env *provider.TestEnvironment) {
 			compliantObjects = append(compliantObjects, testhelper.NewPodReportObject(put.Namespace, put.Name, "Pod has compliant owner reference", true))
 		}
 	}
-	testhelper.AddTestResultReason(compliantObjects, nonCompliantObjects, tnf.ClaimFilePrintf, ginkgo.Fail)
+	check.SetResult(compliantObjects, nonCompliantObjects)
 }
 
-func testPodNodeSelectorAndAffinityBestPractices(testPods []*provider.Pod) {
+func testPodNodeSelectorAndAffinityBestPractices(testPods []*provider.Pod, check *checksdb.Check) {
 	var compliantObjects []*testhelper.ReportObject
 	var nonCompliantObjects []*testhelper.ReportObject
 	for _, put := range testPods {
@@ -327,7 +387,7 @@ func testPodNodeSelectorAndAffinityBestPractices(testPods []*provider.Pod) {
 			compliantObjects = append(compliantObjects, testhelper.NewPodReportObject(put.Namespace, put.Name, "Pod has no node selector or affinity", true))
 		}
 	}
-	testhelper.AddTestResultReason(compliantObjects, nonCompliantObjects, tnf.ClaimFilePrintf, ginkgo.Fail)
+	check.SetResult(compliantObjects, nonCompliantObjects)
 }
 
 func nameInDeploymentSkipList(name, namespace string, list []configuration.SkipScalingTestDeploymentsInfo) bool {
@@ -349,8 +409,8 @@ func nameInStatefulSetSkipList(name, namespace string, list []configuration.Skip
 }
 
 //nolint:dupl
-func testDeploymentScaling(env *provider.TestEnvironment, timeout time.Duration) {
-	ginkgo.By("Testing deployment scaling")
+func testDeploymentScaling(env *provider.TestEnvironment, timeout time.Duration, check *checksdb.Check) {
+	tnf.Logf(logrus.InfoLevel, "Testing deployment scaling")
 	defer env.SetNeedsRefresh()
 	var compliantObjects []*testhelper.ReportObject
 	var nonCompliantObjects []*testhelper.ReportObject
@@ -393,11 +453,11 @@ func testDeploymentScaling(env *provider.TestEnvironment, timeout time.Duration)
 		}
 	}
 
-	testhelper.AddTestResultReason(compliantObjects, nonCompliantObjects, tnf.ClaimFilePrintf, ginkgo.Fail)
+	check.SetResult(compliantObjects, nonCompliantObjects)
 }
 
-func testScaleCrd(env *provider.TestEnvironment, timeout time.Duration) {
-	ginkgo.By("Testing custom resource scaling")
+func testScaleCrd(env *provider.TestEnvironment, timeout time.Duration, check *checksdb.Check) {
+	tnf.Logf(logrus.InfoLevel, "Testing custom resource scaling")
 	defer env.SetNeedsRefresh()
 	var compliantObjects []*testhelper.ReportObject
 	var nonCompliantObjects []*testhelper.ReportObject
@@ -418,12 +478,12 @@ func testScaleCrd(env *provider.TestEnvironment, timeout time.Duration) {
 			compliantObjects = append(compliantObjects, testhelper.NewCrdReportObject(scaleCr.Namespace, scaleCr.Name, "CR is scalable", true))
 		}
 	}
-	testhelper.AddTestResultReason(compliantObjects, nonCompliantObjects, tnf.ClaimFilePrintf, ginkgo.Fail)
+	check.SetResult(compliantObjects, nonCompliantObjects)
 }
 
 //nolint:dupl
-func testStatefulSetScaling(env *provider.TestEnvironment, timeout time.Duration) {
-	ginkgo.By("Testing statefulset scaling")
+func testStatefulSetScaling(env *provider.TestEnvironment, timeout time.Duration, check *checksdb.Check) {
+	tnf.Logf(logrus.InfoLevel, "Testing statefulset scaling")
 	defer env.SetNeedsRefresh()
 	var compliantObjects []*testhelper.ReportObject
 	var nonCompliantObjects []*testhelper.ReportObject
@@ -466,12 +526,12 @@ func testStatefulSetScaling(env *provider.TestEnvironment, timeout time.Duration
 		}
 	}
 
-	testhelper.AddTestResultReason(compliantObjects, nonCompliantObjects, tnf.ClaimFilePrintf, ginkgo.Fail)
+	check.SetResult(compliantObjects, nonCompliantObjects)
 }
 
 // testHighAvailability
-func testHighAvailability(env *provider.TestEnvironment) {
-	ginkgo.By("Should set pod replica number greater than 1")
+func testHighAvailability(check *checksdb.Check, env *provider.TestEnvironment) {
+	tnf.Logf(logrus.InfoLevel, "Should set pod replica number greater than 1")
 
 	var compliantObjects []*testhelper.ReportObject
 	var nonCompliantObjects []*testhelper.ReportObject
@@ -517,28 +577,39 @@ func testHighAvailability(env *provider.TestEnvironment) {
 		}
 	}
 
-	testhelper.AddTestResultReason(compliantObjects, nonCompliantObjects, tnf.ClaimFilePrintf, ginkgo.Fail)
+	check.SetResult(compliantObjects, nonCompliantObjects)
 }
 
 // testPodsRecreation tests that pods belonging to deployments and statefulsets are re-created and ready in case a node is lost
-func testPodsRecreation(env *provider.TestEnvironment) { //nolint:funlen
+func testPodsRecreation(check *checksdb.Check, env *provider.TestEnvironment) { //nolint:funlen,gocyclo
+	var compliantObjects []*testhelper.ReportObject
+	var nonCompliantObjects []*testhelper.ReportObject
+
 	needsPostMortemInfo := true
 	defer func() {
 		if needsPostMortemInfo {
 			tnf.ClaimFilePrintf(postmortem.Log())
 		}
+		// Since we are possible exiting early, we need to make sure we set the result at the end of the function.
+		check.SetResult(compliantObjects, nonCompliantObjects)
 	}()
-	ginkgo.By("Testing node draining effect of deployment")
-	ginkgo.By("Testing initial state for deployments")
+	tnf.Logf(logrus.InfoLevel, "Testing node draining effect of deployment")
+	tnf.Logf(logrus.InfoLevel, "Testing initial state for deployments")
 	defer env.SetNeedsRefresh()
 
 	// Before draining any node, wait until all podsets are ready. The timeout depends on the number of podsets to check.
 	// timeout = k-mins + (1min * (num-deployments + num-statefulsets))
 	allPodsetsReadyTimeout := timeoutPodSetReady + time.Minute*time.Duration(len(env.Deployments)+len(env.StatefulSets))
-	claimsLog, atLeastOnePodsetNotReady := podsets.WaitForAllPodSetsReady(env, allPodsetsReadyTimeout)
-	if atLeastOnePodsetNotReady {
+	claimsLog, notReadyDeployments, notReadyStatefulSets := podsets.WaitForAllPodSetsReady(env, allPodsetsReadyTimeout)
+	if len(notReadyDeployments) > 0 || len(notReadyStatefulSets) > 0 {
 		tnf.ClaimFilePrintf("%s", claimsLog.GetLogLines())
-		ginkgo.Fail("Some deployments or stateful sets are not in a good initial state. Cannot perform test.")
+		for _, dep := range notReadyDeployments {
+			nonCompliantObjects = append(nonCompliantObjects, testhelper.NewDeploymentReportObject(dep.Namespace, dep.Name, "Deployment was not ready before draining any node.", false))
+		}
+		for _, sts := range notReadyStatefulSets {
+			nonCompliantObjects = append(nonCompliantObjects, testhelper.NewStatefulSetReportObject(sts.Namespace, sts.Name, "Statefulset was not ready before draining any node.", false))
+		}
+		return
 	}
 
 	// Filter out pods with Node Assignments present and FAIL them.
@@ -555,47 +626,72 @@ func testPodsRecreation(env *provider.TestEnvironment) { //nolint:funlen
 	}
 	if len(podsWithNodeAssignment) > 0 {
 		logrus.Errorf("Pod(s) have been found to contain a node assignment and cannot perform the pod-recreation test: %v", podsWithNodeAssignment)
-		testhelper.AddTestResultLog("Non-compliant", podsWithNodeAssignment, tnf.ClaimFilePrintf, ginkgo.Fail)
+		for _, pod := range podsWithNodeAssignment {
+			nonCompliantObjects = append(nonCompliantObjects, testhelper.NewPodReportObject(pod.Namespace, pod.Name, "Pod has node assignment.", false))
+		}
+
+		return
 	}
 
-	for n := range podsets.GetAllNodesForAllPodSets(env.Pods) {
-		defer podrecreation.CordonCleanup(n) //nolint:gocritic // The defer in loop is intentional, calling the cleanup function once per node
-		err := podrecreation.CordonHelper(n, podrecreation.Cordon)
+	for nodeName := range podsets.GetAllNodesForAllPodSets(env.Pods) {
+		defer podrecreation.CordonCleanup(nodeName) //nolint:gocritic // The defer in loop is intentional, calling the cleanup function once per node
+		err := podrecreation.CordonHelper(nodeName, podrecreation.Cordon)
 		if err != nil {
-			logrus.Errorf("error cordoning the node: %s", n)
-			ginkgo.Fail(fmt.Sprintf("Cordoning node %s failed with err: %v. Test inconclusive, skipping", n, err))
+			logrus.Errorf("error cordoning the node: %s", nodeName)
+			nonCompliantObjects = append(nonCompliantObjects, testhelper.NewNodeReportObject(nodeName, "Node cordoning failed", false))
+			return
 		}
-		ginkgo.By(fmt.Sprintf("Draining and Cordoning node %s: ", n))
-		logrus.Debugf("node: %s cordoned", n)
-		count, err := podrecreation.CountPodsWithDelete(env.Pods, n, podrecreation.NoDelete)
+		tnf.Logf(logrus.InfoLevel, fmt.Sprintf("Draining and Cordoning node %s: ", nodeName))
+		logrus.Debugf("node: %s cordoned", nodeName)
+		count, err := podrecreation.CountPodsWithDelete(env.Pods, nodeName, podrecreation.NoDelete)
 		if err != nil {
-			ginkgo.Fail(fmt.Sprintf("Getting pods list to drain in node %s failed with err: %v. Test inconclusive.", n, err))
+			nonCompliantObjects = append(nonCompliantObjects, testhelper.NewNodeReportObject(nodeName, "Getting pods list to drain failed", false))
+			return
 		}
 		nodeTimeout := timeoutPodSetReady + timeoutPodRecreationPerPod*time.Duration(count)
-		logrus.Debugf("draining node: %s with timeout: %s", n, nodeTimeout)
-		_, err = podrecreation.CountPodsWithDelete(env.Pods, n, podrecreation.DeleteForeground)
+		logrus.Debugf("draining node: %s with timeout: %s", nodeName, nodeTimeout)
+		_, err = podrecreation.CountPodsWithDelete(env.Pods, nodeName, podrecreation.DeleteForeground)
 		if err != nil {
-			ginkgo.Fail(fmt.Sprintf("Draining node %s failed with err: %v. Test inconclusive", n, err))
+			nonCompliantObjects = append(nonCompliantObjects, testhelper.NewNodeReportObject(nodeName, "Draining node failed", false))
+			return
 		}
 
-		claimsLog, podsNotReady := podsets.WaitForAllPodSetsReady(env, nodeTimeout)
-		if podsNotReady {
+		claimsLog, notReadyDeployments, notReadyStatefulSets := podsets.WaitForAllPodSetsReady(env, nodeTimeout)
+		if len(notReadyDeployments) > 0 || len(notReadyStatefulSets) > 0 {
 			tnf.ClaimFilePrintf("%s", claimsLog.GetLogLines())
-			ginkgo.Fail(fmt.Sprintf("Some pods are not ready after draining the node %s", n))
+			for _, dep := range notReadyDeployments {
+				nonCompliantObjects = append(nonCompliantObjects, testhelper.NewDeploymentReportObject(dep.Namespace, dep.Name, "Deployment not ready after draining node "+nodeName, false))
+			}
+			for _, sts := range notReadyStatefulSets {
+				nonCompliantObjects = append(nonCompliantObjects, testhelper.NewStatefulSetReportObject(sts.Namespace, sts.Name, "Statefulset not ready after draining node "+nodeName, false))
+			}
+			return
 		}
 
-		err = podrecreation.CordonHelper(n, podrecreation.Uncordon)
+		err = podrecreation.CordonHelper(nodeName, podrecreation.Uncordon)
 		if err != nil {
-			logrus.Fatalf("error uncordoning the node: %s", n)
+			logrus.Fatalf("error uncordoning the node: %s", nodeName)
 		}
 	}
 
-	// Reached end of TC, which means no ginkgo.Fail() was called.
+	// If everything went well for all nodes, the nonCompliantObjects should be empty. We need to
+	// manually add all the deps/sts into the compliant object lists so the check is marked as skipped.
+	// ToDo: Improve this.
+	if len(nonCompliantObjects) == 0 {
+		for _, dep := range env.Deployments {
+			compliantObjects = append(compliantObjects, testhelper.NewDeploymentReportObject(dep.Namespace, dep.Name, "Deployment's pods successfully re-schedulled after node draining.", true))
+		}
+
+		for _, sts := range env.StatefulSets {
+			compliantObjects = append(compliantObjects, testhelper.NewStatefulSetReportObject(sts.Namespace, sts.Name, "Statefulset's pods successfully re-schedulled after node draining.", true))
+		}
+	}
+
 	needsPostMortemInfo = false
 }
 
-func testPodPersistentVolumeReclaimPolicy(env *provider.TestEnvironment) {
-	ginkgo.By("Testing PersistentVolumes for reclaim policy to be set to delete")
+func testPodPersistentVolumeReclaimPolicy(check *checksdb.Check, env *provider.TestEnvironment) {
+	tnf.Logf(logrus.InfoLevel, "Testing PersistentVolumes for reclaim policy to be set to delete")
 	var compliantObjects []*testhelper.ReportObject
 	var nonCompliantObjects []*testhelper.ReportObject
 
@@ -625,11 +721,11 @@ func testPodPersistentVolumeReclaimPolicy(env *provider.TestEnvironment) {
 		}
 	}
 
-	testhelper.AddTestResultReason(compliantObjects, nonCompliantObjects, tnf.ClaimFilePrintf, ginkgo.Fail)
+	check.SetResult(compliantObjects, nonCompliantObjects)
 }
 
-func testCPUIsolation(env *provider.TestEnvironment) {
-	ginkgo.By("Testing pods for CPU isolation requirements")
+func testCPUIsolation(check *checksdb.Check, env *provider.TestEnvironment) {
+	tnf.Logf(logrus.InfoLevel, "Testing pods for CPU isolation requirements")
 
 	// Individual requirements we are looking for:
 	//  - CPU Requests and Limits must be in the form of whole units
@@ -651,12 +747,11 @@ func testCPUIsolation(env *provider.TestEnvironment) {
 		}
 	}
 
-	testhelper.AddTestResultReason(compliantObjects, nonCompliantObjects, tnf.ClaimFilePrintf, ginkgo.Fail)
+	check.SetResult(compliantObjects, nonCompliantObjects)
 }
 
-func testAffinityRequiredPods(env *provider.TestEnvironment) {
-	ginkgo.By("Testing affinity required pods for ")
-	testhelper.SkipIfEmptyAny(ginkgo.Skip, testhelper.NewSkipObject(env.GetAffinityRequiredPods(), "env.GetAffinityRequiredPods()"))
+func testAffinityRequiredPods(check *checksdb.Check, env *provider.TestEnvironment) {
+	tnf.Logf(logrus.InfoLevel, "Testing affinity required pods for ")
 
 	var compliantObjects []*testhelper.ReportObject
 	var nonCompliantObjects []*testhelper.ReportObject
@@ -670,10 +765,10 @@ func testAffinityRequiredPods(env *provider.TestEnvironment) {
 			compliantObjects = append(compliantObjects, testhelper.NewPodReportObject(put.Namespace, put.Name, "Pod is Affinity compliant", true))
 		}
 	}
-	testhelper.AddTestResultReason(compliantObjects, nonCompliantObjects, tnf.ClaimFilePrintf, ginkgo.Fail)
+	check.SetResult(compliantObjects, nonCompliantObjects)
 }
 
-func testPodTolerationBypass(env *provider.TestEnvironment) {
+func testPodTolerationBypass(check *checksdb.Check, env *provider.TestEnvironment) {
 	var compliantObjects []*testhelper.ReportObject
 	var nonCompliantObjects []*testhelper.ReportObject
 
@@ -696,11 +791,11 @@ func testPodTolerationBypass(env *provider.TestEnvironment) {
 		}
 	}
 
-	testhelper.AddTestResultReason(compliantObjects, nonCompliantObjects, tnf.ClaimFilePrintf, ginkgo.Fail)
+	check.SetResult(compliantObjects, nonCompliantObjects)
 }
 
 //nolint:funlen
-func testStorageProvisioner(env *provider.TestEnvironment) {
+func testStorageProvisioner(check *checksdb.Check, env *provider.TestEnvironment) {
 	const localStorageProvisioner = "kubernetes.io/no-provisioner"
 	const lvmProvisioner = "topolvm.io"
 	var compliantObjects []*testhelper.ReportObject
@@ -710,6 +805,7 @@ func testStorageProvisioner(env *provider.TestEnvironment) {
 	var Pvc = env.PersistentVolumeClaims
 	snoSingleLocalStorageProvisionner := ""
 	for _, put := range env.Pods {
+		usesPvcAndStorageClass := false
 		for pvIndex := range put.Spec.Volumes {
 			// Skip any nil persistentClaims.
 			volume := put.Spec.Volumes[pvIndex]
@@ -722,6 +818,7 @@ func testStorageProvisioner(env *provider.TestEnvironment) {
 				if Pvc[i].Name == put.Spec.Volumes[pvIndex].PersistentVolumeClaim.ClaimName && Pvc[i].Namespace == put.Namespace {
 					for j := range StorageClasses {
 						if Pvc[i].Spec.StorageClassName != nil && StorageClasses[j].Name == *Pvc[i].Spec.StorageClassName {
+							usesPvcAndStorageClass = true
 							tnf.ClaimFilePrintf("%s pvc_name: %s, storageclass_name: %s, provisioner_name: %s", put.String(), put.Spec.Volumes[pvIndex].PersistentVolumeClaim.ClaimName,
 								StorageClasses[j].Name, StorageClasses[j].Provisioner)
 
@@ -768,7 +865,13 @@ func testStorageProvisioner(env *provider.TestEnvironment) {
 					}
 				}
 			}
+			// Save as compliant pod in case it's not using any of the existing PVC/StorageClasses of the cluster.
+			// Otherwise, in this cases the check will be marked as skipped.
+			// ToDo: improve this function.
+			if !usesPvcAndStorageClass {
+				compliantObjects = append(compliantObjects, testhelper.NewPodReportObject(put.Namespace, put.Name, "Pod not configured to use local storage.", true))
+			}
 		}
 	}
-	testhelper.AddTestResultReason(compliantObjects, nonCompliantObjects, tnf.ClaimFilePrintf, ginkgo.Fail)
+	check.SetResult(compliantObjects, nonCompliantObjects)
 }

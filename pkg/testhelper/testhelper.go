@@ -326,10 +326,55 @@ func ResultToString(result int) (str string) {
 	return ""
 }
 
+func GetNoServicesUnderTestSkipFn(env *provider.TestEnvironment) func() (bool, string) {
+	return func() (bool, string) {
+		if len(env.Services) == 0 {
+			return true, "no services to check found"
+		}
+
+		return false, ""
+	}
+}
+
+func GetDaemonSetFailedToSpawnSkipFn(env *provider.TestEnvironment) func() (bool, string) {
+	return func() (bool, string) {
+		if env.DaemonsetFailedToSpawn {
+			return true, "no daemonSets to check found"
+		}
+
+		return false, ""
+	}
+}
+
+func GetNoCPUPinningPodsSkipFn(env *provider.TestEnvironment) func() (bool, string) {
+	return func() (bool, string) {
+		if len(env.GetCPUPinningPodsWithDpdk()) == 0 {
+			return true, "no CPU pinning pods to check found"
+		}
+
+		return false, ""
+	}
+}
+
+func GetNoSRIOVPodsSkipFn(env *provider.TestEnvironment) func() (bool, string) {
+	return func() (bool, string) {
+		pods, err := env.GetPodsUsingSRIOV()
+		if err != nil {
+			return true, fmt.Sprintf("failed to get SRIOV pods: %v", err)
+		}
+
+		if len(pods) == 0 {
+			return true, "no SRIOV pods to check found"
+		}
+
+		return false, ""
+	}
+}
+
 func GetNoContainersUnderTestSkipFn(env *provider.TestEnvironment) func() (bool, string) {
 	return func() (bool, string) {
 		if len(env.Containers) == 0 {
-			return true, "There are no containers to check. Please check under test labels."
+			return true, "no containers to check found"
 		}
 
 		return false, ""
@@ -339,9 +384,147 @@ func GetNoContainersUnderTestSkipFn(env *provider.TestEnvironment) func() (bool,
 func GetNoPodsUnderTestSkipFn(env *provider.TestEnvironment) func() (bool, string) {
 	return func() (bool, string) {
 		if len(env.Pods) == 0 {
-			return true, "There are no pods to check. Please check under test labels."
+			return true, "no pods to check found"
 		}
 
+		return false, ""
+	}
+}
+
+func GetNoDeploymentsUnderTestSkipFn(env *provider.TestEnvironment) func() (bool, string) {
+	return func() (bool, string) {
+		if len(env.Deployments) == 0 {
+			return true, "no deployments to check found"
+		}
+
+		return false, ""
+	}
+}
+
+func GetNoStatefulSetsUnderTestSkipFn(env *provider.TestEnvironment) func() (bool, string) {
+	return func() (bool, string) {
+		if len(env.StatefulSets) == 0 {
+			return true, "no statefulSets to check found"
+		}
+
+		return false, ""
+	}
+}
+
+func GetNoCrdsUnderTestSkipFn(env *provider.TestEnvironment) func() (bool, string) {
+	return func() (bool, string) {
+		if len(env.Crds) == 0 {
+			return true, "no roles to check"
+		}
+
+		return false, ""
+	}
+}
+
+func GetNoNamespacesSkipFn(env *provider.TestEnvironment) func() (bool, string) {
+	return func() (bool, string) {
+		if len(env.Namespaces) == 0 {
+			return true, "There are no namespaces to check. Please check config."
+		}
+
+		return false, ""
+	}
+}
+
+func GetNoRolesSkipFn(env *provider.TestEnvironment) func() (bool, string) {
+	return func() (bool, string) {
+		if len(env.Roles) == 0 {
+			return true, "There are no roles to check. Please check config."
+		}
+
+		return false, ""
+	}
+}
+
+func GetSharedProcessNamespacePodsSkipFn(env *provider.TestEnvironment) func() (bool, string) {
+	return func() (bool, string) {
+		if len(env.GetShareProcessNamespacePods()) == 0 {
+			return true, "Shared process namespace pods found."
+		}
+
+		return false, ""
+	}
+}
+
+func GetNotIntrusiveSkipFn(env *provider.TestEnvironment) func() (bool, string) {
+	return func() (bool, string) {
+		if !env.IsIntrusive() {
+			return true, "not intrusive test"
+		}
+
+		return false, ""
+	}
+}
+
+func GetNoPersistentVolumesSkipFn(env *provider.TestEnvironment) func() (bool, string) {
+	return func() (bool, string) {
+		if len(env.PersistentVolumes) == 0 {
+			return true, "no persistent volumes to check found"
+		}
+
+		return false, ""
+	}
+}
+
+func GetNotEnoughWorkersSkipFn(env *provider.TestEnvironment, minWorkerNodes int) func() (bool, string) {
+	return func() (bool, string) {
+		if env.GetWorkerCount() < minWorkerNodes {
+			return true, "not enough nodes to check found"
+		}
+
+		return false, ""
+	}
+}
+
+func GetPodsWithoutAffinityRequiredLabelSkipFn(env *provider.TestEnvironment) func() (bool, string) {
+	return func() (bool, string) {
+		if len(env.GetPodsWithoutAffinityRequiredLabel()) == 0 {
+			return true, "no pods with required affinity label found"
+		}
+
+		return false, ""
+	}
+}
+
+func GetNoGuaranteedPodsWithExclusiveCPUsSkipFn(env *provider.TestEnvironment) func() (bool, string) {
+	return func() (bool, string) {
+		if len(env.GetGuaranteedPodsWithExclusiveCPUs()) == 0 {
+			return true, "no pods with exclusive CPUs found"
+		}
+
+		return false, ""
+	}
+}
+
+func GetNoAffinityRequiredPodsSkipFn(env *provider.TestEnvironment) func() (bool, string) {
+	return func() (bool, string) {
+		if len(env.GetAffinityRequiredPods()) == 0 {
+			return true, "no pods with required affinity found"
+		}
+
+		return false, ""
+	}
+}
+
+func GetNoStorageClassesSkipFn(env *provider.TestEnvironment) func() (bool, string) {
+	return func() (bool, string) {
+		if len(env.StorageClassList) == 0 {
+			return true, "no storage classes found"
+		}
+		return false, ""
+	}
+}
+
+func GetNoPersistentVolumeClaimsSkipFn(env *provider.TestEnvironment) func() (bool, string) {
+	return func() (bool, string) {
+		if len(env.PersistentVolumeClaims) == 0 {
+			return true, "no persistent volume claims found"
+		}
 		return false, ""
 	}
 }
